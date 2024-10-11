@@ -1,0 +1,60 @@
+name: Generate_Debug_Build
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build_apk:
+    name: Build release apk
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Build release APK
+        run: ./gradlew assembleReleaseDebug
+
+      - name: Get build time
+        id: build_time
+        run: echo "BUILD_TIME=$(date +'%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
+
+      - name: Rename APK
+        id: rename_apk
+        run: |
+          REPO_NAME=$(basename ${{ github.repository }})
+          APK_PATH="./composeApp/build/outputs/apk/releaseDebug/composeApp-releaseDebug.apk"
+          NEW_APK_PATH="./composeApp/build/outputs/apk/releaseDebug/${REPO_NAME}_${{ env.BUILD_TIME }}.apk"
+          mv $APK_PATH $NEW_APK_PATH
+          echo "APK file renamed to: $NEW_APK_PATH"
+          echo "APK_FILE_NAME=${NEW_APK_PATH}" >> $GITHUB_ENV
+          ls -l ./composeApp/build/outputs/apk/releaseDebug/ 
+
+      - name: Create directory on server
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            mkdir -p www/xweb.ru/apk/$(basename ${{ github.repository }})
+            rm -f www/xweb.ru/apk/$(basename ${{ github.repository }})/*.apk || true
+
+      - name: Upload APK to server via SCP
+        uses: appleboy/scp-action@v0.1.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          source: "${{ env.APK_FILE_NAME }}"
+          target: "www/xweb.ru/apk/$(basename ${{ github.repository }})"
+          strip_components: 6

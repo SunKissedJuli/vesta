@@ -32,11 +32,12 @@ fun CategoryRow(
 ){
     Row(Modifier
         .fillMaxWidth()
-        .padding(top = 10.dp),
-        horizontalArrangement = Arrangement.SpaceBetween) {
+        .padding(top = 10.dp, start = 10.dp, end = 10.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically) {
         Row {
             CustomAsyncImage(image)
-            Spacer(Modifier.width(10.dp))
+            Spacer(Modifier.width(15.dp))
             Text(
                 name,
                 fontSize = 15.sp,

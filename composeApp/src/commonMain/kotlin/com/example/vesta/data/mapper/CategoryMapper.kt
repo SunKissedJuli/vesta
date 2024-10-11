@@ -16,9 +16,7 @@ fun CategoryResponse.toUI(): CategoryUi {
     return CategoryUi(
         categoryId = this.categoryId ?: 0,
         image = this.image.orEmpty(),
-        octImage = if (!this.octImage.isNullOrEmpty()) {
-            BASE_IMAGE_URL + this.octImage
-        } else { "" },
+        octImage = this.octImage.orEmpty(),
         parentId = this.parentId ?: 0,
         top = this.top ?: 0,
         column = this.column ?: 0,

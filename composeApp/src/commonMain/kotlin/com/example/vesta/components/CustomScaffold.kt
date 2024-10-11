@@ -1,5 +1,6 @@
 package com.example.vesta.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 
@@ -17,6 +19,7 @@ fun CustomScaffold(
     modifier: Modifier = Modifier,
     topBar: @Composable (() -> Unit)? = null,
     bottomBar: @Composable (() -> Unit)? = null,
+    background: Color = MaterialTheme.colorScheme.tertiary,
     content: @Composable () -> Unit,
 ) {
     val localFocusManager = LocalFocusManager.current
@@ -36,7 +39,9 @@ fun CustomScaffold(
             },
             content = {
                 Box(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(background)
                         .padding(
                             top = it.calculateTopPadding(),
                             bottom = it.calculateBottomPadding()

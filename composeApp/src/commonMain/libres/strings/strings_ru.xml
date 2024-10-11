@@ -3,4 +3,5 @@
 <resources>
     <string name="app_name">Веста</string>
     <string name="search_string">Поиск по названию товара, категории товара, артикулу, бренду...</string>
+    <string name="filter">Фильтр товаров</string>
 </resources>

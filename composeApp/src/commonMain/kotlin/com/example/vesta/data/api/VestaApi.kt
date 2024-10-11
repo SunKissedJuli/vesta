@@ -8,7 +8,7 @@ import de.jensklingenberg.ktorfit.http.POST
 interface VestaApi {
     //категории
     @GET("api/getAllCategory")
-    suspend fun getAllCategory(): Map<String, CategoryResponse>
+    suspend fun getAllCategory(): List<CategoryResponse>
 
     @GET("api/getCategoryId/")
     suspend fun getCategoryById(): CategoryResponse

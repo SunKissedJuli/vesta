@@ -11,7 +11,7 @@ import com.example.vesta.platform.apiCall
 class ProductRepositoryImpl(private val vestaApi: VestaApi) : ProductRepository {
     override suspend fun getAllCategory(): Either<Failure, List<CategoryUi>> {
         return apiCall (call = {
-            vestaApi.getAllCategory().values.toList()
+            vestaApi.getAllCategory()
         },
             mapResponse = { userData -> userData.toUI() })
     }

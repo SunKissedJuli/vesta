@@ -123,9 +123,25 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    signingConfigs {
+        create("releaseDebug"){
+            keyAlias = "key0"
+            keyPassword = "123456"
+            storeFile = rootProject.file("./debug_key_store")
+            storePassword = "123456"
+        }
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
+        }
+        create("releaseDebug") {
+            initWith((getByName("release")))
+            isMinifyEnabled = false
+            signingConfig = signingConfigs["releaseDebug"]
+            matchingFallbacks += listOf("release", "debug")
         }
     }
     compileOptions {
