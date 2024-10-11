@@ -4,4 +4,8 @@
     <string name="app_name">Веста</string>
     <string name="search_string">Поиск по названию товара, категории товара, артикулу, бренду...</string>
     <string name="filter">Фильтр товаров</string>
+    <string name="sort">Сортировка:</string>
+    <string name="sort_ascending">По цене (по возрастанию)</string>
+    <string name="sort_descending">По цене (по убыванию)</string>
+    <string name="display">Отображение:</string>
 </resources>

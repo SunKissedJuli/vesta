@@ -28,7 +28,7 @@ fun CategoryResponse.toUI(): CategoryUi {
         lastSyncAt = this.lastSyncAt.orEmpty(),
         onesUuid = this.onesUuid.orEmpty(),
         description = this.description?.map { it.toUI() } ?: emptyList(),
-        category = this.category?.map { it.toUI() } ?: emptyList()
+        category = this.children?.map { it.toUI() } ?: emptyList()
     )
 }
 

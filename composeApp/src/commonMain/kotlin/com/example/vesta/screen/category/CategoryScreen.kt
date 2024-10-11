@@ -33,11 +33,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.vesta.components.CategoryRow
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.SearchTextField
 import com.example.vesta.domain.modelsUI.CategoryUi
 import com.example.vesta.images.VestaResourceImages
+import com.example.vesta.screen.subCategory.SubcategoryScreen
 import com.example.vesta.strings.VestaResourceStrings
 import io.github.skeptick.libres.compose.painterResource
 
@@ -46,14 +50,12 @@ class CategoryScreen: Screen {
     override fun Content() {
         val viewModel = rememberScreenModel { CategoryViewModel() }
         val state by viewModel.stateFlow.collectAsState()
-
+        val navigator = LocalNavigator.currentOrThrow
         LaunchedEffect(viewModel){
             viewModel.loadData()
         }
 
-        if(viewModel.status.collectAsState().value){
-            //тут типа загрузка
-        } else{
+
             CustomScaffold(
                 topBar = {
 
@@ -75,7 +77,7 @@ class CategoryScreen: Screen {
                                 .padding(13.dp)
                                 .background(MaterialTheme.colorScheme.background),
                                 verticalAlignment = Alignment.CenterVertically){
-                                SearchTextField(
+                                    SearchTextField(
                                     state.searchString,
                                     {viewModel.updateSearchString(it)})
                             }
@@ -83,23 +85,27 @@ class CategoryScreen: Screen {
                     }
                 }
             ) {
-                Box(Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.tertiary)) {
-
-                    LazyColumn(Modifier
+                if(viewModel.status.collectAsState().value){
+                    //тут загрузка будет
+                } else{
+                    Box(Modifier
                         .fillMaxSize()
-                        .padding(horizontal = 15.dp)
-                        .background(MaterialTheme.colorScheme.background)) {
-                        items(state.topCategoryList){category ->
-                            CategoryRow(
-                                category.octImage,
-                                category.description[0].name
-                            )
+                        .background(MaterialTheme.colorScheme.tertiary)) {
+
+                        LazyColumn(Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 15.dp)
+                            .background(MaterialTheme.colorScheme.background)) {
+                                items(state.topCategoryList){category ->
+                                    CategoryRow(
+                                        onClick = { navigator.push(SubcategoryScreen(category.categoryId))},
+                                        image = category.octImage,
+                                        name = category.description[0].name
+                                    )
+                                }
                         }
                     }
                 }
             }
-        }
     }
 }

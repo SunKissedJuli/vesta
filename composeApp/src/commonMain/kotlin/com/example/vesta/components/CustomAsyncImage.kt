@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,15 +21,19 @@ fun CustomAsyncImage(
     size: Int = 30,
     errorColor: Color = MaterialTheme.colorScheme.background
 ){
-    SubcomposeAsyncImage((image),
+    SubcomposeAsyncImage(
+        model =(image),
         contentDescription = "",
         contentScale = ContentScale.Crop,
         modifier = Modifier
             .size(size.dp),
         loading = { Box(modifier = Modifier
             .size(size.dp)
-            .background(errorColor))
+            .background(errorColor)){
+                CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+            }
         },
+        //сделать норм заглушки
         error = { Box(modifier = Modifier
             .size(size.dp)
             .background(errorColor))

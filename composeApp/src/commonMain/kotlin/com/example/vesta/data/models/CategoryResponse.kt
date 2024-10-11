@@ -19,7 +19,7 @@ class CategoryResponse(
     @SerialName("last_sync_at") val lastSyncAt: String?,
     @SerialName("ones_uuid") val onesUuid: String?,
     @SerialName("description") val description: List<DescriptionResponse>?,
-    @SerialName("category") val category: List<SubCategoryResponse>?
+    @SerialName("children") val children: List<SubCategoryResponse>?
 )
 
 @Serializable

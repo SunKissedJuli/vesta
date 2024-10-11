@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vesta.domain.modelsUI.CategoryUi
+import com.example.vesta.ext.clickableBlank
 import kotlin.math.PI
 
 @Composable
@@ -31,11 +32,12 @@ fun CategoryRow(
     onClick: ()->Unit = {}
 ){
     Row(Modifier
+        .clickableBlank { onClick() }
         .fillMaxWidth()
         .padding(top = 10.dp, start = 10.dp, end = 10.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically) {
-        Row {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             CustomAsyncImage(image)
             Spacer(Modifier.width(15.dp))
             Text(
