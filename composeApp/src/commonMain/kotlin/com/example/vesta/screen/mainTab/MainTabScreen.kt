@@ -15,13 +15,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.VerticalLine
+import com.example.vesta.platform.OpenPhone
 import com.example.vesta.screen.Info.InfoDialog
+import com.example.vesta.screen.profile.ProfileScreen
+import com.example.vesta.screen.profile.ProfileViewModel
 import com.example.vesta.screen.tabs.CartTab
 import com.example.vesta.screen.tabs.CategoryTab
 import com.example.vesta.screen.tabs.GeolocationTab
@@ -55,7 +59,19 @@ class MainTabScreen(): Screen {
                     }
                 }
             ){
-                tab.current.Content()
+                CategoryTab.Content()
+
+                if(tab.current == InfoTab){
+                    InfoDialog { tab.current = CategoryTab }
+                }else if(tab.current==ProfileTab){
+                    val viewModel = rememberScreenModel { ProfileViewModel() }
+                    ProfileScreen(viewModel) { tab.current = CategoryTab }
+                }else if(tab.current == PhoneTab){
+                    OpenPhone()
+                }
+
+
+
             }
         }
     }

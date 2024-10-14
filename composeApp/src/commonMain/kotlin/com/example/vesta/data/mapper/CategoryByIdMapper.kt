@@ -42,6 +42,6 @@ fun CategoryById.toUI(): CategoryByIdUi {
 fun CategoryByIdResponse.toUI(): CategoryByIdResponseUi {
     return CategoryByIdResponseUi(
         category = category?.toUI()?: CategoryByIdUi.empty,
-        products = products?.toUI()  ?: ProductsResponseUi.empty
+        products = products?.map{it.toUI()}  ?: emptyList()
     )
 }

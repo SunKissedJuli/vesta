@@ -9,8 +9,8 @@ import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColorScheme(
     primary = ButtonColor,
-      secondary = SearchBarColor,
-     secondaryContainer = Gray,
+    secondary = SearchBarColor,
+    secondaryContainer = Gray,
     background = White,
     onSecondary = Color.Black,
     onTertiary = AccentColor,

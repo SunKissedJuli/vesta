@@ -19,7 +19,7 @@ fun OctStickers.toUI(): OctStickersUi {
 fun OctStickerData.toUI(): OctStickerDataUi {
     return OctStickerDataUi(
         fonColor = fonColor.orEmpty(),
-        link = link.orEmpty(),
+      //  link = link.orEmpty(),
         sort = sort.orEmpty(),
         textColor = textColor.orEmpty(),
         title = title.orEmpty()

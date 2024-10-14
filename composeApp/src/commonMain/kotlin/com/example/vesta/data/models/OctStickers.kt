@@ -5,14 +5,14 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class OctStickers(
-    @SerialName("customer_700-rub-v-podarok") val stickerData: OctStickerData?,
+    @SerialName("customer") val stickerData: OctStickerData?,
     @SerialName("stickers_special") val specialStickerData: SpecialStickerData?
 )
 
 @Serializable
 class OctStickerData(
     @SerialName("fon_color") val fonColor: String?,
-    @SerialName("link") val link: String?,
+ //   @SerialName("link") val link: String?,
     @SerialName("sort") val sort: String?,
     @SerialName("text_color") val textColor: String?,
     @SerialName("title") val title: String?

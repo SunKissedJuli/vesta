@@ -5,7 +5,6 @@ import kotlinx.serialization.Serializable
 
 data class OctStickerDataUi(
     val fonColor: String,
-    val link: String,
     val sort: String,
     val textColor: String,
     val title: String
@@ -13,7 +12,6 @@ data class OctStickerDataUi(
     companion object{
         val empty = OctStickerDataUi(
             fonColor = "",
-            link = "",
             sort = "",
             textColor = "",
             title = ""

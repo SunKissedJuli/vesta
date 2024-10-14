@@ -26,13 +26,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
+import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.FilterButton
 import com.example.vesta.components.ProductCard
 import com.example.vesta.components.SubcategorySquare
 import com.example.vesta.strings.VestaResourceStrings
 
-class SubcategoryScreen(val id: Int): Screen {
+class SubcategoryScreen(private val id: Int): Screen {
     @Composable
     override fun Content() {
 
@@ -55,8 +56,8 @@ class SubcategoryScreen(val id: Int): Screen {
 
                 }
 
-                if(viewModel.status.collectAsState().value){
-                    //тут загрузка будет
+                if(viewModel.status.collectAsState().value && SubcategoryState.InitState==state){
+                    CustomCircularProgressIndicator()
                 } else {
 
                     LazyVerticalGrid(
@@ -86,7 +87,7 @@ class SubcategoryScreen(val id: Int): Screen {
                         item(span = { GridItemSpan(2)}) {
                             Column(
                                 Modifier.fillMaxWidth()
-                                    .padding(start = 15.dp, end = 15.dp, top = 10.dp)
+                                    .padding(start = 25.dp, end = 15.dp, top = 10.dp)
                             ) {
                                 Text(
                                     text = VestaResourceStrings.sort,
@@ -109,7 +110,7 @@ class SubcategoryScreen(val id: Int): Screen {
                         }
 
                         //продукты
-                        items(state.productList.data, span = { GridItemSpan(2)}){ product->
+                        items(state.productList, span = { GridItemSpan(2)}){ product->
                             ProductCard(product)
                         }
 

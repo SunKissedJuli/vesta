@@ -1,7 +1,7 @@
 package com.example.vesta.di
 
 import com.example.vesta.commons.Constantas
-import com.example.vesta.commons.toToken
+import com.example.vesta.ext.toToken
 import com.example.vesta.domain.manager.AuthManager
 import com.example.vesta.platform.Failure
 import de.jensklingenberg.ktorfit.Ktorfit

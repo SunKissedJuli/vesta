@@ -8,4 +8,15 @@
     <string name="sort_ascending">По цене (по возрастанию)</string>
     <string name="sort_descending">По цене (по убыванию)</string>
     <string name="display">Отображение:</string>
+    <string name="authorize">Авторизация</string>
+    <string name="sign_in">Войти</string>
+    <string name="password">Пароль</string>
+    <string name="email">E-Mail</string>
+    <string name="registration">Регистрация</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="product_code">Код товара:</string>
+    <string name="rub">руб.</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+
 </resources>

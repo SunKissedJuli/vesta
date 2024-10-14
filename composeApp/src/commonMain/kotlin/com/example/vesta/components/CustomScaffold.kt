@@ -4,29 +4,36 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
+import cafe.adriel.voyager.core.annotation.InternalVoyagerApi
 
+@OptIn(InternalVoyagerApi::class)
 @Composable
 fun CustomScaffold(
     modifier: Modifier = Modifier,
     topBar: @Composable (() -> Unit)? = null,
     bottomBar: @Composable (() -> Unit)? = null,
-    background: Color = MaterialTheme.colorScheme.tertiary,
+    contentBackground: Color = MaterialTheme.colorScheme.tertiary,
+    containerColor: Color = MaterialTheme.colorScheme.background,
+    contentColor: Color = MaterialTheme.colorScheme.onSecondary,
     content: @Composable () -> Unit,
 ) {
     val localFocusManager = LocalFocusManager.current
 
     Column {
-        Scaffold(containerColor = MaterialTheme.colorScheme.background,
-            contentColor = MaterialTheme.colorScheme.onSecondary,
+        Scaffold(containerColor = containerColor,
+            contentColor = contentColor,
             modifier = modifier.weight(1f).pointerInput(Unit) {
                 detectTapGestures(onTap = { localFocusManager.clearFocus() })
             },
@@ -41,7 +48,7 @@ fun CustomScaffold(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(background)
+                        .background(contentBackground)
                         .padding(
                             top = it.calculateTopPadding(),
                             bottom = it.calculateBottomPadding()

@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 class CategoryByIdResponse(
     @SerialName("category") val category: CategoryById?,
-    @SerialName("products") val products: ProductsResponse?,
+    @SerialName("products") val products: List<ProductDataResponse>?,
 )
 
 @Serializable
