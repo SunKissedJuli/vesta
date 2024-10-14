@@ -2,6 +2,8 @@ package com.example.vesta.data.repositoryImpl
 
 import com.example.vesta.data.api.VestaApi
 import com.example.vesta.data.mapper.toUI
+import com.example.vesta.data.models.CategoryByIdResponse
+import com.example.vesta.domain.modelsUI.CategoryByIdResponseUi
 import com.example.vesta.domain.modelsUI.CategoryUi
 import com.example.vesta.domain.repository.ProductRepository
 import com.example.vesta.platform.Either
@@ -13,13 +15,13 @@ class ProductRepositoryImpl(private val vestaApi: VestaApi) : ProductRepository 
         return apiCall (call = {
             vestaApi.getAllCategory()
         },
-            mapResponse = { userData -> userData.toUI() })
+            mapResponse = { category -> category.toUI() })
     }
 
-    override suspend fun getCategoryById(): Either<Failure, CategoryUi> {
+    override suspend fun getCategoryById(categoryId: Int, limit: Int, page: Int): Either<Failure, CategoryByIdResponseUi> {
         return apiCall (call = {
-            vestaApi.getCategoryById()
+            vestaApi.getCategoryById(categoryId, limit, page)
         },
-            mapResponse = { userData -> userData.toUI() })
+        mapResponse = { category -> category.toUI() })
     }
 }

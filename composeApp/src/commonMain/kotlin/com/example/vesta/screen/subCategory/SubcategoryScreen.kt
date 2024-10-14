@@ -28,6 +28,7 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.FilterButton
+import com.example.vesta.components.ProductCard
 import com.example.vesta.components.SubcategorySquare
 import com.example.vesta.strings.VestaResourceStrings
 
@@ -70,18 +71,23 @@ class SubcategoryScreen(val id: Int): Screen {
                         item(span = { GridItemSpan(2)}){
                             FilterButton(
                                 onClick = {},
-                                modifier = Modifier.padding(20.dp))
+                                modifier = Modifier.padding(start = 15.dp, end = 15.dp, top = 15.dp))
                         }
 
-                        items(state.subcategoryList) { subcategory ->
+                        //субкатегории
+                        items(state.subcategoryList.children) { subcategory ->
                             SubcategorySquare(
                                 image = subcategory.image,
-                                name = subcategory.description[1].name
+                                name = subcategory.description[0].name
                             )
                         }
 
-                        item{
-                            Column {
+                        //сортировка
+                        item(span = { GridItemSpan(2)}) {
+                            Column(
+                                Modifier.fillMaxWidth()
+                                    .padding(start = 15.dp, end = 15.dp, top = 10.dp)
+                            ) {
                                 Text(
                                     text = VestaResourceStrings.sort,
                                     fontSize = 17.sp,
@@ -100,8 +106,13 @@ class SubcategoryScreen(val id: Int): Screen {
                                     fontWeight = FontWeight.Medium
                                 )
                             }
-
                         }
+
+                        //продукты
+                        items(state.productList.data, span = { GridItemSpan(2)}){ product->
+                            ProductCard(product)
+                        }
+
                     }
                 }
             }

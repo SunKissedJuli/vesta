@@ -2,11 +2,14 @@ package com.example.vesta.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,25 +27,32 @@ fun SubcategorySquare(
     image: Any,
     name: String
 ){
-    Column(modifier
+    Box(modifier
         .fillMaxWidth()
-        .height(180.dp)
-        .background(MaterialTheme.colorScheme.background),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center) {
+        .height(210.dp)
+        .padding(10.dp)
+        .background(MaterialTheme.colorScheme.background)
+        .clickable{}) {
 
-        CustomAsyncImage(
-            image = image,
-            size = 88
-        )
-        Spacer(Modifier.height(10.dp))
-        Text(
-            text = name,
-            fontSize = 15.sp,
-            fontFamily = FontFamily.SansSerif,
-            color = MaterialTheme.colorScheme.tertiary,
-            softWrap = true,
-            textAlign = TextAlign.Center)
-
+        Column(
+            Modifier
+                .padding(10.dp)
+                .align(Alignment.Center),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
+            CustomAsyncImage(image = image, size = 88)
+            Spacer(Modifier.height(15.dp))
+            Text(
+                text = name,
+                fontSize = 17.sp,
+                fontFamily = FontFamily.SansSerif,
+                color = MaterialTheme.colorScheme.secondaryContainer,
+                softWrap = true,
+                maxLines = 3,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(horizontal = 3.dp)
+            )
+        }
     }
 }

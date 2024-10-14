@@ -10,10 +10,19 @@ internal class SubcategoryViewModel: BaseScreenModel<SubcategoryState, Unit>(Sub
     private val productRepository: ProductRepository by inject()
 
     fun loadData(id: Int) = intent {
-//        launchOperation(
-//            operation = {
-//                productRepository.getCategoryById()
-//            }
-//        )
+        launchOperation(
+            operation = {
+                productRepository.getCategoryById(
+                    categoryId = id
+                )
+            },
+            success = {response ->
+                reduceLocal {
+                    state.copy(
+                        subcategoryList = response.category,
+                        productList = response.products
+                        )
+                }}
+        )
     }
 }

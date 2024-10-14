@@ -14,7 +14,7 @@ object CartTab: Tab {
 
     @Composable
     override fun Content() {
-        Navigator(CategoryScreen())
+     //   Navigator(CategoryScreen())
     }
 
     override val options: TabOptions

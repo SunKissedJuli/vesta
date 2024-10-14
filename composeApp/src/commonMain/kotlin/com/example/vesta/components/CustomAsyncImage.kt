@@ -19,22 +19,23 @@ import coil3.compose.SubcomposeAsyncImage
 fun CustomAsyncImage(
     image: Any?,
     size: Int = 30,
-    errorColor: Color = MaterialTheme.colorScheme.background
+    errorColor: Color = MaterialTheme.colorScheme.background,
+    modifier: Modifier = Modifier
 ){
     SubcomposeAsyncImage(
         model =(image),
         contentDescription = "",
         contentScale = ContentScale.Crop,
-        modifier = Modifier
+        modifier = modifier
             .size(size.dp),
-        loading = { Box(modifier = Modifier
+        loading = { Box(modifier = modifier
             .size(size.dp)
             .background(errorColor)){
                 CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
             }
         },
         //сделать норм заглушки
-        error = { Box(modifier = Modifier
+        error = { Box(modifier = modifier
             .size(size.dp)
             .background(errorColor))
         })

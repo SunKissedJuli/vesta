@@ -21,6 +21,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.VerticalLine
+import com.example.vesta.screen.Info.InfoDialog
 import com.example.vesta.screen.tabs.CartTab
 import com.example.vesta.screen.tabs.CategoryTab
 import com.example.vesta.screen.tabs.GeolocationTab
