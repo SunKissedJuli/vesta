@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 class OctStickers(
     @SerialName("customer") val stickerData: OctStickerData?,
-    @SerialName("stickers_special") val specialStickerData: SpecialStickerData?
+    @SerialName("stickers") val specialStickerData: SpecialStickerData?
 )
 
 @Serializable

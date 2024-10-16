@@ -25,18 +25,20 @@ import androidx.compose.ui.unit.sp
 fun SubcategorySquare(
     modifier: Modifier = Modifier,
     image: Any,
-    name: String
+    name: String,
+    onClick: ()-> Unit
 ){
     Box(modifier
         .fillMaxWidth()
         .height(210.dp)
         .padding(10.dp)
         .background(MaterialTheme.colorScheme.background)
-        .clickable{}) {
+        .clickable{onClick()}
+    ) {
 
         Column(
             Modifier
-                .padding(10.dp)
+                .padding(5.dp)
                 .align(Alignment.Center),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -49,7 +51,7 @@ fun SubcategorySquare(
                 fontFamily = FontFamily.SansSerif,
                 color = MaterialTheme.colorScheme.secondaryContainer,
                 softWrap = true,
-                maxLines = 3,
+                maxLines = 4,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(horizontal = 3.dp)
             )

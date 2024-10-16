@@ -1,6 +1,6 @@
 package com.example.vesta.domain.repository
 
-import com.example.vesta.data.models.CategoryByIdResponse
+import com.example.vesta.data.models.product.ProductResponseUi
 import com.example.vesta.domain.modelsUI.CategoryByIdResponseUi
 import com.example.vesta.domain.modelsUI.CategoryUi
 import com.example.vesta.platform.Either
@@ -15,6 +15,10 @@ interface ProductRepository {
         limit: Int = 25,
         page: Int = 1
     ): Either<Failure, CategoryByIdResponseUi>
+
+    suspend fun getProduct(
+        productId: Int,
+    ): Either<Failure, ProductResponseUi>
 
 
 }

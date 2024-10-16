@@ -7,7 +7,7 @@ import com.example.vesta.domain.modelsUI.ProductsResponseUi
 
 data class SubcategoryState(
     val subcategoryList: CategoryByIdUi,
-    val productList: List<ProductDataResponseUi>
+    val productList: List<ProductDataResponseUi>,
 ){
     companion object{
         val InitState = SubcategoryState(

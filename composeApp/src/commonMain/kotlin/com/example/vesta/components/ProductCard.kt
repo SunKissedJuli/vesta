@@ -1,6 +1,7 @@
 package com.example.vesta.components
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,7 +26,10 @@ import com.example.vesta.domain.modelsUI.ProductDataResponseUi
 import com.example.vesta.strings.VestaResourceStrings
 
 @Composable
-fun ProductCard(product: ProductDataResponseUi){
+fun ProductCard(
+    product: ProductDataResponseUi,
+    onClick: ()-> Unit
+){
     Surface(
         Modifier
             .fillMaxWidth()
@@ -33,7 +37,7 @@ fun ProductCard(product: ProductDataResponseUi){
             .padding(horizontal = 20.dp, vertical = 7.dp),
         shadowElevation = 5.dp) {
 
-        Column(Modifier.fillMaxSize()) {
+        Column(Modifier.fillMaxSize().clickable(onClick = onClick)) {
             Column(Modifier.fillMaxWidth()){
                if(product.octStickers.stickerData.title.isNotEmpty()){
                    ProductSticker(product.octStickers.stickerData)

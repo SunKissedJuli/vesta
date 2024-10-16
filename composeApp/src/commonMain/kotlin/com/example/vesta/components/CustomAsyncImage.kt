@@ -21,12 +21,13 @@ fun CustomAsyncImage(
     image: Any?,
     size: Int = 30,
     errorColor: Color = MaterialTheme.colorScheme.background,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    contentScale: ContentScale = ContentScale.FillHeight
 ){
     SubcomposeAsyncImage(
         model =(image),
         contentDescription = "",
-        contentScale = ContentScale.FillHeight,
+        contentScale = contentScale,
         modifier = modifier
             .size(size.dp),
         loading = { Box(modifier = modifier

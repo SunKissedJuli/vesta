@@ -84,11 +84,12 @@ class CategoryScreen: Screen {
                             .fillMaxSize()
                             .padding(horizontal = 15.dp)
                             .background(MaterialTheme.colorScheme.background)) {
-                                items(state.topCategoryList){category ->
+                                items(state.categoryList){category ->
                                     CategoryRow(
                                         onClick = { navigator.push(SubcategoryScreen(category.categoryId))},
                                         image = category.octImage,
-                                        name = category.description[0].name
+                                      //  name = category.description[0].name
+                                        name = category.name
                                     )
                                 }
                         }

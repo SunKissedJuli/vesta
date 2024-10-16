@@ -26,11 +26,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.FilterButton
 import com.example.vesta.components.ProductCard
 import com.example.vesta.components.SubcategorySquare
+import com.example.vesta.screen.category.CategoryScreen
+import com.example.vesta.screen.product.ProductScreen
 import com.example.vesta.strings.VestaResourceStrings
 
 class SubcategoryScreen(private val id: Int): Screen {
@@ -39,6 +43,7 @@ class SubcategoryScreen(private val id: Int): Screen {
 
         val viewModel = rememberScreenModel { SubcategoryViewModel() }
         val state by viewModel.stateFlow.collectAsState()
+        val navigator = LocalNavigator.currentOrThrow
 
         LaunchedEffect(viewModel){
             viewModel.loadData(id)
@@ -56,7 +61,7 @@ class SubcategoryScreen(private val id: Int): Screen {
 
                 }
 
-                if(viewModel.status.collectAsState().value && SubcategoryState.InitState==state){
+                if(viewModel.status.collectAsState().value || SubcategoryState.InitState==state){
                     CustomCircularProgressIndicator()
                 } else {
 
@@ -79,7 +84,8 @@ class SubcategoryScreen(private val id: Int): Screen {
                         items(state.subcategoryList.children) { subcategory ->
                             SubcategorySquare(
                                 image = subcategory.image,
-                                name = subcategory.description[0].name
+                                name = subcategory.description[0].name,
+                                onClick = { viewModel.loadData(subcategory.categoryId) }
                             )
                         }
 
@@ -111,7 +117,10 @@ class SubcategoryScreen(private val id: Int): Screen {
 
                         //продукты
                         items(state.productList, span = { GridItemSpan(2)}){ product->
-                            ProductCard(product)
+                            ProductCard(
+                                product = product,
+                                onClick = {navigator.push(ProductScreen(product.productId))}
+                                )
                         }
 
                     }
