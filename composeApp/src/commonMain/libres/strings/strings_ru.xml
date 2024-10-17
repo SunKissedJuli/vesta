@@ -18,5 +18,17 @@
     <string name="rub">руб.</string>
     <string name="minus">-</string>
     <string name="plus">+</string>
+    <string name="choose_sity">Выберите регион</string>
+    <string name="maufacturer">Производитель:</string>
+    <string name="guarantee">Гарантия:</string>
+    <string name="service">сервисные центры</string>
+    <string name="country">Страна производства:</string>
+    <string name="article">Артикул:</string>
+    <string name="availability">Наличие:</string>
+    <string name="opt_store">оптовый склад</string>
+    <string name="store_available">в магазине</string>
+    <string name="spb">СПБ</string>
+    <string name="msk">МСК</string>
+    <string name="sam">САМ</string>
 
 </resources>

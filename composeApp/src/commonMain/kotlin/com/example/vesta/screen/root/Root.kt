@@ -6,12 +6,13 @@ import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.example.vesta.screen.category.CategoryScreen
 import com.example.vesta.screen.mainTab.MainTabScreen
+import com.example.vesta.screen.splash.SplashScreen
 import com.example.vesta.theme.VestaTheme
 
 @Composable
 fun Root(){
     VestaTheme {
-        Navigator(MainTabScreen()) {
+        Navigator(SplashScreen()) {
             CompositionLocalProvider(RootNavigator provides it,) {
                 CurrentScreen()
             }

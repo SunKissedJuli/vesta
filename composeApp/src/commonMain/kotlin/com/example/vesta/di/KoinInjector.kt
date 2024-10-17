@@ -11,8 +11,8 @@ object KoinInjector {
             listOf(
                 networkModule,
                 preferencesModule,
-                apiModule,
                 managerModule,
+                apiModule,
                 repositoryModule,
             )
         )

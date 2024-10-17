@@ -9,5 +9,14 @@ data class SityUi(
     val name: String,
     val url: String,
     val ssl: String
-)
+){
+    companion object{
+        val empty = SityUi(
+            storeId = 0,
+            name = "",
+            url = "",
+            ssl = ""
+        )
+    }
+}
 

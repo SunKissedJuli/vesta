@@ -69,7 +69,7 @@ class SubcategoryScreen(private val id: Int): Screen {
                         columns = GridCells.Fixed(2),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 20.dp)
+                            .padding(horizontal = 15.dp)
                             .background(MaterialTheme.colorScheme.background),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -120,9 +120,8 @@ class SubcategoryScreen(private val id: Int): Screen {
                             ProductCard(
                                 product = product,
                                 onClick = {navigator.push(ProductScreen(product.productId))}
-                                )
+                            )
                         }
-
                     }
                 }
             }

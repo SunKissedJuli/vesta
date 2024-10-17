@@ -5,5 +5,4 @@ object Constantas{
     const val BASE_IMAGE_URL = "https://vestatrade.ru/image/"
     const val DEFAULT_STRING = ""
     const val DEFAULT_BOOLEAN = false
-
 }

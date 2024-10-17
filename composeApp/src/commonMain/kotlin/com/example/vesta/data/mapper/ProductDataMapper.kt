@@ -33,7 +33,7 @@ fun ProductDataResponse.toUI(): ProductDataResponseUi {
         manufacturerId = manufacturerId ?: 0,
         metaKeyword = metaKeyword.orEmpty(),
         metaTitle = metaTitle.orEmpty(),
-        model = model.orEmpty(),
+        model = if(model=="?") "" else model.orEmpty(),
         name = name.orEmpty(),
         nameKorr = nameKorr.orEmpty(),
         octStickers = octStickers?.toUI()?: OctStickersUi.empty,

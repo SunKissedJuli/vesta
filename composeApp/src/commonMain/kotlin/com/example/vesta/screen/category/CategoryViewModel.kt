@@ -19,9 +19,6 @@ internal class CategoryViewModel: BaseScreenModel<CategoryState, Unit>(CategoryS
             success = { response ->
                 reduceLocal { state.copy(
                     categoryList = response,
-                   // topCategoryList = response.filter {
-                        //костыль для отображения валидных данных
-                      //  it.top == 1 && it.parentId == 0 && it.status == 1 }
                 )}
             }
         )

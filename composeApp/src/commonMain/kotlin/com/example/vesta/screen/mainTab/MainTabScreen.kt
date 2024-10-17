@@ -26,6 +26,8 @@ import com.example.vesta.platform.OpenPhone
 import com.example.vesta.screen.Info.InfoDialog
 import com.example.vesta.screen.profile.ProfileScreen
 import com.example.vesta.screen.profile.ProfileViewModel
+import com.example.vesta.screen.sity.SityScreen
+import com.example.vesta.screen.sity.SityViewModel
 import com.example.vesta.screen.tabs.CartTab
 import com.example.vesta.screen.tabs.CategoryTab
 import com.example.vesta.screen.tabs.GeolocationTab
@@ -60,18 +62,20 @@ class MainTabScreen(): Screen {
                 }
             ){
                 CategoryTab.Content()
-
                 if(tab.current == InfoTab){
                     InfoDialog { tab.current = CategoryTab }
-                }else if(tab.current==ProfileTab){
+                }
+                else if(tab.current==ProfileTab){
                     val viewModel = rememberScreenModel { ProfileViewModel() }
                     ProfileScreen(viewModel) { tab.current = CategoryTab }
-                }else if(tab.current == PhoneTab){
+                }
+                else if(tab.current == PhoneTab){
                     OpenPhone()
                 }
-
-
-
+                else if(tab.current == GeolocationTab){
+                    val viewModel = rememberScreenModel { SityViewModel() }
+                    SityScreen(viewModel) { tab.current = CategoryTab }
+                }
             }
         }
     }

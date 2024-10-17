@@ -23,18 +23,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vesta.domain.modelsUI.ProductDataResponseUi
+import com.example.vesta.ext.QuantityToStore
 import com.example.vesta.strings.VestaResourceStrings
 
 @Composable
 fun ProductCard(
     product: ProductDataResponseUi,
-    onClick: ()-> Unit
+    onClick: ()-> Unit,
 ){
     Surface(
         Modifier
             .fillMaxWidth()
-            .defaultMinSize(minHeight = 270.dp)
-            .padding(horizontal = 20.dp, vertical = 7.dp),
+            .defaultMinSize(minHeight = 290.dp)
+            .padding(horizontal = 10.dp, vertical = 7.dp),
         shadowElevation = 5.dp) {
 
         Column(Modifier.fillMaxSize().clickable(onClick = onClick)) {
@@ -47,7 +48,7 @@ fun ProductCard(
                 }
             }
 
-            Row(Modifier.fillMaxWidth().weight(2f).padding(10.dp)){
+            Row(Modifier.fillMaxWidth().weight(2f).padding(vertical = 10.dp, horizontal = 5.dp)){
                 Box( Modifier.weight(1f)){
                     CustomAsyncImage(product.image, modifier = Modifier.fillMaxSize())
                 }
@@ -60,49 +61,62 @@ fun ProductCard(
                     maxLines = 6)
             }
 
-            Row(Modifier.fillMaxWidth().weight(1f).padding(start = 10.dp, bottom = 10.dp, end = 10.dp)){
-                Column( Modifier.weight(1f),
-                    verticalArrangement = Arrangement.SpaceBetween,
-                    horizontalAlignment = Alignment.CenterHorizontally){
-                    Text(text = VestaResourceStrings.product_code,
-                        color = MaterialTheme.colorScheme.secondaryContainer,
-                        fontSize = 16.sp,
-                        softWrap = true,
-                        textAlign = TextAlign.Center,
-                        maxLines = 2)
-                    Text(text = product.model,
-                        color = MaterialTheme.colorScheme.secondaryContainer,
-                        fontSize = 16.sp,
-                        softWrap = true,
-                        textAlign = TextAlign.Center,
-                        maxLines = 2)
-                    Spacer(Modifier.height(10.dp))
-                    Text(text = "Склад такой-то",
-                        color = MaterialTheme.colorScheme.secondary,
-                        fontSize = 16.sp,
-                        softWrap = true,
-                        maxLines = 2)
-                }
-                Spacer(Modifier.width(10.dp))
-                Column( Modifier.weight(1.25f),
-                    verticalArrangement = Arrangement.SpaceBetween,
-                    horizontalAlignment = Alignment.CenterHorizontally){
 
-                    Row(Modifier.fillMaxWidth()){
-                        CounterBlock(
-                            onIncrement = {},
-                            onDeIncrement = {},
-                            modifier = Modifier.weight(3f)
-                        )
-                        CardButton(modifier = Modifier.weight(1f)) { }
-
+            Column(Modifier.fillMaxWidth().weight(1f).padding(start = 10.dp, bottom = 10.dp, end = 10.dp)) {
+                Row(Modifier.fillMaxWidth()){
+                    Column(Modifier.weight(1f),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally){
+                        if(product.model.isNotEmpty()){
+                            Text(text = VestaResourceStrings.product_code,
+                                color = MaterialTheme.colorScheme.secondaryContainer,
+                                fontSize = 16.sp,
+                                textAlign = TextAlign.Center)
+                            Text(text = product.model,
+                                color = MaterialTheme.colorScheme.secondaryContainer,
+                                fontSize = 16.sp,
+                                softWrap = true,
+                                textAlign = TextAlign.Center,
+                                maxLines = 2)
+                            Spacer(Modifier.height(7.dp))
+                        }
                     }
-                    Spacer(Modifier.height(10.dp))
-                    Text(text = "${product.price} ${VestaResourceStrings.rub}",
-                        color = MaterialTheme.colorScheme.secondary,
-                        fontSize = 16.sp,
-                        softWrap = true,
-                        maxLines = 2)
+                    Spacer(Modifier.width(10.dp))
+                    Column(Modifier.weight(1.25f),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally){
+                        Row(Modifier.fillMaxWidth()){
+                            CounterBlock(
+                                onIncrement = {},
+                                onDeIncrement = {},
+                                modifier = Modifier.weight(3f)
+                            )
+                            CardButton(modifier = Modifier.weight(1f)) { }
+                        }
+                    }
+                }
+                Spacer(Modifier.height(10.dp))
+                Row(Modifier.fillMaxWidth()){
+                    Column(Modifier.weight(1f),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally){
+                        Text(text = product.quantity.QuantityToStore(),
+                            color = MaterialTheme.colorScheme.secondary,
+                            fontSize = 16.sp,
+                            softWrap = true,
+                            textAlign = TextAlign.Center,
+                            maxLines = 2)
+                    }
+                    Spacer(Modifier.width(10.dp))
+                    Column(Modifier.weight(1.25f),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally){
+                        Text(text = "${product.price} ${VestaResourceStrings.rub}",
+                            color = MaterialTheme.colorScheme.secondary,
+                            fontSize = 16.sp,
+                            softWrap = true,
+                            maxLines = 2)
+                    }
                 }
             }
         }

@@ -39,7 +39,7 @@ internal fun ProfileScreen(viewModel: ProfileViewModel, onDismissRequest: ()-> U
     val state by viewModel.stateFlow.collectAsState()
 
     BasicAlertDialog(
-        onDismissRequest = onDismissRequest,){
+        onDismissRequest = onDismissRequest){
 
         Column(Modifier
             .fillMaxWidth()

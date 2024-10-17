@@ -7,6 +7,7 @@ import com.example.vesta.data.models.info.ShopsResponse
 import com.example.vesta.data.models.info.SityResponse
 import com.example.vesta.data.models.info.SityUi
 import com.example.vesta.data.models.product.ProductResponse
+import com.example.vesta.domain.manager.AuthManager
 import de.jensklingenberg.ktorfit.http.GET
 import de.jensklingenberg.ktorfit.http.Path
 import de.jensklingenberg.ktorfit.http.Query
@@ -25,17 +26,17 @@ interface VestaApi {
     suspend fun getCategoryById(
         @Path("categoryId") categoryId: Int,
         @Query("limit") limit: Int = 25,
-        @Query("page") page: Int = 1
+        @Query("page") page: Int = 1,
+        @Query("sity") sity: Int = 0
     ): CategoryByIdResponse
 
     @GET("api/getProductId/{productId}")
-    suspend fun getProduct(@Path("productId") productId: Int,): ProductResponse
-
+    suspend fun getProduct(@Path("productId") productId: Int, @Query("sity") sity: Int = 0): ProductResponse
 
     //инфо
-    @GET("api/getSites")
+    @GET("api/info/getSites")
     suspend fun getSites(): List<SityResponse>
 
-    @GET("api/getShops")
+    @GET("api/info/getShops")
     suspend fun getShops(@Query("sity") sity: Int = 0): List<ShopsResponse>
 }
