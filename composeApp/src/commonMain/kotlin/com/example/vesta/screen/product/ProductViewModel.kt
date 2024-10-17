@@ -17,12 +17,21 @@ internal class ProductViewModel:BaseScreenModel<ProductState, Unit>(ProductState
                 productRepository.getProduct(id)
             },
             success = { response ->
-                val mainImage = ImageUi(response.image, 0, 0, 0)
-                val allImages: List<ImageUi> = listOf(mainImage) + response.images
-                reduceLocal {
-                    state.copy(
-                        productData = response.copy(images = allImages)
-                    )
+                if (response.image.isNotEmpty()) {
+                    val mainImage = ImageUi(response.image, 0, 0, 0)
+                    val allImages: List<ImageUi> = listOf(mainImage) + response.images
+
+                    reduceLocal {
+                        state.copy(
+                            productData = response.copy(images = allImages)
+                        )
+                    }
+                } else {
+                    reduceLocal {
+                        state.copy(
+                            productData = response
+                        )
+                    }
                 }
             }
         )

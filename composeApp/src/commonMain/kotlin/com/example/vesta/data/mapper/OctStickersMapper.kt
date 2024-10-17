@@ -11,8 +11,8 @@ import com.example.vesta.domain.modelsUI.SpecialStickerDataUi
 
 fun OctStickers.toUI(): OctStickersUi {
     return OctStickersUi(
-        stickerData = stickerData?.toUI()?: OctStickerDataUi.empty,
-        specialStickerData = specialStickerData?.toUI()?: SpecialStickerDataUi.empty
+       // stickerData = stickerData?.toUI()?: OctStickerDataUi.empty,
+        specialStickerData = this.specialStickerData?.map{it.toUI()}?: emptyList()
     )
 }
 

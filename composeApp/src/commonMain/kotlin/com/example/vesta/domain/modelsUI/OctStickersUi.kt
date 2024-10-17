@@ -20,13 +20,13 @@ data class OctStickerDataUi(
 }
 
 data class OctStickersUi(
-    val stickerData: OctStickerDataUi,
-    val specialStickerData: SpecialStickerDataUi
+   // val stickerData: OctStickerDataUi,
+    val specialStickerData: List<SpecialStickerDataUi>
 ){
     companion object{
         val empty = OctStickersUi(
-            stickerData = OctStickerDataUi.empty,
-            specialStickerData = SpecialStickerDataUi.empty
+          //  stickerData = OctStickerDataUi.empty,
+            specialStickerData = emptyList()
         )
     }
 }

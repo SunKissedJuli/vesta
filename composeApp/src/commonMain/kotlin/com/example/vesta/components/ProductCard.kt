@@ -40,12 +40,15 @@ fun ProductCard(
 
         Column(Modifier.fillMaxSize().clickable(onClick = onClick)) {
             Column(Modifier.fillMaxWidth()){
-               if(product.octStickers.stickerData.title.isNotEmpty()){
-                   ProductSticker(product.octStickers.stickerData)
-               }
-                if(product.octStickers.specialStickerData.title.isNotEmpty()){
-                    ProductStickerSpecial(product.octStickers.specialStickerData)
+            //   if(product.octStickers.stickerData.title.isNotEmpty()){
+               //    ProductSticker(product.octStickers.stickerData)
+          //     }
+                for(sticker in product.octStickers.specialStickerData){
+                    ProductStickerSpecial(sticker)
                 }
+               // if(product.octStickers.specialStickerData.title.isNotEmpty()){
+               //     ProductStickerSpecial(product.octStickers.specialStickerData)
+               // }
             }
 
             Row(Modifier.fillMaxWidth().weight(2f).padding(vertical = 10.dp, horizontal = 5.dp)){
@@ -55,7 +58,7 @@ fun ProductCard(
 
                 Spacer(Modifier.width(10.dp))
                 Text(text = product.nameKorr,
-                    fontSize = 16.sp,
+                    fontSize = 15.sp,
                     softWrap = true,
                     modifier = Modifier.weight(1.25f),
                     maxLines = 6)
@@ -70,11 +73,11 @@ fun ProductCard(
                         if(product.model.isNotEmpty()){
                             Text(text = VestaResourceStrings.product_code,
                                 color = MaterialTheme.colorScheme.secondaryContainer,
-                                fontSize = 16.sp,
+                                fontSize = 15.sp,
                                 textAlign = TextAlign.Center)
                             Text(text = product.model,
                                 color = MaterialTheme.colorScheme.secondaryContainer,
-                                fontSize = 16.sp,
+                                fontSize = 15.sp,
                                 softWrap = true,
                                 textAlign = TextAlign.Center,
                                 maxLines = 2)
@@ -102,7 +105,7 @@ fun ProductCard(
                         horizontalAlignment = Alignment.CenterHorizontally){
                         Text(text = product.quantity.QuantityToStore(),
                             color = MaterialTheme.colorScheme.secondary,
-                            fontSize = 16.sp,
+                            fontSize = 15.sp,
                             softWrap = true,
                             textAlign = TextAlign.Center,
                             maxLines = 2)
@@ -113,7 +116,7 @@ fun ProductCard(
                         horizontalAlignment = Alignment.CenterHorizontally){
                         Text(text = "${product.price} ${VestaResourceStrings.rub}",
                             color = MaterialTheme.colorScheme.secondary,
-                            fontSize = 16.sp,
+                            fontSize = 15.sp,
                             softWrap = true,
                             maxLines = 2)
                     }

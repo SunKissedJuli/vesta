@@ -91,7 +91,7 @@ class ProductScreen(private val id: Int): Screen{
 
                         Row(Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 20.dp, horizontal = 30.dp),
+                            .padding(vertical = 20.dp, horizontal = 25.dp),
                             verticalAlignment = Alignment.CenterVertically){
                             VerticalLine(Modifier
                                 .width(3.dp)
@@ -102,7 +102,7 @@ class ProductScreen(private val id: Int): Screen{
 
                             Text(
                                 text = state.productData.description[0].nameKorr,
-                                fontSize = 25.sp,
+                                fontSize = 22.sp,
                                 fontWeight = FontWeight.Bold,
                                 softWrap = true,
                             )
@@ -114,7 +114,7 @@ class ProductScreen(private val id: Int): Screen{
                         .background(MaterialTheme.colorScheme.background)) {
                         ImageViewer(state.productData.images)
 
-                        Column(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 15.dp)) {
+                        Column(Modifier.fillMaxWidth().padding(horizontal = 15.dp, vertical = 15.dp)) {
                             DetailsRow(
                                 title = VestaResourceStrings.maufacturer,
                                 text = state.productData.manufacturer.name
@@ -149,13 +149,13 @@ private fun DetailsRow(title: String, text: String){
         Row(Modifier.fillMaxWidth().padding(vertical = 3.dp)){
             Text(
                 text = title,
-                fontSize = 19.sp,
+                fontSize = 15.sp,
                 fontWeight = FontWeight.Medium,
                 modifier = Modifier.padding(end = 5.dp)
             )
             Text(
                 text = text,
-                fontSize = 19.sp,
+                fontSize = 15.sp,
                 fontWeight = FontWeight.Medium,
                 modifier = Modifier.padding(end = 5.dp)
             )

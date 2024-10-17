@@ -47,7 +47,7 @@ fun SubcategorySquare(
             Spacer(Modifier.height(15.dp))
             Text(
                 text = name,
-                fontSize = 17.sp,
+                fontSize = 15.sp,
                 fontFamily = FontFamily.SansSerif,
                 color = MaterialTheme.colorScheme.secondaryContainer,
                 softWrap = true,
