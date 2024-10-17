@@ -17,12 +17,12 @@ import com.example.vesta.ext.rgbToColor
 
 @Composable
 fun ProductStickerSpecial(sticker: SpecialStickerDataUi){
-    Row(Modifier.height(30.dp).background(sticker.fonColor.rgbToColor()),
+    Row(Modifier.height(28.dp).background(sticker.fonColor.rgbToColor()),
         verticalAlignment = Alignment.CenterVertically){
         Text(
             text = sticker.title,
             color = sticker.textColor.rgbToColor(),
-            fontSize = 15.sp,
+            fontSize = 13.sp,
             modifier = Modifier.padding(horizontal = 5.dp)
         )
     }
