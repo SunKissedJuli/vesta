@@ -8,6 +8,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.screen.mainTab.MainTabScreen
+import com.example.vesta.screen.welcome.WelcomeScreen
 
 class SplashScreen : Screen {
     @Composable
@@ -25,7 +26,7 @@ class SplashScreen : Screen {
                         navigator.replaceAll(MainTabScreen())
                     }
                     is SplashEvent.UserNotAutorize ->{
-                        navigator.replaceAll(MainTabScreen())
+                        navigator.push(WelcomeScreen())
                     }
                 }
             }

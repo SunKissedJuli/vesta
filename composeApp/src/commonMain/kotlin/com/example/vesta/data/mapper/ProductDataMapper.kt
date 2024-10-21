@@ -1,10 +1,11 @@
 package com.example.vesta.data.mapper
 
-import com.example.vesta.data.models.ProductDataResponse
+import com.example.vesta.data.models.ProductsDataResponse
 import com.example.vesta.data.models.ProductsResponse
 import com.example.vesta.domain.modelsUI.OctStickersUi
-import com.example.vesta.domain.modelsUI.ProductDataResponseUi
+import com.example.vesta.domain.modelsUI.ProductsDataResponseUi
 import com.example.vesta.domain.modelsUI.ProductsResponseUi
+import com.example.vesta.ext.cleanHtml
 
 fun ProductsResponse.toUI(): ProductsResponseUi {
     return ProductsResponseUi(
@@ -24,39 +25,23 @@ fun ProductsResponse.toUI(): ProductsResponseUi {
     )
 }
 
-fun ProductDataResponse.toUI(): ProductDataResponseUi {
-    return ProductDataResponseUi(
+fun ProductsDataResponse.toUI(): ProductsDataResponseUi {
+    return ProductsDataResponseUi(
         categoryId = categoryId ?: 0,
-        description = description.orEmpty(),
+        description = description?.cleanHtml().orEmpty(),
         image = image.orEmpty(),
         isbn = isbn.orEmpty(),
         manufacturerId = manufacturerId ?: 0,
         metaKeyword = metaKeyword.orEmpty(),
         metaTitle = metaTitle.orEmpty(),
         model = if(model=="?") "" else model.orEmpty(),
-        name = name.orEmpty(),
-        nameKorr = nameKorr.orEmpty(),
+        name = name?.cleanHtml().orEmpty(),
+        nameKorr = nameKorr?.cleanHtml().orEmpty(),
         octStickers = octStickers?.toUI()?: OctStickersUi.empty,
         price = price ?: 0,
         pricep = pricep.orEmpty(),
         productId = productId ?: 0,
         quantity = quantity ?: 0,
-        spb1 = spb1 ?: 0,
-        spb10 = spb10 ?: 0,
-        spb11 = spb11 ?: 0,
-        spb12 = spb12 ?: 0,
-        spb13 = spb13 ?: 0,
-        spb14 = spb14 ?: 0,
-        spb15 = spb15 ?: 0,
-        spb16 = spb16 ?: 0,
-        spb2 = spb2 ?: 0,
-        spb3 = spb3 ?: 0,
-        spb4 = spb4 ?: 0,
-        spb5 = spb5 ?: 0,
-        spb6 = spb6 ?: 0,
-        spb7 = spb7 ?: 0,
-        spb8 = spb8 ?: 0,
-        spb9 = spb9 ?: 0,
         status = status ?: 0,
         stockStatusId = stockStatusId ?: 0,
         storeId = storeId ?: 0,

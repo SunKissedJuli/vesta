@@ -1,6 +1,5 @@
 package com.example.vesta.data.models.info
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable

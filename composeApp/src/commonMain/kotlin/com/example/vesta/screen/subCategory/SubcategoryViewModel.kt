@@ -25,7 +25,6 @@ internal class SubcategoryViewModel: BaseScreenModel<SubcategoryState, Subcatego
                         productList = response.products
                         )
                 }},
-           // loading = {setStatus(true)}
         )
     }
 

@@ -1,7 +1,7 @@
 package com.example.vesta.domain.modelsUI
 
 import com.example.vesta.data.models.CategoryById
-import com.example.vesta.data.models.ProductDataResponse
+import com.example.vesta.data.models.ProductsDataResponse
 import com.example.vesta.data.models.ProductsResponse
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 
 class CategoryByIdResponseUi(
     val category: CategoryByIdUi,
-    val products: List<ProductDataResponseUi>,
+    val products: List<ProductsDataResponseUi>,
 )
 
 data class CategoryByIdUi(

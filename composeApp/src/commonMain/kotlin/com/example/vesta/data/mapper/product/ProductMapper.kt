@@ -19,7 +19,6 @@ fun ProductResponse.toUI(): ProductResponseUi {
         description = this.description?.map { it.toUI() } ?: emptyList(),
         ean = this.ean ?: "",
         height = this.height ?: "",
-      //  image =  if(!image.isNullOrEmpty()) BASE_IMAGE_URL + image else "",
         image = this.image.orEmpty(),
         images = this.images?.map { it.toUI() } ?: emptyList(),
         isbn = this.isbn ?: "",

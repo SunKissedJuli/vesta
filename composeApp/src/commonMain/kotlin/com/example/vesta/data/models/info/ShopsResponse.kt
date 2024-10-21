@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
 
 @Serializable
-data class ShopsResponse(
+class ShopsResponse(
     @SerialName("active") val active: Int?,
     @SerialName("address") val address: String?,
     @SerialName("coordinates") val coordinates: String?,

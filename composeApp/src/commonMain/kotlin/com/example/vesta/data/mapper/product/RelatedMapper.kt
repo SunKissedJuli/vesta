@@ -3,6 +3,7 @@ package com.example.vesta.data.models.product
 import com.example.vesta.data.mapper.toUI
 import com.example.vesta.data.models.OctStickers
 import com.example.vesta.domain.modelsUI.OctStickersUi
+import com.example.vesta.ext.cleanHtml
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
 
@@ -55,14 +56,14 @@ fun RelatedDetails.toUI(): RelatedDetailsUi {
 
 fun ProductDescription.toUI(): ProductDescriptionUi {
     return ProductDescriptionUi(
-        description=this.description.orEmpty(),
+        description=this.description?.cleanHtml().orEmpty(),
         languageId=this.languageId ?: 0,
         metaDescription=this.metaDescription.orEmpty(),
         metaH1=this.metaH1.orEmpty(),
         metaKeyword=this.metaKeyword.orEmpty(),
         metaTitle=this.metaTitle.orEmpty(),
-        name=this.name.orEmpty(),
-        nameKorr=this.nameKorr.orEmpty(),
+        name=this.name?.cleanHtml().orEmpty(),
+        nameKorr=this.nameKorr?.cleanHtml().orEmpty(),
         productId=this.productId ?: 0,
         tag=this.tag.orEmpty()
     )

@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 class ProductsResponse(
     @SerialName("current_page") val currentPage: Int?,
-    @SerialName("data") val data: List<ProductDataResponse>?,
+    @SerialName("data") val data: List<ProductsDataResponse>?,
     @SerialName("first_page_url") val firstPageUrl: String?,
     @SerialName("from") val from: Int?,
     @SerialName("last_page") val lastPage: Int?,
@@ -21,7 +21,7 @@ class ProductsResponse(
 )
 
 @Serializable
-class ProductDataResponse(
+class ProductsDataResponse(
     @SerialName("category_id") val categoryId: Int?,
     @SerialName("description") val description: String?,
     @SerialName("image") val image: String?,
@@ -37,22 +37,6 @@ class ProductDataResponse(
     @SerialName("pricep") val pricep: String?,
     @SerialName("product_id") val productId: Int?,
     @SerialName("quantity") val quantity: Int?,
-    @SerialName("spb1") val spb1: Int?,
-    @SerialName("spb10") val spb10: Int?,
-    @SerialName("spb11") val spb11: Int?,
-    @SerialName("spb12") val spb12: Int?,
-    @SerialName("spb13") val spb13: Int?,
-    @SerialName("spb14") val spb14: Int?,
-    @SerialName("spb15") val spb15: Int?,
-    @SerialName("spb16") val spb16: Int?,
-    @SerialName("spb2") val spb2: Int?,
-    @SerialName("spb3") val spb3: Int?,
-    @SerialName("spb4") val spb4: Int?,
-    @SerialName("spb5") val spb5: Int?,
-    @SerialName("spb6") val spb6: Int?,
-    @SerialName("spb7") val spb7: Int?,
-    @SerialName("spb8") val spb8: Int?,
-    @SerialName("spb9") val spb9: Int?,
     @SerialName("status") val status: Int?,
     @SerialName("stock_status_id") val stockStatusId: Int?,
     @SerialName("store_id") val storeId: Int?,

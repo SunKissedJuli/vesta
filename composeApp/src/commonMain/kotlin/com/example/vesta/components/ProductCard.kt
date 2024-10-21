@@ -1,5 +1,6 @@
 package com.example.vesta.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -25,14 +26,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.vesta.domain.modelsUI.ProductDataResponseUi
+import com.example.vesta.domain.modelsUI.ProductsDataResponseUi
 import com.example.vesta.ext.QuantityToStore
 import com.example.vesta.strings.VestaResourceStrings
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ProductCard(
-    product: ProductDataResponseUi,
+    product: ProductsDataResponseUi,
     onClick: ()-> Unit,
 ){
     Surface(
@@ -43,7 +44,7 @@ fun ProductCard(
         shadowElevation = 5.dp) {
 
 
-            Column(Modifier.fillMaxSize().clickable(onClick = onClick),
+            Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).clickable(onClick = onClick),
                 verticalArrangement = Arrangement.Center) {
                 FlowRow(
                     modifier = Modifier.fillMaxWidth(),) {

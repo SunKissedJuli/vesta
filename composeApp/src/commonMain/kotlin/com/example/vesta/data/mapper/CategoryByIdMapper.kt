@@ -2,14 +2,12 @@ package com.example.vesta.data.mapper
 
 import com.example.vesta.data.models.CategoryById
 import com.example.vesta.data.models.CategoryByIdResponse
-import com.example.vesta.data.models.CategoryResponse
 import com.example.vesta.data.models.Link
-import com.example.vesta.data.models.ProductsResponse
 import com.example.vesta.domain.modelsUI.CategoryByIdResponseUi
 import com.example.vesta.domain.modelsUI.CategoryByIdUi
-import com.example.vesta.domain.modelsUI.CategoryUi
 import com.example.vesta.domain.modelsUI.LinkUi
-import com.example.vesta.domain.modelsUI.ProductsResponseUi
+import com.example.vesta.data.mapper.toUI
+import com.example.vesta.data.mapper.toUI
 
 
 fun List<CategoryById>.toUI(): List<CategoryByIdUi> {

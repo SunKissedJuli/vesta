@@ -24,7 +24,7 @@ fun CustomScaffold(
     modifier: Modifier = Modifier,
     topBar: @Composable (() -> Unit)? = null,
     bottomBar: @Composable (() -> Unit)? = null,
-    contentBackground: Color = MaterialTheme.colorScheme.tertiary,
+    contentBackground: Color = MaterialTheme.colorScheme.background,
     containerColor: Color = MaterialTheme.colorScheme.background,
     contentColor: Color = MaterialTheme.colorScheme.onSecondary,
     content: @Composable () -> Unit,

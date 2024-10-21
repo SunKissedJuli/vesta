@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <string name="app_name">Веста</string>
+    <string name="app_name">VESTA</string>
+    <string name="app_name_trading">TRADING</string>
+    <string name="hello_text">Мы работаем для того, чтобы в каждом доме были вода и тепло</string>
     <string name="search_string">Поиск по названию товара, категории товара, артикулу, бренду...</string>
     <string name="filter">Фильтр товаров</string>
     <string name="sort">Сортировка:</string>
@@ -10,9 +12,24 @@
     <string name="display">Отображение:</string>
     <string name="authorize">Авторизация</string>
     <string name="sign_in">Войти</string>
-    <string name="password">Пароль</string>
-    <string name="email">E-Mail</string>
+    <string name="further">Далее</string>
+    <string name="miss">Пропустить</string>
+    <string name="wanna_enter">У меня уже есть аккаунт, хочу войти</string>
+    <string name="password">* Пароль</string>
+    <string name="password_repeat">* Повторите пароль</string>
+    <string name="email">* Email</string>
     <string name="registration">Регистрация</string>
+    <string name="sign_up">Зарегистрироваться</string>
+    <string name="i_agree">Я согласен с Политикой приватности и конфиденциальности</string>
+    <string name="i_agree_news">Подписка на новости</string>
+    <string name="last_name">* Фамилия</string>
+    <string name="first_name">* Имя</string>
+    <string name="phone">* Номер телефона</string>
+    <string name="basic_information">Основная информация</string>
+    <string name="contact_information">Контактная информация</string>
+    <string name="your_account">Ваш аккаунт</string>
+    <string name="patronymic">Отчество</string>
+    <string name="wanna_registration">У меня нет аккаунта, хочу зарегистрироваться</string>
     <string name="forgot_password">Забыли пароль?</string>
     <string name="product_code">Код товара:</string>
     <string name="rub">руб.</string>
@@ -30,5 +47,14 @@
     <string name="spb">СПБ</string>
     <string name="msk">МСК</string>
     <string name="sam">САМ</string>
+    <string name="home">Главная</string>
+    <string name="catalog">Каталог</string>
+    <string name="card">Корзина</string>
+    <string name="profile">Аккаунт</string>
+    <string name="about">О нас</string>
+    <string name="popular_product">Популярные товары</string>
+    <string name="special_offers">Специальные предложения</string>
+
+
 
 </resources>

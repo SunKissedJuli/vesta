@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 private val DarkColorPalette = darkColorScheme(
     primary = ButtonColor,
     secondary = SearchBarColor,
-    secondaryContainer = Gray,
+    secondaryContainer = LightGray,
     background = White,
     onSecondary = Color.Black,
     onTertiary = AccentColor,
@@ -29,11 +29,8 @@ private val LightColorPalette = lightColorScheme(
 
 @Composable
 fun VestaTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
+    val colors = LightColorPalette
+
 
     MaterialTheme(
         colorScheme = colors,

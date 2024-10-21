@@ -6,6 +6,7 @@ import com.example.vesta.data.models.ProductsResponse
 import com.example.vesta.data.models.info.ShopsResponse
 import com.example.vesta.data.models.info.SityResponse
 import com.example.vesta.data.models.info.SityUi
+import com.example.vesta.data.models.info.StocksResponse
 import com.example.vesta.data.models.product.ProductResponse
 import com.example.vesta.domain.manager.AuthManager
 import de.jensklingenberg.ktorfit.http.GET
@@ -39,4 +40,9 @@ interface VestaApi {
 
     @GET("api/info/getShops")
     suspend fun getShops(@Query("sity") sity: Int = 0): List<ShopsResponse>
+
+    @GET("api/getStocks") //акции
+    suspend fun getStocks(@Query("sity") sity: Int = 0): List<StocksResponse>
+
+
 }

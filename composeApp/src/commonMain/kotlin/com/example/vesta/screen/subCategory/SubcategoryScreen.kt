@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.vesta.components.CustomCircularProgressIndicator
@@ -38,6 +39,7 @@ import com.example.vesta.screen.product.ProductScreen
 import com.example.vesta.strings.VestaResourceStrings
 
 class SubcategoryScreen(private val id: Int): Screen {
+    override val key: ScreenKey = id.toString()
     @Composable
     override fun Content() {
 
@@ -45,7 +47,7 @@ class SubcategoryScreen(private val id: Int): Screen {
         val state by viewModel.stateFlow.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
 
-        LaunchedEffect(viewModel){
+        LaunchedEffect(id){
             viewModel.loadData(id)
         }
         CustomScaffold(
@@ -58,7 +60,6 @@ class SubcategoryScreen(private val id: Int): Screen {
                     Modifier
                         .fillMaxWidth()
                         .height(70.dp)){
-
                 }
 
                 if(viewModel.status.collectAsState().value || SubcategoryState.InitState==state){
@@ -85,7 +86,7 @@ class SubcategoryScreen(private val id: Int): Screen {
                             SubcategorySquare(
                                 image = subcategory.image,
                                 name = subcategory.description[0].name,
-                                onClick = { viewModel.loadData(subcategory.categoryId) }
+                                onClick = { navigator.push(SubcategoryScreen(subcategory.categoryId)) }
                             )
                         }
 
