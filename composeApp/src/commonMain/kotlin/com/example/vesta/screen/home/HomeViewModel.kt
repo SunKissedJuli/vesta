@@ -1,5 +1,6 @@
 package com.example.vesta.screen.home
 
+import com.example.vesta.domain.manager.AuthManager
 import com.example.vesta.domain.repository.InfoRepository
 import com.example.vesta.domain.repository.ProductRepository
 import com.example.vesta.platform.BaseScreenModel
@@ -13,6 +14,7 @@ import org.orbitmvi.orbit.syntax.simple.reduce
 internal class HomeViewModel: BaseScreenModel<HomeState, Unit>(HomeState.InitState) {
 
     private val infoRepository: InfoRepository by inject()
+    private val manager: AuthManager by inject()
 
     fun loadData(){
         loadStocks()
@@ -27,6 +29,24 @@ internal class HomeViewModel: BaseScreenModel<HomeState, Unit>(HomeState.InitSta
                 reduceLocal { state.copy(
                     stockData = response
                 ) }
+            }
+        )
+        launchOperation(
+            operation = {
+                infoRepository.getSites()
+            },
+            success = { response ->
+                var phone: String = ""
+                for(item in response){
+                    if(item.storeId==manager.sity){
+                        phone = item.phone
+                    }
+                }
+                reduceLocal {
+                    state.copy(
+                        phone = phone
+                    )
+                }
             }
         )
     }

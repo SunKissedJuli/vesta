@@ -22,7 +22,8 @@ data class ProductsDataResponseUi(
     val status: Int,
     val stockStatusId: Int,
     val storeId: Int,
-    val tag: String
+    val tag: String,
+    val quantityStatus: String
 )
 
 data class ProductsResponseUi(

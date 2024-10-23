@@ -17,7 +17,7 @@ class AuthManagerImpl: AuthManager, KoinComponent {
 
     override var sity: Int?
         get() {
-            return if (settings.contains(SITY)) settings.getInt(SITY, 0) else null
+            return if (settings.contains(SITY)) settings.getInt(SITY, 0) else 0
         }
         set(value) {
             settings.putInt(SITY, value ?: 0)

@@ -26,17 +26,6 @@ fun CustomButton(
     text: String ,
     modifier: Modifier = Modifier
 ) {
-//    Button( onClick = onClick,
-//        shape =  RoundedCornerShape(40.dp),
-//        modifier = modifier
-//        .fillMaxWidth()
-//        .height(50.dp)
-//        .background(MaterialTheme.colorScheme.primary,
-//            RoundedCornerShape(40.dp)
-//        ),
-//  //      shape =  RoundedCornerShape(50.dp),
-//
-//        )
     Row( modifier = modifier
         .fillMaxWidth()
         .height(40.dp)

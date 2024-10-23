@@ -6,6 +6,7 @@ fun SityResponse.toUI(): SityUi {
         name = name.orEmpty(),
         url = url.orEmpty(),
         ssl = ssl.orEmpty(),
+        phone = phone.orEmpty()
     )
 }
 

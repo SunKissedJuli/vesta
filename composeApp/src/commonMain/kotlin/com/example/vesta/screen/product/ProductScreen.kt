@@ -48,17 +48,13 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.example.vesta.components.CustomAsyncImage
 import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.components.CustomFlexAsyncImage
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.VerticalLine
 import com.example.vesta.data.models.product.ImageUi
 import com.example.vesta.ext.QuantityToStore
-import com.example.vesta.screen.subCategory.SubcategoryViewModel
 import com.example.vesta.strings.VestaResourceStrings
-import io.github.skeptick.libres.compose.painterResource
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class ProductScreen(private val id: Int): Screen{

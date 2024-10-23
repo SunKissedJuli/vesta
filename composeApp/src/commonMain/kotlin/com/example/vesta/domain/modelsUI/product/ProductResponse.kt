@@ -158,7 +158,7 @@ data class MultistoreProductUi(
             spb15 = 0,
             spb16 = 0,
             stockStatusId = 0,
-            storeId = 0
+            storeId = 0,
         )
     }
 

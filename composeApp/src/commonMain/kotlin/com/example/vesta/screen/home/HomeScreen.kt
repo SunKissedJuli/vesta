@@ -178,11 +178,10 @@ class HomeScreen: Screen {
         }
 
         if(state.isOpenPhone){
-            OpenPhone()
+            OpenPhone(state.phone)
         }
         if(state.isOpenSity){
             SityScreen(sityViewModel) { viewModel.openSity() }
         }
-
     }
 }

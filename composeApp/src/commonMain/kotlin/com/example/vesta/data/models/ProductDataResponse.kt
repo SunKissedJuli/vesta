@@ -17,7 +17,8 @@ class ProductsResponse(
     @SerialName("per_page") val perPage: Int?,
     @SerialName("prev_page_url") val prevPageUrl: String?,
     @SerialName("to") val to: Int?,
-    @SerialName("total") val total: Int?
+    @SerialName("total") val total: Int?,
+    @SerialName("quantity_status") val quantityStatus: String?
 )
 
 @Serializable
@@ -40,5 +41,6 @@ class ProductsDataResponse(
     @SerialName("status") val status: Int?,
     @SerialName("stock_status_id") val stockStatusId: Int?,
     @SerialName("store_id") val storeId: Int?,
-    @SerialName("tag") val tag: String?
+    @SerialName("tag") val tag: String?,
+    @SerialName("quantity_status") val quantityStatus: String?
 )

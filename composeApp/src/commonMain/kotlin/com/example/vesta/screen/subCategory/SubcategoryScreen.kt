@@ -2,6 +2,7 @@ package com.example.vesta.screen.subCategory
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,7 +21,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,6 +33,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.vesta.components.CustomButton
 import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.FilterButton
@@ -52,15 +57,37 @@ class SubcategoryScreen(private val id: Int): Screen {
         }
         CustomScaffold(
             topBar = {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth().height(51.dp).background(Color.Transparent)
+                        .shadow(
+                            5.dp,
+                            shape = MaterialTheme.shapes.medium,
+                            ambientColor = Color(0x1FF00000),
+                            clip = false,
+                        )
+                ) {
+                    Row(
+                        Modifier
+                            .align(Alignment.TopCenter)
+                            .fillMaxWidth()
+                            .height(46.dp)
+                            .background(MaterialTheme.colorScheme.background),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
 
+                        Text(
+                            text = VestaResourceStrings.catalog,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Medium,
+                            lineHeight = 19.5.sp
+                        )
+                    }
+                }
             }
         ) {
             Column(Modifier.fillMaxHeight()) {
-                Row(
-                    Modifier
-                        .fillMaxWidth()
-                        .height(70.dp)){
-                }
 
                 if(viewModel.status.collectAsState().value || SubcategoryState.InitState==state){
                     CustomCircularProgressIndicator()
@@ -76,7 +103,8 @@ class SubcategoryScreen(private val id: Int): Screen {
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         item(span = { GridItemSpan(2)}){
-                            FilterButton(
+                            CustomButton(
+                                text = VestaResourceStrings.filter,
                                 onClick = {},
                                 modifier = Modifier.padding(start = 15.dp, end = 15.dp, top = 15.dp))
                         }

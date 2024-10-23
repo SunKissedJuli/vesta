@@ -26,7 +26,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vesta.domain.modelsUI.ProductsDataResponseUi
-import com.example.vesta.ext.QuantityToStore
 import com.example.vesta.strings.VestaResourceStrings
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -74,7 +73,6 @@ fun ProductCard(
 
 
                 Column(Modifier.fillMaxWidth()
-                  //  .weight(1f)
                     .padding(start = 10.dp, bottom = 10.dp, end = 10.dp)) {
                     Row(Modifier.fillMaxWidth()){
                         Column(Modifier.weight(1f),
@@ -113,7 +111,7 @@ fun ProductCard(
                         Column(Modifier.weight(1f),
                             verticalArrangement = Arrangement.Center,
                             horizontalAlignment = Alignment.CenterHorizontally){
-                            Text(text = product.quantity.QuantityToStore(),
+                            Text(text = product.quantityStatus,
                                 color = MaterialTheme.colorScheme.secondary,
                                 fontSize = 15.sp,
                                 softWrap = true,

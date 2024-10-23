@@ -8,6 +8,7 @@ class SityResponse(
     @SerialName("store_id") val storeId: Int?,
     @SerialName("name") val name: String?,
     @SerialName("url") val url: String?,
-    @SerialName("ssl") val ssl: String?
+    @SerialName("ssl") val ssl: String?,
+    @SerialName("phone") val phone: String?
 )
 

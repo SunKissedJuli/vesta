@@ -17,7 +17,7 @@ object ProfileTab: Tab {
     override fun Content() {
         //тут будет код, который переносит на SignInScreen
         // если не зареган и на ProfileScreen если зареган
-        Navigator(SignInScreen())
+        Navigator(screen = SignInScreen())
     }
 
     override val options: TabOptions

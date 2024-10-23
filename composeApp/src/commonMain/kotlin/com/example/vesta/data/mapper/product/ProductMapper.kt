@@ -52,7 +52,7 @@ fun ProductResponse.toUI(): ProductResponseUi {
         viewed= this.viewed ?: 0,
         weight= this.weight ?: "",
         weightClassId= this.weightClassId ?: 0,
-        width= this.width ?: ""
+        width= this.width ?: "",
     )
 }
 

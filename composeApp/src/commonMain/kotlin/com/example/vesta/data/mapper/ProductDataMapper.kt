@@ -45,6 +45,7 @@ fun ProductsDataResponse.toUI(): ProductsDataResponseUi {
         status = status ?: 0,
         stockStatusId = stockStatusId ?: 0,
         storeId = storeId ?: 0,
-        tag = tag.orEmpty()
+        tag = tag.orEmpty(),
+        quantityStatus = quantityStatus.orEmpty()
     )
 }

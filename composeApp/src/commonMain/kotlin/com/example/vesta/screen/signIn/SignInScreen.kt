@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.vesta.components.CustomButton
 import com.example.vesta.components.CustomScaffold
@@ -76,7 +77,9 @@ class SignInScreen: Screen {
                     ) {
                         Spacer(modifier = Modifier.width(20.dp))
                         IconButton(
-                            onClick = { navigator.pop() },
+                            onClick = {
+
+                                navigator.pop() },
                         ) {
                             Icon(
                                 painter = painterResource(VestaResourceImages.button_back),

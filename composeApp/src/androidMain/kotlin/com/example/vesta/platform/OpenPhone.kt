@@ -10,11 +10,10 @@ import org.koin.core.component.inject
 import org.koin.java.KoinJavaComponent.inject
 
 @Composable
-actual fun OpenPhone(){
+actual fun OpenPhone(phone: String){
     val context = LocalContext.current
-    val phoneNumber = "88005553535"
     val intent = Intent(Intent.ACTION_DIAL).apply {
-        data = Uri.parse("tel:$phoneNumber")
+        data = Uri.parse("tel:$phone")
     }
     context.startActivity(intent)
 }
