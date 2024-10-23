@@ -1,6 +1,7 @@
 package com.example.vesta.screen.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,8 +42,12 @@ import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.components.CustomFlexAsyncImage
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.images.VestaResourceImages
-import com.example.vesta.screen.category.CategoryState
-import com.example.vesta.screen.signIn.SignInViewModel
+import com.example.vesta.platform.OpenPhone
+import com.example.vesta.screen.mainTab.MainTabScreen
+import com.example.vesta.screen.sity.SityScreen
+import com.example.vesta.screen.sity.SityViewModel
+import com.example.vesta.screen.splash.SplashEvent
+import com.example.vesta.screen.welcome.WelcomeScreen
 import com.example.vesta.strings.VestaResourceStrings
 import io.github.skeptick.libres.compose.painterResource
 
@@ -50,12 +56,14 @@ class HomeScreen: Screen {
     override fun Content() {
 
         val viewModel = rememberScreenModel { HomeViewModel() }
+        val sityViewModel = rememberScreenModel { SityViewModel() }
         val state by viewModel.stateFlow.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
 
         LaunchedEffect(viewModel){
             viewModel.loadData()
         }
+
         CustomScaffold(
             topBar = {
                 Box(
@@ -89,7 +97,6 @@ class HomeScreen: Screen {
             }
         ) {
             if(viewModel.status.collectAsState().value && HomeState.InitState==state){
-
                 CustomCircularProgressIndicator()
             } else {
 
@@ -127,8 +134,55 @@ class HomeScreen: Screen {
                             modifier = Modifier.padding(bottom = 20.dp)
                         )
                     }
+
+                        //кнопки
+                    Box(Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.BottomCenter)
+                        .padding(horizontal = 30.dp, vertical = 15.dp)){
+
+                        Box(
+                            modifier = Modifier
+                                .align(Alignment.BottomStart)
+                                .size(40.dp)
+                                .clip(CircleShape)
+                                .background(MaterialTheme.colorScheme.primary, CircleShape)
+                                .clickable { viewModel.openSity() }
+                        ){
+                            Icon(
+                                painterResource(VestaResourceImages.icon_geolocation),
+                                contentDescription = "",
+                                tint = MaterialTheme.colorScheme.background,
+                                modifier = Modifier.align(Alignment.Center)
+                            )
+                        }
+
+                        Box(
+                            modifier = Modifier
+                                .align(Alignment.BottomEnd)
+                                .size(40.dp)
+                                .clip(CircleShape)
+                                .background(MaterialTheme.colorScheme.primary, CircleShape)
+                                .clickable {  viewModel.openPhone()}
+                        ){
+                            Icon(
+                                painterResource(VestaResourceImages.icon_phone),
+                                contentDescription = "",
+                                tint = MaterialTheme.colorScheme.background,
+                                modifier = Modifier.align(Alignment.Center)
+                            )
+                        }
+                    }
                 }
             }
         }
+
+        if(state.isOpenPhone){
+            OpenPhone()
+        }
+        if(state.isOpenSity){
+            SityScreen(sityViewModel) { viewModel.openSity() }
+        }
+
     }
 }

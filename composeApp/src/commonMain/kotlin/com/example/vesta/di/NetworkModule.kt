@@ -30,7 +30,6 @@ internal val networkModule = module {
     factoryOf(::provideJson)
     factoryOf(::provideHttpClient)
     factory { provideKtorHttpClient(get(), Constantas.BASE_URL, get()) }
-
 }
 
 @OptIn(ExperimentalSerializationApi::class)

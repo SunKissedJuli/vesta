@@ -17,12 +17,10 @@ class AuthManagerImpl: AuthManager, KoinComponent {
 
     override var sity: Int?
         get() {
-            // Directly retrieve the integer value; if not found, return null
             return if (settings.contains(SITY)) settings.getInt(SITY, 0) else null
         }
         set(value) {
-            // Store the value as an Int
-            settings.putInt(SITY, value ?: 0) // Store as an Int, default to 0 if null
+            settings.putInt(SITY, value ?: 0)
         }
 
     companion object{

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.DropdownMenuItem
@@ -49,7 +50,7 @@ fun CustomDropdownMenu(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(45.dp)
-                .border(3.dp, MaterialTheme.colorScheme.secondary)
+                .border(3.dp, MaterialTheme.colorScheme.secondary, RoundedCornerShape(15.dp))
                 .menuAnchor()
                 .clickable { expanded = true },
             verticalAlignment = Alignment.CenterVertically

@@ -1,6 +1,7 @@
 package com.example.vesta.screen.sity
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -20,6 +22,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
@@ -47,13 +50,15 @@ internal fun SityScreen(
 
     } else {
         BasicAlertDialog(
-            onDismissRequest = onDismissRequest
+            onDismissRequest = onDismissRequest,
+            modifier = Modifier.clip(RoundedCornerShape(15.dp))
+                .background(MaterialTheme.colorScheme.background)
         ) {
 
             Column(
                 Modifier
                     .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.background)
+                   // .background(MaterialTheme.colorScheme.background)
             ) {
 
                 Row(

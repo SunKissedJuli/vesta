@@ -28,77 +28,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import cafe.adriel.voyager.core.model.rememberScreenModel
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.vesta.components.CustomButton
+import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.LoginTextField
 import com.example.vesta.strings.VestaResourceStrings
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-internal fun ProfileScreen(viewModel: ProfileViewModel, onDismissRequest: ()-> Unit){
-    val localFocusManager = LocalFocusManager.current
-    val state by viewModel.stateFlow.collectAsState()
 
-    BasicAlertDialog(
-        onDismissRequest = onDismissRequest){
+class ProfileScreen(): Screen{
+    @Composable
+    override fun Content() {
+        val viewModel = rememberScreenModel { ProfileViewModel() }
+        val navigator = LocalNavigator.currentOrThrow
+        val state by viewModel.stateFlow.collectAsState()
 
-        Column(Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.background)
-            .pointerInput(Unit) { detectTapGestures(
-                onTap = { localFocusManager.clearFocus() }
-            ) }
-        ) {
+        CustomScaffold {
 
-            Row(Modifier
-                .fillMaxWidth()
-                .height(70.dp)
-                .background(MaterialTheme.colorScheme.secondary),
-                verticalAlignment = Alignment.CenterVertically){
-
-                Text(
-                    text = VestaResourceStrings.authorize,
-                    color = MaterialTheme.colorScheme.background,
-                    fontWeight = FontWeight.Medium,
-                    letterSpacing = 1.sp,
-                    fontSize = 22.sp,
-                    modifier = Modifier.padding(start = 30.dp)
-                )
-            }
-
-            Column(
-                Modifier
-                    .fillMaxWidth()
-                    .padding(30.dp)) {
-                LoginTextField(
-                    placeholder = VestaResourceStrings.email,
-                    value = state.email,
-                    onValueChange = {viewModel.updateEmail(it)}
-                )
-                Spacer(Modifier.height(30.dp))
-
-                LoginTextField(
-                    placeholder = VestaResourceStrings.password,
-                    value = state.password,
-                    onValueChange = {viewModel.updatePassword(it)}
-                )
-                Spacer(Modifier.height(30.dp))
-
-                Row(Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween){
-                    TextButton(onClick={}, modifier = Modifier.weight(1f)){
-                        Text(text = VestaResourceStrings.forgot_password)
-                    }
-                    TextButton(onClick={}, modifier = Modifier.weight(1f)){
-                        Text(text = VestaResourceStrings.registration)
-                    }
-                }
-                Spacer(Modifier.height(30.dp))
-
-                CustomButton(
-                    text = VestaResourceStrings.sign_in,
-                    onClick = {viewModel.signIn(state.email, state.password)}
-                )
-            }
         }
     }
 }

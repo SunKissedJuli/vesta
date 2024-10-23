@@ -42,12 +42,12 @@ import com.example.vesta.components.CustomSplitClickableText
 import com.example.vesta.components.RoundedTextField
 import com.example.vesta.images.VestaResourceImages
 import com.example.vesta.screen.mainTab.MainTabScreen
+import com.example.vesta.screen.profile.ProfileScreen
 import com.example.vesta.screen.signUp.SignUpScreen
 import com.example.vesta.strings.VestaResourceStrings
 import io.github.skeptick.libres.compose.painterResource
 
 class SignInScreen: Screen {
-    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
         val viewModel = rememberScreenModel { SignInViewModel() }
@@ -133,7 +133,7 @@ class SignInScreen: Screen {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ){
                         CustomButton(
-                            onClick = {navigator.replaceAll(MainTabScreen())},
+                            onClick = {navigator.push(ProfileScreen())},
                             text = VestaResourceStrings.sign_in
                         )
                         Spacer(Modifier.height(25.dp))

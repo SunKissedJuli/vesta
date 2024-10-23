@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
@@ -33,6 +35,7 @@ import com.example.vesta.platform.OpenPhone
 import com.example.vesta.screen.Info.InfoDialog
 import com.example.vesta.screen.profile.ProfileScreen
 import com.example.vesta.screen.profile.ProfileViewModel
+import com.example.vesta.screen.signIn.SignInScreen
 import com.example.vesta.screen.sity.SityScreen
 import com.example.vesta.screen.sity.SityViewModel
 import com.example.vesta.screen.tabs.CartTab
@@ -47,18 +50,17 @@ class MainTabScreen(): Screen {
 
     @Composable
     override fun Content() {
+
         TabNavigator(CatalogTab, disposeNestedNavigators = false){ tab ->
             CustomScaffold(
                 bottomBar = {
                     Box(
-                        modifier = Modifier
-                            .fillMaxWidth().height(82.dp).background(Color.Transparent)
-                            .shadow(
-                                10.dp,
-                                shape = MaterialTheme.shapes.small,
-                                ambientColor = Color(0x1FF00000),
-                                clip = false,
-                            )
+                        Modifier
+                            .fillMaxWidth()
+                            .height(82.dp)
+                            .background(Color.Transparent)
+                            .shadow(10.dp, shape = MaterialTheme.shapes.small,
+                                ambientColor = Color(0x1FF00000), clip = false)
                     ) {
                         NavigationBar(
                             modifier = Modifier.height(72.dp).fillMaxWidth()

@@ -13,18 +13,20 @@ private val DarkColorPalette = darkColorScheme(
     secondaryContainer = LightGray,
     background = White,
     onSecondary = Color.Black,
-    onTertiary = AccentColor,
-    tertiary = BackgroundGray
+    onTertiary = MainAccentColor,
+    tertiary = BackgroundGray,
+    tertiaryContainer = SubAccentColor
 )
 
 private val LightColorPalette = lightColorScheme(
     primary = ButtonColor,
     secondary = SearchBarColor,
-    secondaryContainer = Gray,
+    secondaryContainer = LightGray,
     background = White,
     onSecondary = Color.Black,
-    onTertiary = AccentColor,
-    tertiary = BackgroundGray
+    onTertiary = MainAccentColor,
+    tertiary = BackgroundGray,
+    tertiaryContainer = SubAccentColor
 )
 
 @Composable

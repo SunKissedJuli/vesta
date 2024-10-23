@@ -15,7 +15,8 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.SubcomposeAsyncImage
-
+import coil3.request.ImageRequest
+import com.example.vesta.platform.CompressedAsyncImage
 
 
 @Composable
@@ -26,6 +27,7 @@ fun CustomFlexAsyncImage(
     modifier: Modifier = Modifier,
     contentScale: ContentScale = ContentScale.FillWidth,
 ){
+
     SubcomposeAsyncImage(
         model =(image),
         contentDescription = "",
@@ -36,9 +38,8 @@ fun CustomFlexAsyncImage(
             .background(errorColor)){
             CircularProgressIndicator(
                 color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.align(Alignment.Center))
-        }
-        },
+                modifier = Modifier.align(Alignment.Center)) }
+                  },
         //сделать норм заглушки
         error = { Box(modifier = modifier
             .size(size.dp)
