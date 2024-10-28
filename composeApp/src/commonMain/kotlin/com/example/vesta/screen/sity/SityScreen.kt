@@ -46,9 +46,8 @@ internal fun SityScreen(
         viewModel.loadData()
     }
 
-    if(viewModel.status.collectAsState().value || state==SityState.InitState){
+    if(state!=SityState.InitState) {
 
-    } else {
         BasicAlertDialog(
             onDismissRequest = onDismissRequest,
             modifier = Modifier.clip(RoundedCornerShape(15.dp))
@@ -58,7 +57,7 @@ internal fun SityScreen(
             Column(
                 Modifier
                     .fillMaxWidth()
-                   // .background(MaterialTheme.colorScheme.background)
+                // .background(MaterialTheme.colorScheme.background)
             ) {
 
                 Row(

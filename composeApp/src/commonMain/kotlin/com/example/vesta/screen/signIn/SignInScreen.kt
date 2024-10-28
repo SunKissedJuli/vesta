@@ -32,6 +32,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -54,7 +55,11 @@ class SignInScreen: Screen {
         val viewModel = rememberScreenModel { SignInViewModel() }
         val state by viewModel.stateFlow.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
-
+        LifecycleEffect(
+            onStarted = {
+                viewModel.setBottomBarVisible(false)
+            }
+        )
         CustomScaffold(
             topBar = {
                 Box(
@@ -78,7 +83,7 @@ class SignInScreen: Screen {
                         Spacer(modifier = Modifier.width(20.dp))
                         IconButton(
                             onClick = {
-
+                                viewModel.setBottomBarVisible(true)
                                 navigator.pop() },
                         ) {
                             Icon(
@@ -136,7 +141,7 @@ class SignInScreen: Screen {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ){
                         CustomButton(
-                            onClick = {navigator.push(ProfileScreen())},
+                            onClick = {viewModel.autorize(state.email, state.password, navigator)},
                             text = VestaResourceStrings.sign_in
                         )
                         Spacer(Modifier.height(25.dp))

@@ -23,7 +23,7 @@ internal class SityViewModel:BaseScreenModel<SityState, Unit>(SityState.InitStat
                         sities = response
                     )
                 }
-            }
+            },
         )
     }
 

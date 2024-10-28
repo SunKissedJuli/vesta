@@ -12,10 +12,11 @@ internal class SplashViewModel: BaseScreenModel<Unit, SplashEvent>(Unit) {
     private val infoRepository: InfoRepository by inject()
     private val manager: AuthManager by inject()
     fun isAutorize() = intent{
-        println(manager.sity)
-        //когда будет запрос из апишки на авторизацию, тут она будет проверяться
-        delay(500)
-        postSideEffect(SplashEvent.UserNotAutorize)
-
+        if(manager.token.isNullOrEmpty()){
+            postSideEffect(SplashEvent.UserNotAutorize)
+        }
+        else{
+            postSideEffectLocal(SplashEvent.UserAutorize)
+        }
     }
 }

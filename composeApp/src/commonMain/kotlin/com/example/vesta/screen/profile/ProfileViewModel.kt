@@ -1,22 +1,44 @@
 package com.example.vesta.screen.profile
 
+import com.example.vesta.domain.manager.AuthManager
+import com.example.vesta.domain.repository.UserRepository
 import com.example.vesta.platform.BaseScreenModel
+import com.example.vesta.screen.splash.SplashEvent
+import org.koin.core.component.inject
 import org.orbitmvi.orbit.syntax.simple.blockingIntent
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import vestatrade.composeapp.generated.resources.Res
 
-internal class ProfileViewModel: BaseScreenModel<ProfileState, Unit>(ProfileState.InitState) {
+internal class ProfileViewModel: BaseScreenModel<ProfileState, ProfileEvent>(ProfileState.InitState) {
 
-    fun updatePassword(newPassword: String) = blockingIntent {
-        reduce { state.copy(password = newPassword) }
+    val userRepository: UserRepository by inject()
+    val authManager: AuthManager by inject()
+
+    fun loadData() = intent {
+        launchOperation(
+            operation = {
+                userRepository.getCurrentUser()
+            },
+            success = { response ->
+                reduceLocal {
+                    state.copy(
+                        currentUser = response
+                    )
+                }
+            }
+        )
     }
 
-    fun updateEmail(newEmail: String) = blockingIntent {
-        reduce { state.copy(email = newEmail) }
-    }
-
-    fun signIn(email: String, password: String) = intent {
-
+    fun logOut() = intent {
+        launchOperation(
+            operation = {
+                userRepository.logOut()
+            },
+            success = {
+                authManager.token = ""
+                postSideEffectLocal(ProfileEvent.UserLogOut)
+            }
+        )
     }
 }

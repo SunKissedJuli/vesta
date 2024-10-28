@@ -8,8 +8,11 @@ import com.example.vesta.data.models.info.SityResponse
 import com.example.vesta.data.models.info.SityUi
 import com.example.vesta.data.models.info.StocksResponse
 import com.example.vesta.data.models.product.ProductResponse
+import com.example.vesta.data.models.user.CurrentUser
+import com.example.vesta.data.models.user.TokenResponse
 import com.example.vesta.domain.manager.AuthManager
 import de.jensklingenberg.ktorfit.http.GET
+import de.jensklingenberg.ktorfit.http.POST
 import de.jensklingenberg.ktorfit.http.Path
 import de.jensklingenberg.ktorfit.http.Query
 
@@ -44,5 +47,14 @@ interface VestaApi {
     @GET("api/getStocks") //акции
     suspend fun getStocks(@Query("sity") sity: Int = 0): List<StocksResponse>
 
+    //юзер
+    @POST("api/user/login")
+    suspend fun autorize(@Query("email") login: String, @Query("password") password: String): TokenResponse
+
+    @GET("api/user/getProfile")
+    suspend fun getCurrentUser(): CurrentUser
+
+    @POST("api/user/logout")
+    suspend fun logOut(): Unit
 
 }

@@ -1,11 +1,14 @@
 package com.example.vesta.screen.signUp
 
+import com.example.vesta.domain.manager.ObserverManager
 import com.example.vesta.platform.BaseScreenModel
+import org.koin.core.component.inject
 import org.orbitmvi.orbit.syntax.simple.blockingIntent
 import org.orbitmvi.orbit.syntax.simple.reduce
 
 internal class SignUpViewModel: BaseScreenModel<SignUpState, Unit>(SignUpState.InitState) {
 
+    private val bottomBarVisibleManager: ObserverManager by inject()
     fun updateLastName(newLastName: String) = blockingIntent {
         reduce { state.copy(lastName = newLastName) }
     }
@@ -40,5 +43,9 @@ internal class SignUpViewModel: BaseScreenModel<SignUpState, Unit>(SignUpState.I
 
     fun updateAgreeNews() = blockingIntent {
         reduce { state.copy(agreeNews = !state.agreeNews) }
+    }
+
+    fun setBottomBarVisible(visible: Boolean){
+        bottomBarVisibleManager.setBottomBarVisibility(false)
     }
 }

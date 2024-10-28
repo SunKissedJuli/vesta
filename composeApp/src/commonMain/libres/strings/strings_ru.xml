@@ -12,6 +12,7 @@
     <string name="display">Отображение:</string>
     <string name="authorize">Авторизация</string>
     <string name="sign_in">Войти</string>
+    <string name="log_out">Выйти</string>
     <string name="further">Далее</string>
     <string name="miss">Пропустить</string>
     <string name="wanna_enter">У меня уже есть аккаунт, хочу войти</string>
