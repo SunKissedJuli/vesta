@@ -41,6 +41,7 @@ fun RoundedTextField(
             focusedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
             unfocusedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
             unfocusedTextColor = MaterialTheme.colorScheme.onSecondary,
+            focusedTextColor = MaterialTheme.colorScheme.onSecondary,
             unfocusedPlaceholderColor = MaterialTheme.colorScheme.secondaryContainer,
             focusedPlaceholderColor = MaterialTheme.colorScheme.secondaryContainer,
             disabledPlaceholderColor = MaterialTheme.colorScheme.secondaryContainer,

@@ -3,6 +3,7 @@ package com.example.vesta.data.api
 import com.example.vesta.data.models.CategoryByIdResponse
 import com.example.vesta.data.models.CategoryResponse
 import com.example.vesta.data.models.ProductsResponse
+import com.example.vesta.data.models.info.NewsResponse
 import com.example.vesta.data.models.info.ShopsResponse
 import com.example.vesta.data.models.info.SityResponse
 import com.example.vesta.data.models.info.SityUi
@@ -40,6 +41,13 @@ interface VestaApi {
     //инфо
     @GET("api/info/getSites")
     suspend fun getSites(): List<SityResponse>
+
+    @GET("api/getNews")
+    suspend fun getNews(
+        @Query("sity") sity: Int = 0,
+        @Query("limit") limit: Int = 25,
+        @Query("page") page: Int = 1
+        ): NewsResponse
 
     @GET("api/info/getShops")
     suspend fun getShops(@Query("sity") sity: Int = 0): List<ShopsResponse>

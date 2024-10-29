@@ -9,6 +9,7 @@ import com.example.vesta.data.models.info.toUI
 import com.example.vesta.domain.manager.AuthManager
 import com.example.vesta.domain.modelsUI.CategoryByIdResponseUi
 import com.example.vesta.domain.modelsUI.CategoryUi
+import com.example.vesta.domain.modelsUI.info.NewsUi
 import com.example.vesta.domain.modelsUI.info.ShopsUi
 import com.example.vesta.domain.modelsUI.info.StocksUi
 import com.example.vesta.domain.repository.InfoRepository
@@ -37,6 +38,13 @@ class InfoRepositoryImpl(private val vestaApi: VestaApi, private val manager: Au
             vestaApi.getStocks(manager.sity?:0)
         },
             mapResponse = { stock -> stock.toUI() })
+    }
+
+    override suspend fun getNews(): Either<Failure, NewsUi> {
+        return apiCall (call = {
+            vestaApi.getNews(manager.sity?:0)
+        },
+            mapResponse = { news -> news.toUI() })
     }
 
 }

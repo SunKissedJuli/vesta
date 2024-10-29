@@ -55,7 +55,12 @@
     <string name="about">О нас</string>
     <string name="popular_product">Популярные товары</string>
     <string name="special_offers">Специальные предложения</string>
+    <string name="save">Сохранить</string>
+    <string name="old_password">Старый пароль</string>
+    <string name="new_password">Новый пароль</string>
+    <string name="confirm_password">Подтвердите пароль</string>
 
+    <string name="change_password">Изменить пароль</string>
 
 
 </resources>

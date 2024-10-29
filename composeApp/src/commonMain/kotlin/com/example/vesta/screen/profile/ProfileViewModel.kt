@@ -41,4 +41,19 @@ internal class ProfileViewModel: BaseScreenModel<ProfileState, ProfileEvent>(Pro
             }
         )
     }
+
+    fun updateChangePassword(change: Boolean) = blockingIntent {
+        reduce { state.copy(changePassword = change) }
+    }
+
+    fun updateOldPassword(password: String) = blockingIntent {
+        reduce { state.copy(oldPassword = password) }
+    }
+
+    fun updateNewPassword(password: String) = blockingIntent {
+        reduce { state.copy(newPassword = password) }
+    }
+    fun updateConfirmPassword(password: String) = blockingIntent {
+        reduce { state.copy(confirmPassword = password) }
+    }
 }

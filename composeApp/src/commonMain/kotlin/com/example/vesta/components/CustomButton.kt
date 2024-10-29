@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -24,13 +25,15 @@ import com.example.vesta.strings.VestaResourceStrings
 fun CustomButton(
     onClick: () -> Unit,
     text: String ,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    background: Color = MaterialTheme.colorScheme.primary,
+    textColor: Color = MaterialTheme.colorScheme.background,
 ) {
     Row( modifier = modifier
         .fillMaxWidth()
         .height(40.dp)
         .clip(RoundedCornerShape(50.dp))
-        .background(MaterialTheme.colorScheme.primary)
+        .background(background)
         .clickable(onClick = onClick),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
@@ -41,7 +44,7 @@ fun CustomButton(
             lineHeight = 19.5.sp,
             fontWeight = FontWeight.Bold,
             letterSpacing = 1.sp,
-            color = MaterialTheme.colorScheme.background
+            color = textColor
         )
     }
 }

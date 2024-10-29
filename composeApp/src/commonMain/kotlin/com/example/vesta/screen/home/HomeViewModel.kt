@@ -49,6 +49,11 @@ internal class HomeViewModel: BaseScreenModel<HomeState, Unit>(HomeState.InitSta
                 }
             }
         )
+        launchOperation(
+            operation = {
+                infoRepository.getNews()
+            }
+        )
     }
 
     fun openPhone() = intent {

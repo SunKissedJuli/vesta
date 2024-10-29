@@ -57,7 +57,6 @@ internal fun SityScreen(
             Column(
                 Modifier
                     .fillMaxWidth()
-                // .background(MaterialTheme.colorScheme.background)
             ) {
 
                 Row(
