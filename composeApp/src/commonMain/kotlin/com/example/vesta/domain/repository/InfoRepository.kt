@@ -1,7 +1,9 @@
 package com.example.vesta.domain.repository
 
+import com.example.vesta.data.models.info.MainBlogResponse
 import com.example.vesta.data.models.info.SityUi
 import com.example.vesta.domain.modelsUI.CategoryUi
+import com.example.vesta.domain.modelsUI.info.MainBlogUi
 import com.example.vesta.domain.modelsUI.info.NewsUi
 import com.example.vesta.domain.modelsUI.info.ShopsUi
 import com.example.vesta.domain.modelsUI.info.StocksUi
@@ -17,4 +19,6 @@ interface InfoRepository {
     suspend fun getStocks() : Either<Failure, List<StocksUi>>
 
     suspend fun getNews() : Either<Failure, NewsUi>
+
+    suspend fun getMainBlogs() : Either<Failure, MainBlogUi>
 }

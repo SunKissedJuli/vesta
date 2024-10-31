@@ -159,7 +159,7 @@ class ProfileScreen(): Screen{
                                     painterResource(VestaResourceImages.icon_phone),
                                     contentDescription = "",
                                     tint = MaterialTheme.colorScheme.onSecondary,
-                                    modifier = Modifier.size(35.dp)
+                                    modifier = Modifier.size(30.dp)
                                 )
                                 Spacer(Modifier.width(20.dp))
                                 Text(
@@ -177,10 +177,10 @@ class ProfileScreen(): Screen{
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Icon(
-                                    Icons.Outlined.Email,
+                                    painterResource(VestaResourceImages.icon_mail),
                                     contentDescription = "",
                                     tint = MaterialTheme.colorScheme.onSecondary,
-                                    modifier = Modifier.size(35.dp)
+                                    modifier = Modifier.size(30.dp)
                                 )
                                 Spacer(Modifier.width(20.dp))
                                 Text(

@@ -3,6 +3,8 @@ package com.example.vesta.domain.repository
 import com.example.vesta.data.models.product.ProductResponseUi
 import com.example.vesta.domain.modelsUI.CategoryByIdResponseUi
 import com.example.vesta.domain.modelsUI.CategoryUi
+import com.example.vesta.domain.modelsUI.ProductsDataResponseUi
+import com.example.vesta.domain.modelsUI.ProductsResponseUi
 import com.example.vesta.platform.Either
 import com.example.vesta.platform.Failure
 
@@ -19,6 +21,8 @@ interface ProductRepository {
     suspend fun getProduct(
         productId: Int,
     ): Either<Failure, ProductResponseUi>
+
+    suspend fun getFeaturedProducts(): Either<Failure, List<ProductResponseUi>>
 
 
 }

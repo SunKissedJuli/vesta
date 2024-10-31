@@ -42,95 +42,93 @@ fun ProductCard(
         shape = RoundedCornerShape(15.dp),
         shadowElevation = 5.dp) {
 
+        Column(
+            Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(15.dp))
+                .background(MaterialTheme.colorScheme.background)
+                .clickable(onClick = onClick),
+            verticalArrangement = Arrangement.Center) {
+            FlowRow(
+                modifier = Modifier.fillMaxWidth(),) {
+                for (sticker in product.octStickers.specialStickerData) {
+                    ProductSticker(sticker)
+                }
+            }
 
-            Column(
-                Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(15.dp))
-                    .background(MaterialTheme.colorScheme.background)
-                    .clickable(onClick = onClick),
-                verticalArrangement = Arrangement.Center) {
-                FlowRow(
-                    modifier = Modifier.fillMaxWidth(),) {
-                    for (sticker in product.octStickers.specialStickerData) {
-                        ProductSticker(sticker)
-                    }
+
+            Row(Modifier.fillMaxWidth().weight(1f).padding(vertical = 10.dp, horizontal = 5.dp)){
+                Box( Modifier.weight(1f)){
+                    CustomAsyncImage(product.image, modifier = Modifier.fillMaxSize())
                 }
 
-
-                Row(Modifier.fillMaxWidth().weight(1f).padding(vertical = 10.dp, horizontal = 5.dp)){
-                    Box( Modifier.weight(1f)){
-                        CustomAsyncImage(product.image, modifier = Modifier.fillMaxSize())
-                    }
-
-                    Spacer(Modifier.width(10.dp))
-                    Text(text = product.nameKorr,
-                        fontSize = 15.sp,
-                        softWrap = true,
-                        modifier = Modifier.weight(1.25f),
-                        maxLines = 6)
-                }
+                Spacer(Modifier.width(10.dp))
+                Text(text = product.nameKorr,
+                    fontSize = 15.sp,
+                    softWrap = true,
+                    modifier = Modifier.weight(1.25f),
+                    maxLines = 6)
+            }
 
 
-                Column(Modifier.fillMaxWidth()
-                    .padding(start = 10.dp, bottom = 10.dp, end = 10.dp)) {
-                    Row(Modifier.fillMaxWidth()){
-                        Column(Modifier.weight(1f),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally){
-                            if(product.model.isNotEmpty()){
-                                Text(text = VestaResourceStrings.product_code,
-                                    color = MaterialTheme.colorScheme.secondaryContainer,
-                                    fontSize = 15.sp,
-                                    textAlign = TextAlign.Center)
-                                Text(text = product.model,
-                                    color = MaterialTheme.colorScheme.secondaryContainer,
-                                    fontSize = 15.sp,
-                                    softWrap = true,
-                                    textAlign = TextAlign.Center,
-                                    maxLines = 2)
-                                Spacer(Modifier.height(7.dp))
-                            }
-                        }
-                        Spacer(Modifier.width(10.dp))
-                        Column(Modifier.weight(1.25f),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally){
-                            Row(Modifier.fillMaxWidth()){
-                                CounterBlock(
-                                    onIncrement = {},
-                                    onDeIncrement = {},
-                                    modifier = Modifier.weight(3f)
-                                )
-                                CardButton(modifier = Modifier.weight(1f)) { }
-                            }
-                        }
-                    }
-                    Spacer(Modifier.height(10.dp))
-                    Row(Modifier.fillMaxWidth()){
-                        Column(Modifier.weight(1f),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally){
-                            Text(text = product.quantityStatus,
-                                color = MaterialTheme.colorScheme.secondary,
+            Column(Modifier.fillMaxWidth()
+                .padding(start = 10.dp, bottom = 10.dp, end = 10.dp)) {
+                Row(Modifier.fillMaxWidth()){
+                    Column(Modifier.weight(1f),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally){
+                        if(product.model.isNotEmpty()){
+                            Text(text = VestaResourceStrings.product_code,
+                                color = MaterialTheme.colorScheme.secondaryContainer,
+                                fontSize = 15.sp,
+                                textAlign = TextAlign.Center)
+                            Text(text = product.model,
+                                color = MaterialTheme.colorScheme.secondaryContainer,
                                 fontSize = 15.sp,
                                 softWrap = true,
                                 textAlign = TextAlign.Center,
                                 maxLines = 2)
+                            Spacer(Modifier.height(7.dp))
                         }
-                        Spacer(Modifier.width(10.dp))
-                        Column(Modifier.weight(1.25f),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally){
-                            Text(text = "${product.price} ${VestaResourceStrings.rub}",
-                                color = MaterialTheme.colorScheme.secondary,
-                                fontSize = 15.sp,
-                                softWrap = true,
-                                maxLines = 2)
+                    }
+                    Spacer(Modifier.width(10.dp))
+                    Column(Modifier.weight(1.25f),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally){
+                        Row(Modifier.fillMaxWidth()){
+                            CounterBlock(
+                                onIncrement = {},
+                                onDeIncrement = {},
+                                modifier = Modifier.weight(3f)
+                            )
+                            CardButton(modifier = Modifier.weight(1f)) { }
                         }
+                    }
+                }
+                Spacer(Modifier.height(10.dp))
+                Row(Modifier.fillMaxWidth()){
+                    Column(Modifier.weight(1f),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally){
+                        Text(text = product.quantityStatus,
+                            color = MaterialTheme.colorScheme.secondary,
+                            fontSize = 15.sp,
+                            softWrap = true,
+                            textAlign = TextAlign.Center,
+                            maxLines = 2)
+                    }
+                    Spacer(Modifier.width(10.dp))
+                    Column(Modifier.weight(1.25f),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally){
+                        Text(text = "${product.price} ${VestaResourceStrings.rub}",
+                            color = MaterialTheme.colorScheme.secondary,
+                            fontSize = 15.sp,
+                            softWrap = true,
+                            maxLines = 2)
                     }
                 }
             }
         }
-
+    }
 }

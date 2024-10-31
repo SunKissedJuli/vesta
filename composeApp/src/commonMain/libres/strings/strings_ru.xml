@@ -59,8 +59,10 @@
     <string name="old_password">Старый пароль</string>
     <string name="new_password">Новый пароль</string>
     <string name="confirm_password">Подтвердите пароль</string>
-
     <string name="change_password">Изменить пароль</string>
+    <string name="stocks">Акции</string>
+    <string name="news">Новости</string>
+    <string name="new_products">Новинки</string>
 
 
 </resources>

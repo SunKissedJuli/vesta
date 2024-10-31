@@ -14,6 +14,7 @@ import org.orbitmvi.orbit.syntax.simple.reduce
 internal class HomeViewModel: BaseScreenModel<HomeState, Unit>(HomeState.InitState) {
 
     private val infoRepository: InfoRepository by inject()
+    private val productRepository: ProductRepository by inject()
     private val manager: AuthManager by inject()
 
     fun loadData(){
@@ -23,13 +24,27 @@ internal class HomeViewModel: BaseScreenModel<HomeState, Unit>(HomeState.InitSta
     fun loadStocks() = intent{
         launchOperation(
             operation = {
-                infoRepository.getStocks()
+                infoRepository.getMainBlogs()
             },
             success = { response ->
                 reduceLocal { state.copy(
-                    stockData = response
+                    stockData = response.akcii,
+                    stockSliderData = response.akciiSlider,
+                    newsData = response.novosti,
+                    newProductsData = response.novinki
                 ) }
             }
+        )
+        launchOperation(
+            operation = {
+                productRepository.getFeaturedProducts()
+            },
+            success = {response ->
+                reduceLocal {
+                    state.copy(
+                        productList = response
+                    )
+                }},
         )
         launchOperation(
             operation = {
@@ -49,11 +64,6 @@ internal class HomeViewModel: BaseScreenModel<HomeState, Unit>(HomeState.InitSta
                 }
             }
         )
-        launchOperation(
-            operation = {
-                infoRepository.getNews()
-            }
-        )
     }
 
     fun openPhone() = intent {
@@ -64,6 +74,11 @@ internal class HomeViewModel: BaseScreenModel<HomeState, Unit>(HomeState.InitSta
 
     fun openSity() = intent {
         reduce{ state.copy(isOpenSity = !state.isOpenSity) }
+
+    }
+
+    fun updatePage(index: Int) = blockingIntent{
+        reduce{ state.copy(selectedPage = index) }
 
     }
 }
