@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
@@ -36,10 +35,8 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.vesta.components.CustomButton
 import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.components.CustomScaffold
-import com.example.vesta.components.FilterButton
 import com.example.vesta.components.ProductCard
 import com.example.vesta.components.SubcategorySquare
-import com.example.vesta.screen.category.CategoryScreen
 import com.example.vesta.screen.product.ProductScreen
 import com.example.vesta.strings.VestaResourceStrings
 
@@ -97,7 +94,7 @@ class SubcategoryScreen(private val id: Int): Screen {
                         columns = GridCells.Fixed(2),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 15.dp)
+                            .padding(horizontal = 10.dp)
                             .background(MaterialTheme.colorScheme.background),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)

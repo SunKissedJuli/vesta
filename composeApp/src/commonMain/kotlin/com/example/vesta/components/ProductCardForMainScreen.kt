@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vesta.data.models.product.ProductResponseUi
 import com.example.vesta.domain.modelsUI.ProductsDataResponseUi
+import com.example.vesta.domain.modelsUI.SpecialStickerDataUi
 import com.example.vesta.ext.QuantityToStore
 import com.example.vesta.strings.VestaResourceStrings
 
@@ -40,7 +41,7 @@ fun ProductCardForMainScreen(
         Modifier
             .fillMaxWidth()
             .height(310.dp)
-            .padding(horizontal = 10.dp, vertical = 7.dp),
+            .padding(start = 5.dp, end = 5.dp, top = 5.dp, bottom = 5.dp),
         shape = RoundedCornerShape(15.dp),
         shadowElevation = 5.dp) {
 
@@ -76,7 +77,7 @@ fun ProductCardForMainScreen(
                 Text(
                     text = "${product.multistoreProduct.price} ${VestaResourceStrings.rub}",
                     color = MaterialTheme.colorScheme.secondary,
-                    fontSize = 15.sp,
+                    fontSize = 14.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(vertical = 7.dp),
                 )

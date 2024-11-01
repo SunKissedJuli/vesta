@@ -23,9 +23,11 @@ class SplashScreen : Screen {
             viewModel.container.sideEffectFlow.collect() {
                 when (it) {
                     is SplashEvent.UserAutorize -> {
+                        viewModel.updateBottomBarVisible(true)
                         navigator.replaceAll(MainTabScreen())
                     }
                     is SplashEvent.UserNotAutorize ->{
+                       // navigator.replaceAll(MainTabScreen())
                         navigator.push(WelcomeScreen())
                     }
                 }

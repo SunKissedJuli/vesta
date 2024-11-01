@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.sp
 
 @Composable
@@ -22,6 +24,7 @@ fun RoundedTextField(
     value: String,
     onValueChange: (String) -> Unit,
     placeholder: String,
+    isPassword: Boolean = false, // New parameter for password masking
     modifier: Modifier = Modifier
 ) {
     val isPlaceholderVisible = value.isEmpty()
@@ -31,6 +34,7 @@ fun RoundedTextField(
     OutlinedTextField(
         modifier = modifier.fillMaxWidth(),
         value = value,
+        maxLines = 1,
         onValueChange = {
             onValueChange(it)
         },
@@ -45,16 +49,16 @@ fun RoundedTextField(
             unfocusedPlaceholderColor = MaterialTheme.colorScheme.secondaryContainer,
             focusedPlaceholderColor = MaterialTheme.colorScheme.secondaryContainer,
             disabledPlaceholderColor = MaterialTheme.colorScheme.secondaryContainer,
-            errorPlaceholderColor =  MaterialTheme.colorScheme.secondaryContainer,
-
+            errorPlaceholderColor = MaterialTheme.colorScheme.secondaryContainer
         ),
         label = {
             Text(
                 text = placeholder,
                 color = MaterialTheme.colorScheme.secondaryContainer,
-                fontSize = labelFontSize.sp,
+                fontSize = labelFontSize.sp
             )
         },
-        interactionSource = interactionSource
+        interactionSource = interactionSource,
+        visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None
     )
 }

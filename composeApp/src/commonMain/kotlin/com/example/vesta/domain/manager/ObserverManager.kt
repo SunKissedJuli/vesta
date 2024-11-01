@@ -1,5 +1,9 @@
 package com.example.vesta.domain.manager
 
+import cafe.adriel.voyager.navigator.tab.Tab
+import com.example.vesta.platform.Either
+import com.example.vesta.platform.Failure
+import com.example.vesta.screen.tabs.HomeTab
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -13,16 +17,21 @@ import org.koin.core.component.inject
 
 interface ObserverManager {
     val bottomBarVisible: StateFlow<Boolean>
+    val tabStack: StateFlow<MutableList<Tab>>
 
     fun setBottomBarVisibility(visible: Boolean)
     fun isBottomBarVisible(): Boolean
     fun observeBottomBarVisibility(observer: (Boolean) -> Unit)
+    fun addTabStack(tab: Tab)
+    fun popTab(): Either<Failure, Unit>
+
 }
 
 class ObserverManagerImpl: ObserverManager, KoinComponent {
-    private val _bottomBarVisible = MutableStateFlow(true)
+    private val _bottomBarVisible = MutableStateFlow(false)
     override val bottomBarVisible: StateFlow<Boolean> = _bottomBarVisible.asStateFlow()
-
+    val _tabStack = MutableStateFlow<MutableList<Tab>>(mutableListOf(HomeTab))
+    override val tabStack: StateFlow<MutableList<Tab>> = _tabStack.asStateFlow()
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
@@ -39,6 +48,26 @@ class ObserverManagerImpl: ObserverManager, KoinComponent {
             bottomBarVisible.collect { isVisible ->
                 observer(isVisible)
             }
+        }
+    }
+
+    override fun addTabStack(tab: Tab) {
+        _tabStack.value.add(tab)
+    }
+
+    override fun popTab(): Either<Failure, Unit> {
+        return try {
+            if(_tabStack.value.size == 1) {
+                return Either.Left(Failure.Message("Стэк навигации пуст"))
+            }
+            coroutineScope.launch {
+                _tabStack.emit(_tabStack.value.dropLast(1).toMutableList())
+            }
+            Either.Right(Unit)
+        } catch (
+            e: Exception
+        ) {
+            Either.Left(Failure.Message("Ошибка"))
         }
     }
 

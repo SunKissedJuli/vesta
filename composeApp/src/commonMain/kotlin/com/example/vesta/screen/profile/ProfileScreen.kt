@@ -12,7 +12,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.outlined.Email
@@ -121,7 +123,7 @@ class ProfileScreen(): Screen{
                         )
                     }
 
-                    Column(Modifier.fillMaxSize().padding(20.dp)) {
+                    Column(Modifier.fillMaxSize().padding(20.dp).verticalScroll(rememberScrollState())) {
                         RoundedTextField(
                             value = state.currentUser.firstName,
                             onValueChange = {},
@@ -141,8 +143,13 @@ class ProfileScreen(): Screen{
                             onValueChange = {},
                             placeholder = VestaResourceStrings.patronymic
                         )
+                        Spacer(Modifier.height(25.dp))
+                        CustomButton(
+                            onClick = {},
+                            text = VestaResourceStrings.save
+                        )
 
-                        Column(Modifier.padding(horizontal = 10.dp, vertical = 35.dp)){
+                        Column(Modifier.padding(horizontal = 10.dp, vertical = 30.dp)){
                             Text(
                             text = VestaResourceStrings.contact_information,
                             fontSize = 16.sp,

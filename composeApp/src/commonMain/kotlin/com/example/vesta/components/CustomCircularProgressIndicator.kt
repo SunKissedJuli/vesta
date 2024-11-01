@@ -21,7 +21,7 @@ fun CustomCircularProgressIndicator(){
                 .fillMaxWidth(0.2f)
                 .align(Alignment.Center)
                 .padding(bottom = 50.dp),
-            strokeWidth = 10.dp)
+            strokeWidth = 5.dp)
     }
 
 }

@@ -41,6 +41,6 @@ internal class SignInViewModel:BaseScreenModel<SignInState, Unit>(SignInState.In
     }
 
     fun setBottomBarVisible(visible: Boolean){
-        bottomBarVisibleManager.setBottomBarVisibility(false)
+        bottomBarVisibleManager.setBottomBarVisibility(visible)
     }
 }

@@ -4,6 +4,7 @@ import com.example.vesta.data.models.CategoryResponse
 import com.example.vesta.data.models.DescriptionResponse
 import com.example.vesta.domain.modelsUI.CategoryUi
 import com.example.vesta.domain.modelsUI.DescriptionUi
+import com.example.vesta.ext.cleanHtml
 
 fun List<CategoryResponse>.toUI(): List<CategoryUi> {
     return map { it.toUI() }
@@ -26,7 +27,7 @@ fun List<CategoryResponse>.toUI(): List<CategoryUi> {
 fun DescriptionResponse.toUI(): DescriptionUi {
     return DescriptionUi(
         categoryId = this.categoryId ?: 0,
-        name = this.name.orEmpty(),
+        name = this.name?.cleanHtml().orEmpty(),
         description = this.description.orEmpty(),
         metaKeyword = this.metaKeyword.orEmpty()
     )

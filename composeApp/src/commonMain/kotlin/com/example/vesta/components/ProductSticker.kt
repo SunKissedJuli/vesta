@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -31,17 +32,20 @@ fun ProductSticker(
             .height(22.dp)
             .padding(start = 10.dp, top = 5.dp )
             .clip(RoundedCornerShape(50.dp))
+            .wrapContentWidth()
             .background(sticker.fonColor.rgbToColor(colorScheme)),
        ){
         Box(Modifier
             .fillMaxHeight()
             .clip(RoundedCornerShape(50.dp))
+            .wrapContentWidth()
             .background(colorScheme.background.copy(alpha = 0.2f)),
         ) {
             Text(
                 text = sticker.title,
                 color = sticker.textColor.rgbToColor(colorScheme),
                 fontSize = 10.sp,
+                softWrap = true,
                 modifier = Modifier.align(Alignment.Center).padding(horizontal = 10.dp)
             )
         }

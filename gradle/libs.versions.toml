@@ -35,7 +35,7 @@ orbit = "6.0.0"
 ksp = "2.0.0-1.0.21"
 junit = "4.13.2"
 kotlin = "2.0.0"
-coil3 = "3.0.0-alpha07"
+coil3 = "3.0.0-alpha08"
 googleAccompanistPager = "0.24.13-rc"
 yadnex-map = "4.4.0-lite"
 

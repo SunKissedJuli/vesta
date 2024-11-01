@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun SubcategorySquare(
     modifier: Modifier = Modifier,
-    image: Any,
+    image: String,
     name: String,
     onClick: ()-> Unit
 ){

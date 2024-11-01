@@ -38,14 +38,17 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import com.example.vesta.components.CustomButton
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.CustomSplitClickableText
 import com.example.vesta.components.RoundedTextField
 import com.example.vesta.images.VestaResourceImages
+import com.example.vesta.screen.home.HomeScreen
 import com.example.vesta.screen.mainTab.MainTabScreen
 import com.example.vesta.screen.profile.ProfileScreen
 import com.example.vesta.screen.signUp.SignUpScreen
+import com.example.vesta.screen.tabs.HomeTab
 import com.example.vesta.strings.VestaResourceStrings
 import io.github.skeptick.libres.compose.painterResource
 
@@ -55,6 +58,7 @@ class SignInScreen: Screen {
         val viewModel = rememberScreenModel { SignInViewModel() }
         val state by viewModel.stateFlow.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
+        val tabNavigator = LocalTabNavigator.current
         LifecycleEffect(
             onStarted = {
                 viewModel.setBottomBarVisible(false)
@@ -84,7 +88,7 @@ class SignInScreen: Screen {
                         IconButton(
                             onClick = {
                                 viewModel.setBottomBarVisible(true)
-                                navigator.pop() },
+                                tabNavigator.current = HomeTab },
                         ) {
                             Icon(
                                 painter = painterResource(VestaResourceImages.button_back),
@@ -120,7 +124,8 @@ class SignInScreen: Screen {
                     RoundedTextField(
                         value = state.password,
                         onValueChange = {viewModel.updatePassword(it)},
-                        placeholder = VestaResourceStrings.password
+                        placeholder = VestaResourceStrings.password,
+                        isPassword = true
                     )
                     Text(
                         text = VestaResourceStrings.forgot_password,

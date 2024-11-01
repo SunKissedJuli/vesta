@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.vesta.strings.VestaResourceStrings
 
 @Composable
@@ -61,6 +62,7 @@ fun CounterBlock(
         Text(text = count.toString(),
             style = MaterialTheme.typography.headlineMedium,
             color = countColor,
+            fontSize = 15.sp,
             modifier = Modifier.weight(1.25f)
                 .wrapContentSize(Alignment.Center))
 

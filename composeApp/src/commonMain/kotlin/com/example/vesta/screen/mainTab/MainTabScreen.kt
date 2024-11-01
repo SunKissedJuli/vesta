@@ -15,6 +15,14 @@ import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -32,7 +40,9 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.VerticalLine
 import com.example.vesta.domain.manager.ObserverManager
+import com.example.vesta.platform.BackHandlerPlatform
 import com.example.vesta.platform.OpenPhone
+import com.example.vesta.platform.doOnFailure
 import com.example.vesta.screen.Info.InfoDialog
 import com.example.vesta.screen.profile.ProfileScreen
 import com.example.vesta.screen.profile.ProfileViewModel
@@ -46,6 +56,7 @@ import com.example.vesta.screen.tabs.HomeTab
 import com.example.vesta.screen.tabs.InfoTab
 import com.example.vesta.screen.tabs.PhoneTab
 import com.example.vesta.screen.tabs.ProfileTab
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -55,30 +66,63 @@ class MainTabScreen(): Screen, KoinComponent {
     override fun Content() {
 
         val observerManager: ObserverManager by inject()
-        TabNavigator(CatalogTab, disposeNestedNavigators = false){ tab ->
+        val tabStack by observerManager.tabStack.collectAsState()
+        var isBottomBarVisible by remember { mutableStateOf(false) }
+        LaunchedEffect(Unit){
+            launch {
+                observerManager.observeBottomBarVisibility {
+                    isBottomBarVisible = observerManager.isBottomBarVisible()
+                }
+            }
+        }
+        TabNavigator(HomeTab, disposeNestedNavigators = false){ tab ->
+            val tabNavigator = LocalTabNavigator.current
+            LaunchedEffect(tabStack) {
+                tabStack.lastOrNull()?.let {
+                    tabNavigator.current = it
+                }
+            }
+
+            BackHandlerPlatform { navigator, rootNavigator, exitApp ->
+                when {
+                    rootNavigator.canPop -> {
+                        rootNavigator.pop()
+                    }
+                    navigator.canPop -> {
+                         navigator.pop()
+                    }
+                    else -> {
+                         observerManager.popTab().doOnFailure {
+                            exitApp()
+                        }
+                    }
+                }
+            }
             CustomScaffold(
 
                 bottomBar = {
-                    if(observerManager.isBottomBarVisible()){
-                        Box(
-                            Modifier
-                                .fillMaxWidth()
-                                .height(82.dp)
-                                .background(Color.Transparent)
-                                .shadow(10.dp, shape = MaterialTheme.shapes.small,
-                                    ambientColor = Color(0x1FF00000), clip = false)
-                        ) {
-                            NavigationBar(
-                                modifier = Modifier.height(72.dp).fillMaxWidth()
-                                    .align(Alignment.BottomStart),
-                                containerColor = MaterialTheme.colorScheme.background,
-                                contentColor = MaterialTheme.colorScheme.onSecondary
+                    key(isBottomBarVisible){
+                        if(observerManager.isBottomBarVisible()){
+                            Box(
+                                Modifier
+                                    .fillMaxWidth()
+                                    .height(82.dp)
+                                    .background(Color.Transparent)
+                                    .shadow(10.dp, shape = MaterialTheme.shapes.small,
+                                        ambientColor = Color(0x1FF00000), clip = false)
                             ) {
-                                TabNavItem(HomeTab)
-                                TabNavItem(CatalogTab)
-                                TabNavItem(CartTab)
-                                TabNavItem(ProfileTab)
-                                TabNavItem(InfoTab)
+                                NavigationBar(
+                                    modifier = Modifier.height(72.dp).fillMaxWidth()
+                                        .align(Alignment.BottomStart),
+                                    containerColor = MaterialTheme.colorScheme.background,
+                                    contentColor = MaterialTheme.colorScheme.onSecondary
+                                ) {
+                                    TabNavItem(HomeTab)
+                                    TabNavItem(CatalogTab)
+                                    TabNavItem(CartTab)
+                                    TabNavItem(ProfileTab)
+                                    TabNavItem(InfoTab)
+                                }
                             }
                         }
                     }

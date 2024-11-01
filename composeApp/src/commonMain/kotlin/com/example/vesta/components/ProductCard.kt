@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -22,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,7 +40,7 @@ fun ProductCard(
         Modifier
             .fillMaxWidth()
             .height(280.dp)
-            .padding(horizontal = 10.dp, vertical = 7.dp),
+            .padding(start = 5.dp, end = 5.dp, top = 5.dp, bottom = 5.dp),
         shape = RoundedCornerShape(15.dp),
         shadowElevation = 5.dp) {
 
@@ -50,29 +52,35 @@ fun ProductCard(
                 .clickable(onClick = onClick),
             verticalArrangement = Arrangement.Center) {
             FlowRow(
-                modifier = Modifier.fillMaxWidth(),) {
+                modifier = Modifier.fillMaxWidth()) {
                 for (sticker in product.octStickers.specialStickerData) {
                     ProductSticker(sticker)
                 }
             }
 
-
-            Row(Modifier.fillMaxWidth().weight(1f).padding(vertical = 10.dp, horizontal = 5.dp)){
-                Box( Modifier.weight(1f)){
-                    CustomAsyncImage(product.image, modifier = Modifier.fillMaxSize())
-                }
+            Row(Modifier.fillMaxWidth()
+                .weight(1f)
+                .padding(vertical = 10.dp, horizontal = 5.dp)){
+               Box( Modifier.weight(1f)){
+                 //   println("картинка = " + product.image)
+                    CustomAsyncImage(
+                        image = product.image,
+                        contentScale = ContentScale.FillWidth
+                      //  modifier = Modifier.weight(1f),
+                    )
+               }
 
                 Spacer(Modifier.width(10.dp))
                 Text(text = product.nameKorr,
-                    fontSize = 15.sp,
+                    fontSize = 14.sp,
                     softWrap = true,
                     modifier = Modifier.weight(1.25f),
                     maxLines = 6)
             }
 
-
-            Column(Modifier.fillMaxWidth()
-                .padding(start = 10.dp, bottom = 10.dp, end = 10.dp)) {
+            Column(Modifier.fillMaxWidth().weight(1f)
+                .padding(start = 10.dp, bottom = 10.dp, end = 10.dp)
+            ) {
                 Row(Modifier.fillMaxWidth()){
                     Column(Modifier.weight(1f),
                         verticalArrangement = Arrangement.Center,
@@ -80,11 +88,11 @@ fun ProductCard(
                         if(product.model.isNotEmpty()){
                             Text(text = VestaResourceStrings.product_code,
                                 color = MaterialTheme.colorScheme.secondaryContainer,
-                                fontSize = 15.sp,
+                                fontSize = 14.sp,
                                 textAlign = TextAlign.Center)
                             Text(text = product.model,
                                 color = MaterialTheme.colorScheme.secondaryContainer,
-                                fontSize = 15.sp,
+                                fontSize = 14.sp,
                                 softWrap = true,
                                 textAlign = TextAlign.Center,
                                 maxLines = 2)
@@ -112,18 +120,18 @@ fun ProductCard(
                         horizontalAlignment = Alignment.CenterHorizontally){
                         Text(text = product.quantityStatus,
                             color = MaterialTheme.colorScheme.secondary,
-                            fontSize = 15.sp,
+                            fontSize = 14.sp,
                             softWrap = true,
                             textAlign = TextAlign.Center,
                             maxLines = 2)
                     }
                     Spacer(Modifier.width(10.dp))
-                    Column(Modifier.weight(1.25f),
+                    Column(Modifier.weight(1.25f).fillMaxHeight(),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally){
                         Text(text = "${product.price} ${VestaResourceStrings.rub}",
                             color = MaterialTheme.colorScheme.secondary,
-                            fontSize = 15.sp,
+                            fontSize = 14.sp,
                             softWrap = true,
                             maxLines = 2)
                     }

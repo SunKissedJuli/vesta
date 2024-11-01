@@ -36,7 +36,7 @@ fun SearchTextField(
                 .fillMaxWidth(0.9f)
                 .padding(start = 15.dp),
             textStyle = TextStyle.Default.copy(
-                fontSize = 17.sp
+                fontSize = 17.sp,
             ),
             maxLines = 1,
             decorationBox = { innerTextField ->

@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -41,6 +42,7 @@ class WelcomeScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
+        val viewModel = rememberScreenModel { WelcomeViewModel() }
         CustomScaffold {
 
             Box(Modifier.fillMaxSize()
@@ -106,7 +108,11 @@ class WelcomeScreen : Screen {
                             style = TextStyle(textDecoration = TextDecoration.Underline),
                             letterSpacing = 0.5.sp,
                             lineHeight = 14.63.sp,
-                            modifier = Modifier.clickable{navigator.replaceAll(MainTabScreen())}
+                            modifier = Modifier
+                                .clickable{
+                                    viewModel.setBottomBarVisible(true)
+                                    navigator.replaceAll(MainTabScreen())
+                                }
                         )
                     }
                 }

@@ -18,7 +18,6 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import cafe.adriel.voyager.core.annotation.InternalVoyagerApi
 
-@OptIn(InternalVoyagerApi::class)
 @Composable
 fun CustomScaffold(
     modifier: Modifier = Modifier,
