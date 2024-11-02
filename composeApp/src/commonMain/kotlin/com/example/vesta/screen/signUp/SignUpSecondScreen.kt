@@ -193,7 +193,7 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
                         horizontalAlignment = Alignment.CenterHorizontally
                     ){
                         CustomButton(
-                            onClick = {navigator.replaceAll(MainTabScreen())},
+                            onClick = {},
                             text = VestaResourceStrings.sign_up
                         )
                         Spacer(Modifier.height(25.dp))

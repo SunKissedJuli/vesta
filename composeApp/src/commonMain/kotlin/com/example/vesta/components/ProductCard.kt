@@ -62,11 +62,9 @@ fun ProductCard(
                 .weight(1f)
                 .padding(vertical = 10.dp, horizontal = 5.dp)){
                Box( Modifier.weight(1f)){
-                 //   println("картинка = " + product.image)
                     CustomAsyncImage(
                         image = product.image,
-                        contentScale = ContentScale.FillWidth
-                      //  modifier = Modifier.weight(1f),
+                        modifier = Modifier.fillMaxSize(),
                     )
                }
 

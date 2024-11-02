@@ -53,6 +53,8 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
+import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.components.CustomFlexAsyncImage
 import com.example.vesta.components.CustomScaffold
@@ -68,6 +70,7 @@ import com.example.vesta.screen.product.ProductScreen
 import com.example.vesta.screen.sity.SityScreen
 import com.example.vesta.screen.sity.SityViewModel
 import com.example.vesta.screen.splash.SplashEvent
+import com.example.vesta.screen.tabs.HomeTab
 import com.example.vesta.screen.welcome.WelcomeScreen
 import com.example.vesta.strings.VestaResourceStrings
 import io.github.skeptick.libres.compose.painterResource
@@ -81,6 +84,8 @@ class HomeScreen: Screen {
         val sityViewModel = rememberScreenModel { SityViewModel() }
         val state by viewModel.stateFlow.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
+        val tabNavigator = LocalTabNavigator.current
+        tabNavigator.current = HomeTab
 
         LaunchedEffect(viewModel){
             viewModel.loadData()

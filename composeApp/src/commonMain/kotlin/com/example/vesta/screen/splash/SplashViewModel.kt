@@ -24,4 +24,12 @@ internal class SplashViewModel: BaseScreenModel<Unit, SplashEvent>(Unit) {
     fun updateBottomBarVisible(isVisible: Boolean){
         observerManager.setBottomBarVisibility(isVisible)
     }
+
+    fun updateIsTabNavigator(isVisible: Boolean){
+        observerManager.setIsTabNavigator(isVisible)
+    }
+
+    fun isTabNavigator() : Boolean{
+        return observerManager.isTabNavigator()
+    }
 }

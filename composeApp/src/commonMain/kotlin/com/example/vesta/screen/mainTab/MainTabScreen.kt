@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
@@ -56,6 +57,7 @@ import com.example.vesta.screen.tabs.HomeTab
 import com.example.vesta.screen.tabs.InfoTab
 import com.example.vesta.screen.tabs.PhoneTab
 import com.example.vesta.screen.tabs.ProfileTab
+import com.example.vesta.screen.welcome.WelcomeScreen
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

@@ -58,7 +58,11 @@ class SignInScreen: Screen {
         val viewModel = rememberScreenModel { SignInViewModel() }
         val state by viewModel.stateFlow.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
-        val tabNavigator = LocalTabNavigator.current
+
+        if(!navigator.canPop){
+            viewModel.updateTabNavigator(LocalTabNavigator.current)
+        }
+
         LifecycleEffect(
             onStarted = {
                 viewModel.setBottomBarVisible(false)
@@ -87,8 +91,14 @@ class SignInScreen: Screen {
                         Spacer(modifier = Modifier.width(20.dp))
                         IconButton(
                             onClick = {
-                                viewModel.setBottomBarVisible(true)
-                                tabNavigator.current = HomeTab },
+                                if(navigator.canPop){
+                                    navigator.pop()
+                                }
+                                else{
+                                    viewModel.setBottomBarVisible(true)
+                                    state.tabNavigator?.current = HomeTab
+                                }
+                                      },
                         ) {
                             Icon(
                                 painter = painterResource(VestaResourceImages.button_back),

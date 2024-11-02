@@ -65,7 +65,7 @@ class ProfileScreen(): Screen{
             viewModel.container.sideEffectFlow.collect() {
                 when (it) {
                     is ProfileEvent.UserLogOut -> {
-                        navigator.push(SignInScreen())
+                        navigator.replace(SignInScreen())
                     }
                 }
             }
