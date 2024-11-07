@@ -24,7 +24,7 @@ data class CategoryUi(
 data class CategoryDetailsUi(
     val categoryId: Int,
     val column: Int,
-    val description: List<DescriptionUi>,
+    val description:DescriptionUi,
     val image: String,
     val octImage: String,
     val parentId: Int,
@@ -36,7 +36,7 @@ data class CategoryDetailsUi(
         val empty = CategoryDetailsUi(
             categoryId = 0,
             column = 0,
-            description = emptyList(),
+            description = DescriptionUi.empty,
             image = "",
             octImage = "",
             parentId = 0,

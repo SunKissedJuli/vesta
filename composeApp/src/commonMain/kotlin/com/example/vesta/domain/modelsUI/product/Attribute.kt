@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
 
 data class AttributeUi(
-    val attribute: List<AttributeDetailsUi>,
+    val attribute: AttributeDetailsUi,
     val attributeId: Int,
     val languageId: Int,
     val productId: Int,
@@ -12,7 +12,7 @@ data class AttributeUi(
 ) {
     companion object {
         val empty = AttributeUi(
-            attribute = emptyList(),
+            attribute = AttributeDetailsUi.empty,
             attributeId = 0,
             languageId = 0,
             productId = 0,
@@ -24,14 +24,14 @@ data class AttributeUi(
 data class AttributeDetailsUi(
     val attributeGroupId: Int,
     val attributeId: Int,
-    val description: List<AttributeDescriptionUi>,
+    val description: AttributeDescriptionUi,
     val sortOrder: Int
 ) {
     companion object {
         val empty = AttributeDetailsUi(
             attributeGroupId = 0,
             attributeId = 0,
-            description = emptyList(),
+            description = AttributeDescriptionUi.empty,
             sortOrder = 0
         )
     }

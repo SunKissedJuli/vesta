@@ -22,7 +22,7 @@ fun ProductResponse.toUI(): ProductResponseUi {
         dateAdded = this.dateAdded ?: "",
         dateAvailable = this.dateAvailable ?: "",
         dateModified = this.dateModified ?: "",
-        description = this.description?.map { it.toUI() } ?: emptyList(),
+        description = this.description?.toUI() ?: ProductDescriptionUi.empty,
         ean = this.ean ?: "",
         height = this.height ?: "",
         image = this.image.orEmpty(),

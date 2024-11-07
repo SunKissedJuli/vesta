@@ -18,7 +18,7 @@ fun CategoryDetails.toUI(): CategoryDetailsUi {
     return CategoryDetailsUi(
         categoryId = this.categoryId ?: 0,
         column = this.column ?: 0,
-        description = this.description?.map { it.toUI() } ?: emptyList(),
+        description = this.description?.toUI() ?: DescriptionUi.empty,
         image = this.image.orEmpty(),
         octImage = this.octImage.orEmpty(),
         parentId = this.parentId ?: 0,

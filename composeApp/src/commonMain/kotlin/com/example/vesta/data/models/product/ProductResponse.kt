@@ -12,7 +12,7 @@ class ProductResponse(
     @SerialName("date_added") val dateAdded: String?,
     @SerialName("date_available") val dateAvailable: String?,
     @SerialName("date_modified") val dateModified: String?,
-    @SerialName("description") val description: List<ProductDescription>?,
+    @SerialName("description") val description: ProductDescription?,
     @SerialName("ean") val ean: String?,
     @SerialName("height") val height: String?,
     @SerialName("image") val image: String?,

@@ -16,7 +16,7 @@ class Category(
 class CategoryDetails(
     @SerialName("category_id") val categoryId: Int?,
     @SerialName("column") val column: Int?,
-    @SerialName("description") val description: List<CategoryDescription>?,
+    @SerialName("description") val description: CategoryDescription?,
     @SerialName("image") val image: String?,
     @SerialName("oct_image") val octImage: String?,
     @SerialName("parent_id") val parentId: Int?,

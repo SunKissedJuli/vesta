@@ -28,6 +28,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -68,6 +69,7 @@ import com.example.vesta.ext.QuantityToStore
 import com.example.vesta.ext.cleanHtml
 import com.example.vesta.ext.clickableBlank
 import com.example.vesta.images.VestaResourceImages
+import com.example.vesta.screen.tabs.HomeTab
 import com.example.vesta.strings.VestaResourceStrings
 import io.github.skeptick.libres.compose.painterResource
 import kotlinx.coroutines.delay
@@ -109,15 +111,24 @@ class ProductScreen(private val id: Int): Screen{
                             .height(46.dp)
                             .background(MaterialTheme.colorScheme.background),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
+                        Box{
+                            Spacer(modifier = Modifier.width(20.dp))
+                            IconButton(
+                                onClick = { navigator.pop() },
+                            ) {
+                                Icon(
+                                    painter = painterResource(VestaResourceImages.button_back),
+                                    contentDescription = "",
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            }
+                        }
 
-                        Text(
-                            text = VestaResourceStrings.personal_account,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Medium,
-                            lineHeight = 19.5.sp
-                        )
+                        Box{
+
+                        }
                     }
                 }
             },
@@ -171,7 +182,7 @@ class ProductScreen(private val id: Int): Screen{
                     Column(Modifier
                         .padding(horizontal = 20.dp, vertical = 5.dp)) {
                         Text(
-                            text = state.productData.description[0].nameKorr,
+                            text = state.productData.description.nameKorr,
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                             softWrap = true,
@@ -215,12 +226,12 @@ class ProductScreen(private val id: Int): Screen{
                         ){
                             Column(Modifier.padding(top = 10.dp)){
                                 Text(
-                                    text = state.productData.description[0].description.cleanHtml(),
+                                    text = state.productData.description.description.cleanHtml(),
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.Normal
                                 )
 
-                                for(image in viewModel.extractImageLinks(state.productData.description[0].description)){
+                                for(image in viewModel.extractImageLinks(state.productData.description.description)){
                                    CustomFlexAsyncImage(
                                        image,
                                        modifier = Modifier.fillMaxWidth(),
@@ -236,7 +247,7 @@ class ProductScreen(private val id: Int): Screen{
                             Column(Modifier.padding(top = 10.dp)){
                                 for(attribute in state.productData.attributes)
                                 DetailsRow(
-                                    title = attribute.attribute[0].description[0].name + VestaResourceStrings.colon,
+                                    title = attribute.attribute.description.name + VestaResourceStrings.colon,
                                     text = attribute.text
                                 )
                             }

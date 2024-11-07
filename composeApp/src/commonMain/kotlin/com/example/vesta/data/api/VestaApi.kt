@@ -47,7 +47,6 @@ interface VestaApi {
         @Query("sity") sity: Int = 0
     ): List<ProductResponse>
 
-
     //инфо
     @GET("api/info/getSites")
     suspend fun getSites(): List<SityResponse>

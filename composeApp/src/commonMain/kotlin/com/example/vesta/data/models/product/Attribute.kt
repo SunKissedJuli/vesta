@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 
 @Serializable
 class Attribute(
-    @SerialName("attribute") val attribute: List<AttributeDetails>?,
+    @SerialName("attribute") val attribute: AttributeDetails?,
     @SerialName("attribute_id") val attributeId: Int?,
     @SerialName("language_id") val languageId: Int?,
     @SerialName("product_id") val productId: Int?,
@@ -16,7 +16,7 @@ class Attribute(
 class AttributeDetails(
     @SerialName("attribute_group_id") val attributeGroupId: Int?,
     @SerialName("attribute_id") val attributeId: Int?,
-    @SerialName("description") val description: List<AttributeDescription>?,
+    @SerialName("description") val description:AttributeDescription?,
     @SerialName("sort_order") val sortOrder: Int?
 )
 

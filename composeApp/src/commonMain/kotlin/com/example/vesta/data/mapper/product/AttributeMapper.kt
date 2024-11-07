@@ -7,7 +7,7 @@ import kotlinx.serialization.SerialName
 
 fun Attribute.toUI(): AttributeUi {
     return AttributeUi(
-        attribute = this.attribute?.map { it.toUI() }?: emptyList(),
+        attribute = this.attribute?.toUI()?: AttributeDetailsUi.empty,
         attributeId = this.attributeId ?: 0,
         languageId = this.languageId ?: 0,
         productId = this.productId ?: 0,
@@ -19,7 +19,7 @@ fun AttributeDetails.toUI(): AttributeDetailsUi {
     return AttributeDetailsUi(
         attributeGroupId = this.attributeGroupId ?: 0,
         attributeId = this.attributeId ?: 0,
-        description = this.description?.map { it.toUI() }?: emptyList(),
+        description = this.description?.toUI()?: AttributeDescriptionUi.empty,
         sortOrder = this.sortOrder ?: 0
     )
 }

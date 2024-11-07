@@ -20,7 +20,7 @@ fun RelatedDetails.toUI(): RelatedDetailsUi {
         dateAdded = this.dateAdded.orEmpty(),
         dateAvailable = this.dateAvailable.orEmpty(),
         dateModified = this.dateModified.orEmpty(),
-        description = this.description?.map { it.toUI() }?: emptyList(),
+        description = this.description?.toUI() ?: ProductDescriptionUi.empty,
         ean = this.ean.orEmpty(),
         height = this.height.orEmpty(),
         image = this.image.orEmpty(),

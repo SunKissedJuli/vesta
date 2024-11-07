@@ -67,7 +67,7 @@ fun ProductCardForMainScreen(
             Column(Modifier.weight(1.5f),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = product.description[0].nameKorr,
+                Text(text = product.description.nameKorr,
                     fontSize = 14.sp,
                     softWrap = true,
                     textAlign = TextAlign.Center,
