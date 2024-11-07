@@ -2,9 +2,11 @@ package com.example.vesta.data.mapper.user
 
 import com.example.vesta.data.models.Link
 import com.example.vesta.data.models.user.CurrentUser
+import com.example.vesta.data.models.user.SmallOrder
 import com.example.vesta.data.models.user.TokenResponse
 import com.example.vesta.domain.modelsUI.LinkUi
 import com.example.vesta.domain.modelsUI.user.CurrentUserUi
+import com.example.vesta.domain.modelsUI.user.SmallOrderUi
 import com.example.vesta.domain.modelsUI.user.TokenUi
 
 fun CurrentUser.toUI(): CurrentUserUi {
@@ -32,6 +34,16 @@ fun CurrentUser.toUI(): CurrentUserUi {
         status = status ?: 0,
         storeId = store_id ?: 0,
         telephone = telephone.orEmpty(),
-        token = token.orEmpty()
+        token = token.orEmpty(),
+        orders = orders?.map { it.toUI() }?: listOf()
+    )
+}
+
+fun SmallOrder.toUI(): SmallOrderUi {
+    return SmallOrderUi(
+        orderId = this.orderId?:0,
+        name = this.name.orEmpty(),
+        total = this.total.orEmpty(),
+        dateAdded = this.dateAdded.orEmpty()
     )
 }

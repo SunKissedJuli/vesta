@@ -1,6 +1,7 @@
 package com.example.vesta.screen.home
 
 import com.example.vesta.domain.manager.AuthManager
+import com.example.vesta.domain.manager.ObserverManager
 import com.example.vesta.domain.repository.InfoRepository
 import com.example.vesta.domain.repository.ProductRepository
 import com.example.vesta.platform.BaseScreenModel
@@ -16,6 +17,7 @@ internal class HomeViewModel: BaseScreenModel<HomeState, Unit>(HomeState.InitSta
     private val infoRepository: InfoRepository by inject()
     private val productRepository: ProductRepository by inject()
     private val manager: AuthManager by inject()
+    private val bottomBarVisibleManager: ObserverManager by inject()
 
     fun loadData(){
         loadStocks()
@@ -74,11 +76,13 @@ internal class HomeViewModel: BaseScreenModel<HomeState, Unit>(HomeState.InitSta
 
     fun openSity() = intent {
         reduce{ state.copy(isOpenSity = !state.isOpenSity) }
-
     }
 
     fun updatePage(index: Int) = blockingIntent{
         reduce{ state.copy(selectedPage = index) }
+    }
 
+    fun setBottomBarVisible(visible: Boolean){
+        bottomBarVisibleManager.setBottomBarVisibility(visible)
     }
 }

@@ -56,7 +56,7 @@ fun RelatedDetails.toUI(): RelatedDetailsUi {
 
 fun ProductDescription.toUI(): ProductDescriptionUi {
     return ProductDescriptionUi(
-        description=this.description?.cleanHtml().orEmpty(),
+        description=this.description.orEmpty(),
         languageId=this.languageId ?: 0,
         metaDescription=this.metaDescription.orEmpty(),
         metaH1=this.metaH1.orEmpty(),

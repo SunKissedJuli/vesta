@@ -39,7 +39,7 @@ fun ProductCard(
     Surface(
         Modifier
             .fillMaxWidth()
-            .height(280.dp)
+            .height(270.dp)
             .padding(start = 5.dp, end = 5.dp, top = 5.dp, bottom = 5.dp),
         shape = RoundedCornerShape(15.dp),
         shadowElevation = 5.dp) {
@@ -113,7 +113,7 @@ fun ProductCard(
                 }
                 Spacer(Modifier.height(10.dp))
                 Row(Modifier.fillMaxWidth()){
-                    Column(Modifier.weight(1f),
+                    Column(Modifier.weight(1f).fillMaxHeight(),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally){
                         Text(text = product.quantityStatus,

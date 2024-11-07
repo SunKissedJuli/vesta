@@ -30,6 +30,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -77,6 +78,11 @@ class MainTabScreen(): Screen, KoinComponent {
                 }
             }
         }
+        LifecycleEffect(
+            onStarted = {
+                observerManager.setIsTabNavigator(true)
+            }
+        )
         TabNavigator(HomeTab, disposeNestedNavigators = false){ tab ->
             val tabNavigator = LocalTabNavigator.current
             LaunchedEffect(tabStack) {

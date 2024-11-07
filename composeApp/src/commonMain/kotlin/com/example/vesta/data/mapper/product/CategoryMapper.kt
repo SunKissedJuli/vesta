@@ -39,7 +39,8 @@ fun CategoryDescription.toUI(): DescriptionUi {
 
 fun Image.toUI(): ImageUi {
     return ImageUi(
-        image = if(!image.isNullOrEmpty()) BASE_IMAGE_URL + image else "",
+        image = this.image.orEmpty(),
+        //if(!image.isNullOrEmpty()) BASE_IMAGE_URL + image else "",
         productId = this.productId ?: 0,
         productImageId = this.productImageId ?: 0,
         sortOrder = this.sortOrder ?: 0

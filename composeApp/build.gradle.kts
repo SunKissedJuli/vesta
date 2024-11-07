@@ -65,6 +65,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.libres.compose)
             implementation(libs.androidx.lifecycle.viewmodel.ktx)
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
 
           //  implementation(libs.yandex.maps)
 

@@ -1,5 +1,6 @@
 package com.example.vesta.data.models.product
 
+import com.example.vesta.ext.cleanHtml
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
 
@@ -10,7 +11,7 @@ fun Attribute.toUI(): AttributeUi {
         attributeId = this.attributeId ?: 0,
         languageId = this.languageId ?: 0,
         productId = this.productId ?: 0,
-        text = this.text.orEmpty(),
+        text = this.text?.cleanHtml().orEmpty(),
     )
 }
 
@@ -27,6 +28,6 @@ fun AttributeDescription.toUI(): AttributeDescriptionUi {
     return AttributeDescriptionUi(
         attributeId = this.attributeId ?: 0,
         languageId = this.languageId ?: 0,
-        name = this.name.orEmpty(),
+        name = this.name?.cleanHtml().orEmpty(),
     )
 }

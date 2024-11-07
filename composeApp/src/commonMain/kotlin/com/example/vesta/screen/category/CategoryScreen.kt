@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -41,6 +42,12 @@ class CategoryScreen: Screen {
         val viewModel = rememberScreenModel { CategoryViewModel() }
         val state by viewModel.stateFlow.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
+        LifecycleEffect(
+            onStarted = {
+                viewModel.setBottomBarVisible(true)
+            }
+        )
+
         LaunchedEffect(viewModel){
             viewModel.loadData()
         }

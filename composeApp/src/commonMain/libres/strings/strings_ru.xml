@@ -12,7 +12,7 @@
     <string name="display">Отображение:</string>
     <string name="authorize">Авторизация</string>
     <string name="sign_in">Войти</string>
-    <string name="log_out">Выйти</string>
+    <string name="log_out">Выход</string>
     <string name="further">Далее</string>
     <string name="miss">Пропустить</string>
     <string name="wanna_enter">У меня уже есть аккаунт, хочу войти</string>
@@ -52,6 +52,7 @@
     <string name="catalog">Каталог</string>
     <string name="card">Корзина</string>
     <string name="profile">Аккаунт</string>
+    <string name="personal_account">Личный кабинет</string>
     <string name="about">О нас</string>
     <string name="popular_product">Популярные товары</string>
     <string name="special_offers">Специальные предложения</string>
@@ -62,7 +63,22 @@
     <string name="change_password">Изменить пароль</string>
     <string name="stocks">Акции</string>
     <string name="news">Новости</string>
+    <string name="sold">Все товары категории распроданы </string>
     <string name="new_products">Новинки</string>
+    <string name="favorites">Закладки</string>
+    <string name="address_book">Адресная книга</string>
+    <string name="history">История заказов</string>
+    <string name="main_features">Основные характеристики</string>
+    <string name="description">Описание</string>
+    <string name="specifications">Характеристики</string>
+    <string name="more">Подробнее</string>
+    <string name="reviews">Отзывы</string>
+    <string name="number_order">Заказ №</string>
+    <string name="availability_in_store">Наличие в магазинах</string>
+    <string name="buy_now">Купить сейчас</string>
+    <string name="to_cart">В корзину</string>
+    <string name="colon">:</string>
+
 
 
 </resources>

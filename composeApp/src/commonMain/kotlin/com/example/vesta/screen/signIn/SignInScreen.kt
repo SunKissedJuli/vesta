@@ -123,14 +123,14 @@ class SignInScreen: Screen {
                 Column(Modifier
                     .fillMaxSize()
                     .background(MaterialTheme.colorScheme.background)
-                    .padding(vertical = 40.dp, horizontal = 20.dp)) {
+                    .padding(vertical = 20.dp, horizontal = 20.dp)) {
 
                     RoundedTextField(
                         value = state.email,
                         onValueChange = {viewModel.updateEmail(it)},
                         placeholder = VestaResourceStrings.email
                     )
-                    Spacer(Modifier.height(25.dp))
+                    Spacer(Modifier.height(20.dp))
                     RoundedTextField(
                         value = state.password,
                         onValueChange = {viewModel.updatePassword(it)},

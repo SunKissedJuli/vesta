@@ -1,5 +1,6 @@
 package com.example.vesta.screen.subCategory
 
+import com.example.vesta.domain.manager.ObserverManager
 import com.example.vesta.domain.repository.ProductRepository
 import com.example.vesta.platform.BaseScreenModel
 import org.koin.core.component.inject
@@ -10,6 +11,7 @@ import org.orbitmvi.orbit.syntax.simple.reduce
 internal class SubcategoryViewModel: BaseScreenModel<SubcategoryState, SubcategotyEvent>(SubcategoryState.InitState) {
 
     private val productRepository: ProductRepository by inject()
+    private val bottomBarVisibleManager: ObserverManager by inject()
 
     fun loadData(id: Int) = intent {
         launchOperation(
@@ -28,7 +30,7 @@ internal class SubcategoryViewModel: BaseScreenModel<SubcategoryState, Subcatego
         )
     }
 
-    fun updateCategoryId(id: Int) = intent{
-        postSideEffectLocal(SubcategotyEvent.UpdateSubcategoryId)
+    fun setBottomBarVisible(visible: Boolean){
+        bottomBarVisibleManager.setBottomBarVisibility(visible)
     }
 }

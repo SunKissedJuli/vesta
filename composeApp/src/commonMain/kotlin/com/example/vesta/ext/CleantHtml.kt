@@ -3,13 +3,16 @@ package com.example.vesta.ext
 fun String.cleanHtml(): String {
    val cleanString = this.replace(Regex("<[^>]*>"), "")
 
-    return cleanString.replace("&nbsp;", " ")
+   return  cleanString
         .replace("&lt;", "<")
         .replace("&gt;", ">")
         .replace("&quot;", "\"")
         .replace("&apos;", "'")
         .replace("&amp;", "&")
-        .replace("\\r\\n|\\r|\\n".toRegex(), "\n")
+        .replace("&nbsp;", " ")
         .replace("\\<.*?\\>".toRegex(), "")
+        .replace("\\r\\n".toRegex(), "\n")
+        .replace("\n\n\n\n", "\n")
+        .replace("\n\n\n", "\n")
         .trim()
 }

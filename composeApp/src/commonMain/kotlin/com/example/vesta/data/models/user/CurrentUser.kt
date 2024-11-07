@@ -29,5 +29,13 @@ class CurrentUser(
     @SerialName("store_id")val store_id: Int?,
     @SerialName("telephone")val telephone: String?,
     @SerialName("token")val token: String?,
-  //  val wishlist: Any
+    @SerialName("order") val orders: List<SmallOrder>?,
+)
+
+@Serializable
+class SmallOrder(
+    @SerialName("order_id") val orderId: Int?,
+    @SerialName("name") val name: String?,
+    @SerialName("total") val total: String?,
+    @SerialName("date_added") val dateAdded: String?,
 )

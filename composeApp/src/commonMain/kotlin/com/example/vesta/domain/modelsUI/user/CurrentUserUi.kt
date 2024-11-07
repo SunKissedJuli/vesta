@@ -27,7 +27,8 @@ data class CurrentUserUi(
     val status: Int,
     val storeId: Int,
     val telephone: String,
-    val token: String
+    val token: String,
+    val orders: List<SmallOrderUi>
 ) {
     companion object {
         val empty = CurrentUserUi(
@@ -54,8 +55,15 @@ data class CurrentUserUi(
             telephone = "",
             token = "",
             ip = "",
-            languageId = 0
+            languageId = 0,
+            orders = emptyList()
         )
-
     }
 }
+
+data class SmallOrderUi(
+    val orderId: Int,
+    val name: String,
+    val total: String,
+    val dateAdded: String,
+)

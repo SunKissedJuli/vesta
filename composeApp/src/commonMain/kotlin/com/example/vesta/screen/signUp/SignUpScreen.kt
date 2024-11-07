@@ -98,7 +98,7 @@ class SignUpScreen: Screen {
                     Modifier
                     .fillMaxSize()
                     .background(MaterialTheme.colorScheme.background)
-                    .padding(vertical = 40.dp, horizontal = 20.dp)) {
+                    .padding(vertical = 20.dp, horizontal = 20.dp)) {
 
                     Text(
                         text = VestaResourceStrings.basic_information,
@@ -113,13 +113,13 @@ class SignUpScreen: Screen {
                         onValueChange = {viewModel.updateLastName(it)},
                         placeholder = VestaResourceStrings.last_name
                     )
-                    Spacer(Modifier.height(25.dp))
+                    Spacer(Modifier.height(20.dp))
                     RoundedTextField(
                         value = state.firstName,
                         onValueChange = {viewModel.updateFirstName(it)},
                         placeholder = VestaResourceStrings.first_name
                     )
-                    Spacer(Modifier.height(25.dp))
+                    Spacer(Modifier.height(20.dp))
                     RoundedTextField(
                         value = state.patronymic,
                         onValueChange = {viewModel.updatePatronymic(it)},
@@ -131,7 +131,7 @@ class SignUpScreen: Screen {
                         fontSize = 16.sp,
                         lineHeight = 19.5.sp,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(top =40.dp, bottom = 20.dp)
+                        modifier = Modifier.padding(top =30.dp, bottom = 20.dp)
                     )
 
                     RoundedTextField(
@@ -154,7 +154,7 @@ class SignUpScreen: Screen {
                             onClick = {navigator.push(SignUpSecondScreen(viewModel))},
                             text = VestaResourceStrings.further
                         )
-                        Spacer(Modifier.height(25.dp))
+                        Spacer(Modifier.height(20.dp))
                         CustomSplitClickableText(
                             text = VestaResourceStrings.wanna_enter,
                             onClick = {navigator.push(SignInScreen())}

@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
@@ -48,7 +49,11 @@ class SubcategoryScreen(private val id: Int): Screen {
         val viewModel = rememberScreenModel { SubcategoryViewModel() }
         val state by viewModel.stateFlow.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
-
+        LifecycleEffect(
+            onStarted = {
+                viewModel.setBottomBarVisible(true)
+            }
+        )
         LaunchedEffect(id){
             viewModel.loadData(id)
         }
@@ -99,6 +104,7 @@ class SubcategoryScreen(private val id: Int): Screen {
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
+
                         item(span = { GridItemSpan(2)}){
                             CustomButton(
                                 text = VestaResourceStrings.filter,
@@ -115,38 +121,32 @@ class SubcategoryScreen(private val id: Int): Screen {
                             )
                         }
 
-                        //сортировка
-                        item(span = { GridItemSpan(2)}) {
-                            Column(
-                                Modifier.fillMaxWidth()
-                                    .padding(start = 25.dp, end = 15.dp, top = 10.dp)
-                            ) {
-                                Text(
-                                    text = VestaResourceStrings.sort,
-                                    fontSize = 17.sp,
-                                    fontWeight = FontWeight.Medium
-                                )
-                                Spacer(Modifier.height(5.dp))
-                                Text(
-                                    text = VestaResourceStrings.sort_ascending,
-                                    fontSize = 17.sp,
-                                    fontWeight = FontWeight.Medium
-                                )
-                                Spacer(Modifier.height(5.dp))
-                                Text(
-                                    text = VestaResourceStrings.sort_descending,
-                                    fontSize = 17.sp,
-                                    fontWeight = FontWeight.Medium
-                                )
-                            }
-                        }
-
                         //продукты
                         items(state.productList, span = { GridItemSpan(2)}){ product->
                             ProductCard(
                                 product = product,
                                 onClick = {navigator.push(ProductScreen(product.productId))}
                             )
+                        }
+                        if(state.productList.isEmpty()){
+                            item(span = { GridItemSpan(2)}){
+                                Row(
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .padding(20.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.Center
+                                ) {
+
+                                    Text(
+                                        text = VestaResourceStrings.sold,
+                                        fontSize = 16.sp,
+                                        fontWeight = FontWeight.Medium,
+                                        lineHeight = 19.5.sp
+                                    )
+                                }
+                            }
+
                         }
                     }
                 }

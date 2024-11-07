@@ -3,7 +3,7 @@ package com.example.vesta.theme
 import androidx.compose.ui.graphics.Color
 
 val SearchBarColor = Color(0xFF90CAF9)
-val Gray = Color(0xFFacacac)
+val ButtonGray = Color(0xFFECECEC)
 val ButtonColor = Color(0xFF1565C0)
 val MainAccentColor = Color(0xFFE12231)
 val White = Color(0xFFFFFFFF)

@@ -112,7 +112,7 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
                     Modifier
                         .fillMaxSize()
                         .background(MaterialTheme.colorScheme.background)
-                        .padding(vertical = 40.dp, horizontal = 20.dp)) {
+                        .padding(vertical = 20.dp, horizontal = 20.dp)) {
 
                     Text(
                         text = VestaResourceStrings.your_account,
@@ -127,13 +127,13 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
                         onValueChange = { viewModel.updateEmail(it) },
                         placeholder = VestaResourceStrings.email
                     )
-                    Spacer(Modifier.height(25.dp))
+                    Spacer(Modifier.height(20.dp))
                     RoundedTextField(
                         value = state.password,
                         onValueChange = { viewModel.updatePassword(it) },
                         placeholder = VestaResourceStrings.password
                     )
-                    Spacer(Modifier.height(25.dp))
+                    Spacer(Modifier.height(20.dp))
                     RoundedTextField(
                         value = state.passwordRepeat,
                         onValueChange = { viewModel.updatePasswordReopeat(it) },

@@ -15,7 +15,8 @@ private val DarkColorPalette = darkColorScheme(
     onSecondary = Color.Black,
     onTertiary = MainAccentColor,
     tertiary = BackgroundGray,
-    tertiaryContainer = SubAccentColor
+    tertiaryContainer = SubAccentColor,
+    onSecondaryContainer = ButtonGray
 )
 
 private val LightColorPalette = lightColorScheme(
@@ -26,7 +27,8 @@ private val LightColorPalette = lightColorScheme(
     onSecondary = Color.Black,
     onTertiary = MainAccentColor,
     tertiary = BackgroundGray,
-    tertiaryContainer = SubAccentColor
+    tertiaryContainer = SubAccentColor,
+    onSecondaryContainer = ButtonGray
 )
 
 @Composable

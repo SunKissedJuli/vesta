@@ -1,6 +1,7 @@
 package com.example.vesta.screen.profile
 
 import com.example.vesta.domain.manager.AuthManager
+import com.example.vesta.domain.manager.ObserverManager
 import com.example.vesta.domain.repository.UserRepository
 import com.example.vesta.platform.BaseScreenModel
 import com.example.vesta.screen.splash.SplashEvent
@@ -12,8 +13,9 @@ import vestatrade.composeapp.generated.resources.Res
 
 internal class ProfileViewModel: BaseScreenModel<ProfileState, ProfileEvent>(ProfileState.InitState) {
 
-    val userRepository: UserRepository by inject()
-    val authManager: AuthManager by inject()
+    private val userRepository: UserRepository by inject()
+    private val authManager: AuthManager by inject()
+    private val bottomBarVisibleManager: ObserverManager by inject()
 
     fun loadData() = intent {
         launchOperation(
@@ -55,5 +57,9 @@ internal class ProfileViewModel: BaseScreenModel<ProfileState, ProfileEvent>(Pro
     }
     fun updateConfirmPassword(password: String) = blockingIntent {
         reduce { state.copy(confirmPassword = password) }
+    }
+
+    fun setBottomBarVisible(visible: Boolean){
+        bottomBarVisibleManager.setBottomBarVisibility(visible)
     }
 }

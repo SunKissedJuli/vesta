@@ -49,6 +49,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -85,8 +86,13 @@ class HomeScreen: Screen {
         val state by viewModel.stateFlow.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
         val tabNavigator = LocalTabNavigator.current
-        tabNavigator.current = HomeTab
 
+        LifecycleEffect(
+            onStarted = {
+                tabNavigator.current = HomeTab
+                viewModel.setBottomBarVisible(true)
+            }
+        )
         LaunchedEffect(viewModel){
             viewModel.loadData()
         }

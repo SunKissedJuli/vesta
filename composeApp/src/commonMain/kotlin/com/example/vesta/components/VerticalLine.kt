@@ -11,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -21,5 +22,15 @@ fun VerticalLine(modifier: Modifier = Modifier){
         .width(1.dp)
         .background(color = MaterialTheme.colorScheme.background)
         .alpha(0.5f)
+    )
+}
+
+@Composable
+fun HorizontalLine(modifier: Modifier = Modifier, background: Color = MaterialTheme.colorScheme.secondaryContainer){
+    Box(modifier = modifier
+        .padding(vertical = 2.dp)
+        .fillMaxWidth()
+        .height(1.dp)
+        .background(background)
     )
 }
