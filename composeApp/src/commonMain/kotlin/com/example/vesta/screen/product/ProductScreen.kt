@@ -113,7 +113,7 @@ class ProductScreen(private val id: Int): Screen{
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Box{
+                        Row{
                             Spacer(modifier = Modifier.width(20.dp))
                             IconButton(
                                 onClick = { navigator.pop() },
@@ -125,9 +125,37 @@ class ProductScreen(private val id: Int): Screen{
                                 )
                             }
                         }
-
-                        Box{
-
+                        Row{
+                            IconButton(
+                                onClick = { },
+                            ) {
+                                Icon(
+                                    painter = painterResource(VestaResourceImages.icon_question),
+                                    contentDescription = "",
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            }
+                            Spacer(modifier = Modifier.width(5.dp))
+                            IconButton(
+                                onClick = { },
+                            ) {
+                                Icon(
+                                    painter = painterResource(VestaResourceImages.icon_statistic),
+                                    contentDescription = "",
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            }
+                            Spacer(modifier = Modifier.width(5.dp))
+                            IconButton(
+                                onClick = { },
+                            ) {
+                                Icon(
+                                    painter = painterResource(VestaResourceImages.icon_fav),
+                                    contentDescription = "",
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            }
+                            Spacer(modifier = Modifier.width(20.dp))
                         }
                     }
                 }
@@ -272,20 +300,13 @@ class ProductScreen(private val id: Int): Screen{
 @Composable
 private fun DetailsRow(title: String, text: String){
     if(text.isNotEmpty()&& text != "?"){
-        Row(Modifier.fillMaxWidth().padding(vertical = 3.dp)){
-            Text(
-                text = title,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Normal,
-                modifier = Modifier.padding(end = 5.dp)
-            )
-            Text(
-                text = text,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Normal,
-                modifier = Modifier.padding(end = 5.dp)
-            )
-        }
+        Text(
+            text = "$title $text",
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Normal,
+            softWrap = true,
+            modifier = Modifier.padding(vertical = 3.dp)
+        )
     }
 }
 
