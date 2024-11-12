@@ -95,7 +95,10 @@ internal class ProfileViewModel: BaseScreenModel<ProfileState, ProfileEvent>(Pro
     }
 
     fun updateOldPassword(password: String) = blockingIntent {
-        reduce { state.copy(newUserData =  state.newUserData.copy(oldPassword = password)) }
+        reduce { state.copy(
+            newUserData =  state.newUserData.copy(oldPassword = password),
+            oldPasswordError = if(password.isEmpty()) VestaResourceStrings.error_fill_all_fields else ""
+        ) }
     }
 
     fun updateChangePassword(change: Boolean) = blockingIntent {
@@ -118,11 +121,17 @@ internal class ProfileViewModel: BaseScreenModel<ProfileState, ProfileEvent>(Pro
     }
 
     fun updateNewPassword(password: String) = blockingIntent {
-        reduce { state.copy(newUserData =  state.newUserData.copy(password = password)) }
+        reduce { state.copy(
+            newUserData =  state.newUserData.copy(password = password),
+            newPasswordError = if(password.isEmpty()) VestaResourceStrings.error_fill_all_fields else ""
+        ) }
     }
 
     fun updateConfirmPassword(password: String) = blockingIntent {
-        reduce { state.copy(newUserData =  state.newUserData.copy(passwordConfirmation = password),) }
+        reduce { state.copy(
+            newUserData =  state.newUserData.copy(passwordConfirmation = password),
+            confirmPasswordError = if(password.isEmpty()) VestaResourceStrings.error_fill_all_fields else ""
+        ) }
     }
 
     @OptIn(OrbitExperimental::class)
