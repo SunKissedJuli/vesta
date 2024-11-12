@@ -11,7 +11,9 @@ import com.example.vesta.data.models.info.StocksResponse
 import com.example.vesta.data.models.product.ProductResponse
 import com.example.vesta.data.models.user.CurrentUser
 import com.example.vesta.data.models.user.TokenResponse
+import com.example.vesta.data.models.user.UserUpdate
 import com.example.vesta.domain.manager.AuthManager
+import de.jensklingenberg.ktorfit.http.Body
 import de.jensklingenberg.ktorfit.http.GET
 import de.jensklingenberg.ktorfit.http.POST
 import de.jensklingenberg.ktorfit.http.Path
@@ -79,5 +81,9 @@ interface VestaApi {
 
     @POST("api/user/logout")
     suspend fun logOut(): Unit
+
+    @POST("api/user/editProfile")
+    suspend fun editUser(  @Body user: UserUpdate): Unit
+
 
 }

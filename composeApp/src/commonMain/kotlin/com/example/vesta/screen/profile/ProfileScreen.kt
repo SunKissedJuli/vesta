@@ -69,10 +69,13 @@ class ProfileScreen(): Screen{
         LifecycleEffect(
             onStarted = {
                 viewModel.setBottomBarVisible(true)
+            },
+            onDisposed = {
+                viewModel.saveData(state.newUserData)
             }
         )
 
-        LaunchedEffect(viewModel){
+        LaunchedEffect(Unit){
             viewModel.loadData()
         }
 
@@ -133,7 +136,10 @@ class ProfileScreen(): Screen{
                             onUpdateNewPassword = {viewModel.updateNewPassword(it)},
                             onUpdateOldPassword = {viewModel.updateOldPassword(it)},
                             onUpdateConfirmPassword = {viewModel.updateConfirmPassword(it)},
-                            onSave = {},
+                            onSave = {viewModel.savePassword(
+                                state.newUserData.oldPassword,
+                                state.newUserData.password,
+                                state.newUserData.passwordConfirmation)},
                             onDismissRequest = {viewModel.updateChangePassword(false)}
                         )
                     }
@@ -148,22 +154,25 @@ class ProfileScreen(): Screen{
                         )
                         RoundedTextField(
                             value = state.currentUser.firstName,
-                            onValueChange = {},
-                            placeholder = VestaResourceStrings.first_name
+                            onValueChange = {viewModel.updateFirstName(it)},
+                            placeholder = VestaResourceStrings.first_name,
+                            errorMessage = state.firstNameError
                         )
                         Spacer(Modifier.height(20.dp))
 
                         RoundedTextField(
                             value = state.currentUser.lastName,
-                            onValueChange = {},
-                            placeholder = VestaResourceStrings.last_name
+                            onValueChange = {viewModel.updateLastName(it)},
+                            placeholder = VestaResourceStrings.last_name,
+                            errorMessage = state.lastNameError
                         )
                         Spacer(Modifier.height(20.dp))
 
                         RoundedTextField(
                             value = state.currentUser.middleName,
-                            onValueChange = {},
-                            placeholder = VestaResourceStrings.patronymic
+                            onValueChange = {viewModel.updateMiddleName(it)},
+                            placeholder = VestaResourceStrings.patronymic,
+                            errorMessage = state.middleNameError
                         )
                         Text(
                             text = VestaResourceStrings.contact_information,
@@ -174,18 +183,22 @@ class ProfileScreen(): Screen{
                         )
                         RoundedTextField(
                             value = state.currentUser.telephone,
-                            onValueChange = {},
-                            placeholder = VestaResourceStrings.phone
+                            onValueChange = {viewModel.updatePhone(it)},
+                            placeholder = VestaResourceStrings.phone,
+                            errorMessage = state.phoneError
                         )
                         Spacer(Modifier.height(20.dp))
                         RoundedTextField(
                             value = state.currentUser.email,
-                            onValueChange = {},
-                            placeholder = VestaResourceStrings.email
+                            onValueChange = {viewModel.updateEmail(it)},
+                            placeholder = VestaResourceStrings.email,
+                            errorMessage = state.emailError
                         )
 
                         //история заказов
-                        HistoryBlock(state, {})
+                        if(state.currentUser.orders.isNotEmpty()){
+                            HistoryBlock(state, {})
+                        }
 
                         Spacer(Modifier.height(20.dp))
                         ArrowButton(
@@ -236,20 +249,16 @@ private fun ChangePassword(
                 .padding(20.dp),
             verticalArrangement = Arrangement.Center
         ) {
-            RoundedTextField(uiState.oldPassword, onUpdateOldPassword,
-                VestaResourceStrings.old_password )
+            RoundedTextField(uiState.newUserData.oldPassword.orEmpty(), onUpdateOldPassword,
+                VestaResourceStrings.old_password, errorMessage = uiState.oldPasswordError )
             Spacer(Modifier.height(25.dp))
-            RoundedTextField(uiState.newPassword, onUpdateNewPassword,
-                VestaResourceStrings.new_password )
+            RoundedTextField(uiState.newUserData.password.orEmpty(), onUpdateNewPassword,
+                VestaResourceStrings.new_password, errorMessage = uiState.newPasswordError)
             Spacer(Modifier.height(25.dp))
-            RoundedTextField(uiState.confirmPassword, onUpdateConfirmPassword,
-                VestaResourceStrings.confirm_password)
+            RoundedTextField(uiState.newUserData.passwordConfirmation.orEmpty(), onUpdateConfirmPassword,
+                VestaResourceStrings.confirm_password,  errorMessage = uiState.confirmPasswordError)
             Spacer(Modifier.height(35.dp))
-            CustomButton(
-                onClick = {
-                    onSave()
-                    onDismissRequest() },
-                VestaResourceStrings.save)
+            CustomButton(onClick = { onSave() }, VestaResourceStrings.save)
         }
     }
 }

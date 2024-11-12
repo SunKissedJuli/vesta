@@ -8,13 +8,17 @@ import com.example.vesta.screen.profile.ProfileState
 data class SignInState(
     val email: String,
     val password: String,
-    val tabNavigator: TabNavigator?
+    val tabNavigator: TabNavigator?,
+    val errorEmail: String,
+    val errorPassword: String
 ){
     companion object{
         val InitState = SignInState(
             email = DEFAULT_STRING,
             password = DEFAULT_STRING,
-            tabNavigator = null
+            tabNavigator = null,
+            errorPassword = DEFAULT_STRING,
+            errorEmail = DEFAULT_STRING
         )
     }
 }

@@ -10,6 +10,7 @@ import com.example.vesta.domain.repository.UserRepository
 import com.example.vesta.platform.BaseScreenModel
 import com.example.vesta.screen.profile.ProfileScreen
 import com.example.vesta.screen.splash.SplashScreen
+import com.example.vesta.strings.VestaResourceStrings
 import org.koin.core.component.inject
 import org.orbitmvi.orbit.syntax.simple.blockingIntent
 import org.orbitmvi.orbit.syntax.simple.intent
@@ -30,16 +31,24 @@ internal class SignInViewModel:BaseScreenModel<SignInState, Unit>(SignInState.In
     }
 
     fun autorize(login: String, password: String, navigator: Navigator) = intent {
-        launchOperation(
-            operation = {
-                userRepository.autirize(login, password)
-            },
-            success = { response ->
-                authManager.token = response.plainTextToken
-                setBottomBarVisible(true)
-                navigator.push(SplashScreen())
-            }
-        )
+         if(login.isNotEmpty()&& password.isNotEmpty()){
+            launchOperation(
+                operation = {
+                    userRepository.autirize(login, password)
+                },
+                success = { response ->
+                    authManager.token = response.plainTextToken
+                    setBottomBarVisible(true)
+                    navigator.push(SplashScreen())
+                }
+            )
+        }
+        else{
+             reduce { state.copy(
+                 errorPassword = if(password.isEmpty()) VestaResourceStrings.error_fill_all_fields else "",
+                 errorEmail = if(login.isEmpty()) VestaResourceStrings.error_fill_all_fields else ""
+             ) }
+        }
     }
 
     fun setBottomBarVisible(visible: Boolean){
@@ -48,5 +57,9 @@ internal class SignInViewModel:BaseScreenModel<SignInState, Unit>(SignInState.In
 
     fun updateTabNavigator(navigator: TabNavigator) = blockingIntent {
         reduce { state.copy(tabNavigator = navigator) }
+    }
+
+    fun isTabNavigator() : Boolean{
+        return bottomBarVisibleManager.isTabNavigator()
     }
 }

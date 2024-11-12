@@ -111,19 +111,22 @@ class SignUpScreen: Screen {
                     RoundedTextField(
                         value = state.lastName,
                         onValueChange = {viewModel.updateLastName(it)},
-                        placeholder = VestaResourceStrings.last_name
+                        placeholder = VestaResourceStrings.last_name,
+                        errorMessage = state.errorLastName
                     )
                     Spacer(Modifier.height(20.dp))
                     RoundedTextField(
                         value = state.firstName,
                         onValueChange = {viewModel.updateFirstName(it)},
-                        placeholder = VestaResourceStrings.first_name
+                        placeholder = VestaResourceStrings.first_name,
+                        errorMessage = state.errorFirstName
                     )
                     Spacer(Modifier.height(20.dp))
                     RoundedTextField(
                         value = state.patronymic,
                         onValueChange = {viewModel.updatePatronymic(it)},
-                        placeholder = VestaResourceStrings.patronymic
+                        placeholder = VestaResourceStrings.patronymic,
+                        errorMessage = state.errorPatronymic
                     )
 
                     Text(
@@ -137,7 +140,8 @@ class SignUpScreen: Screen {
                     RoundedTextField(
                         value = state.phone,
                         onValueChange = {viewModel.updatePhone(it)},
-                        placeholder = VestaResourceStrings.phone
+                        placeholder = VestaResourceStrings.phone,
+                        errorMessage = state.errorPhone
                     )
                 }
 
@@ -151,7 +155,7 @@ class SignUpScreen: Screen {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ){
                         CustomButton(
-                            onClick = {navigator.push(SignUpSecondScreen(viewModel))},
+                            onClick = { viewModel.isFilled(navigator, viewModel) },
                             text = VestaResourceStrings.further
                         )
                         Spacer(Modifier.height(20.dp))

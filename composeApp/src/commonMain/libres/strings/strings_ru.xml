@@ -78,6 +78,11 @@
     <string name="buy_now">Купить сейчас</string>
     <string name="to_cart">В корзину</string>
     <string name="colon">:</string>
+    <string name="error_passwords_not_same">Пароли не совпадают</string>
+    <string name="error_fill_all_fields">Заполните все поля</string>
+    <string name="error_invalid_old_password">Неверный старый пароль</string>
+    <string name="error_new_password_must_be_different">Новый пароль должен отличаться</string>
+    <string name="error_password_length">Пароль от 6 до 24 символов</string>
 
 
 

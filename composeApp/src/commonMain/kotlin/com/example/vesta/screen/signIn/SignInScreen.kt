@@ -59,7 +59,7 @@ class SignInScreen: Screen {
         val state by viewModel.stateFlow.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
 
-        if(!navigator.canPop){
+        if(viewModel.isTabNavigator()){
             viewModel.updateTabNavigator(LocalTabNavigator.current)
         }
 
@@ -128,14 +128,16 @@ class SignInScreen: Screen {
                     RoundedTextField(
                         value = state.email,
                         onValueChange = {viewModel.updateEmail(it)},
-                        placeholder = VestaResourceStrings.email
+                        placeholder = VestaResourceStrings.email,
+                        errorMessage = state.errorEmail
                     )
                     Spacer(Modifier.height(20.dp))
                     RoundedTextField(
                         value = state.password,
                         onValueChange = {viewModel.updatePassword(it)},
                         placeholder = VestaResourceStrings.password,
-                        isPassword = true
+                        isPassword = true,
+                        errorMessage = state.errorPassword
                     )
                     Text(
                         text = VestaResourceStrings.forgot_password,

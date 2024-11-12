@@ -4,9 +4,17 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.outlined.MoreVert
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,18 +32,26 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.components.CustomScaffold
+import com.example.vesta.images.VestaResourceImages
+import com.example.vesta.screen.tabs.HomeTab
 import com.example.vesta.strings.VestaResourceStrings
+import io.github.skeptick.libres.compose.painterResource
 
 class CartScreen: Screen {
     @Composable
     override fun Content() {
-        val viewModel = rememberScreenModel { AboutViewModel() }
+        val viewModel = rememberScreenModel { CartViewModel() }
         val state by viewModel.stateFlow.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
         LaunchedEffect(viewModel){
             viewModel.loadData()
+        }
+
+        if(viewModel.isTabNavigator()){
+            viewModel.updateTabNavigator(LocalTabNavigator.current)
         }
 
         CustomScaffold(
@@ -56,9 +72,10 @@ class CartScreen: Screen {
                             .fillMaxWidth()
                             .height(46.dp)
                             .background(MaterialTheme.colorScheme.background),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
+                        Spacer(modifier = Modifier.weight(1.2f))
+                        Spacer(modifier = Modifier.width(20.dp))
 
                         Text(
                             text = VestaResourceStrings.card,
@@ -66,6 +83,18 @@ class CartScreen: Screen {
                             fontWeight = FontWeight.Medium,
                             lineHeight = 19.5.sp
                         )
+                        Spacer(modifier = Modifier.weight(1f))
+
+                        IconButton(
+                            onClick = {},
+                        ) {
+                            Icon(
+                                Icons.Outlined.MoreVert,
+                                contentDescription = "",
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(20.dp))
                     }
                 }
             }

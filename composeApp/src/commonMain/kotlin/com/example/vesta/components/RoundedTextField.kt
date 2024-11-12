@@ -25,12 +25,14 @@ fun RoundedTextField(
     value: String,
     onValueChange: (String) -> Unit,
     placeholder: String,
-    isPassword: Boolean = false, // New parameter for password masking
+    isPassword: Boolean = false,
+    errorMessage: String = "",
     modifier: Modifier = Modifier
 ) {
     val isPlaceholderVisible = value.isEmpty()
     val interactionSource = remember { MutableInteractionSource() }
     val labelFontSize by animateFloatAsState(targetValue = if (isPlaceholderVisible) 16f else 12f)
+    val labelColor = if (errorMessage.isNotEmpty()) MaterialTheme.colorScheme.onTertiary else MaterialTheme.colorScheme.secondaryContainer
 
     OutlinedTextField(
         modifier = modifier.fillMaxWidth(),
@@ -50,12 +52,16 @@ fun RoundedTextField(
             unfocusedPlaceholderColor = MaterialTheme.colorScheme.secondaryContainer,
             focusedPlaceholderColor = MaterialTheme.colorScheme.secondaryContainer,
             disabledPlaceholderColor = MaterialTheme.colorScheme.secondaryContainer,
-            errorPlaceholderColor = MaterialTheme.colorScheme.secondaryContainer
+            errorPlaceholderColor = MaterialTheme.colorScheme.onTertiary,
+            errorTextColor =  MaterialTheme.colorScheme.onTertiary,
+            errorBorderColor =  MaterialTheme.colorScheme.onTertiary,
+            errorContainerColor = MaterialTheme.colorScheme.background
         ),
+        isError = errorMessage.isNotEmpty(),
         label = {
             Text(
-                text = placeholder,
-                color = MaterialTheme.colorScheme.secondaryContainer,
+                text = errorMessage.ifEmpty { placeholder },
+                color = labelColor,
                 fontSize = labelFontSize.sp
             )
         },
