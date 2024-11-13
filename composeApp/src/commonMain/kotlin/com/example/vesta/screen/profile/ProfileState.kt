@@ -18,9 +18,7 @@ data class ProfileState(
     val firstNameError: String,
     val middleNameError: String,
     val lastNameError: String
-
-
-    ){
+){
     companion object{
         val InitState = ProfileState(
             currentUser = CurrentUserUi.empty,

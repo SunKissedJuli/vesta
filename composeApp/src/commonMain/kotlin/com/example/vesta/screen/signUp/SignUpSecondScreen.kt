@@ -125,19 +125,22 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
                     RoundedTextField(
                         value = state.email,
                         onValueChange = { viewModel.updateEmail(it) },
-                        placeholder = VestaResourceStrings.email
+                        placeholder = VestaResourceStrings.email,
+                        errorMessage = state.errorEmail
                     )
                     Spacer(Modifier.height(20.dp))
                     RoundedTextField(
                         value = state.password,
                         onValueChange = { viewModel.updatePassword(it) },
-                        placeholder = VestaResourceStrings.password
+                        placeholder = VestaResourceStrings.password,
+                        errorMessage = state.errorPassword
                     )
                     Spacer(Modifier.height(20.dp))
                     RoundedTextField(
                         value = state.passwordRepeat,
                         onValueChange = { viewModel.updatePasswordReopeat(it) },
-                        placeholder = VestaResourceStrings.password_repeat
+                        placeholder = VestaResourceStrings.password_repeat,
+                        errorMessage = state.errorPasswordRepeat
                     )
 
                     Column(
@@ -193,7 +196,11 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
                         horizontalAlignment = Alignment.CenterHorizontally
                     ){
                         CustomButton(
-                            onClick = {},
+                            onClick = {viewModel.isFilledSecondScreen(
+                                email = state.email,
+                                password = state.password,
+                                passwordConfirmation = state.passwordRepeat
+                            )},
                             text = VestaResourceStrings.sign_up
                         )
                         Spacer(Modifier.height(25.dp))

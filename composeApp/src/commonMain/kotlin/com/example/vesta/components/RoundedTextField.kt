@@ -14,20 +14,27 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.sp
+import kotlin.math.absoluteValue
 
 @Composable
 fun RoundedTextField(
     value: String,
     onValueChange: (String) -> Unit,
     placeholder: String,
-    isPassword: Boolean = false,
     errorMessage: String = "",
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
     val isPlaceholderVisible = value.isEmpty()
     val interactionSource = remember { MutableInteractionSource() }
@@ -40,6 +47,7 @@ fun RoundedTextField(
         maxLines = 1,
         onValueChange = {
             onValueChange(it)
+            println(value)
         },
         shape = RoundedCornerShape(50.dp),
         colors = OutlinedTextFieldDefaults.colors(
@@ -58,6 +66,7 @@ fun RoundedTextField(
             errorContainerColor = MaterialTheme.colorScheme.background
         ),
         isError = errorMessage.isNotEmpty(),
+        keyboardOptions = keyboardOptions,
         label = {
             Text(
                 text = errorMessage.ifEmpty { placeholder },
@@ -66,6 +75,6 @@ fun RoundedTextField(
             )
         },
         interactionSource = interactionSource,
-        visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None
+        visualTransformation = visualTransformation
     )
 }

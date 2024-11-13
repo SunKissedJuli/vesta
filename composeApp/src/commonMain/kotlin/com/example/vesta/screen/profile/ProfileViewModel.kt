@@ -6,6 +6,8 @@ import com.example.vesta.domain.manager.AuthManager
 import com.example.vesta.domain.manager.ObserverManager
 import com.example.vesta.domain.modelsUI.user.UserUpdateUi
 import com.example.vesta.domain.repository.UserRepository
+import com.example.vesta.ext.formatPhone
+import com.example.vesta.ext.isValidEmail
 import com.example.vesta.platform.BaseScreenModel
 import com.example.vesta.screen.splash.SplashEvent
 import com.example.vesta.strings.VestaResourceStrings
@@ -30,7 +32,9 @@ internal class ProfileViewModel: BaseScreenModel<ProfileState, ProfileEvent>(Pro
             success = { response ->
                 reduceLocal {
                     state.copy(
-                        currentUser = response
+                        currentUser = response.copy(telephone = response.telephone
+                            .replace(Regex("[^\\d]"), "")
+                            .let { if (it.isNotEmpty()) it.substring(1) else it } )
                     )
                 }
             }
@@ -50,11 +54,13 @@ internal class ProfileViewModel: BaseScreenModel<ProfileState, ProfileEvent>(Pro
     }
 
     fun updatePhone(phone: String) = blockingIntent {
-        reduce {
-            state.copy(
-                newUserData =  state.newUserData.copy(telephone = phone),
-                currentUser = state.currentUser.copy(telephone = phone),
-                phoneError = if(phone.isEmpty()) VestaResourceStrings.error_fill_all_fields else "" )
+        if(phone.length<=10&&phone.all { it.isDigit() }){
+            reduce {
+                state.copy(
+                    newUserData =  state.newUserData.copy(telephone = phone),
+                    currentUser = state.currentUser.copy(telephone = phone),
+                    phoneError = if(phone.isEmpty()) VestaResourceStrings.error_fill_all_fields else "" )
+            }
         }
     }
 
@@ -72,7 +78,8 @@ internal class ProfileViewModel: BaseScreenModel<ProfileState, ProfileEvent>(Pro
             state.copy(
                 newUserData =  state.newUserData.copy(firstName = name),
                 currentUser = state.currentUser.copy(firstName = name),
-                firstNameError = if(name.isEmpty()) VestaResourceStrings.error_fill_all_fields else "" )
+                firstNameError = if(name.isEmpty()) VestaResourceStrings.error_fill_all_fields else ""
+            )
         }
     }
 
@@ -136,13 +143,21 @@ internal class ProfileViewModel: BaseScreenModel<ProfileState, ProfileEvent>(Pro
 
     @OptIn(OrbitExperimental::class)
     fun saveData(userData: UserUpdateUi) = blockingIntent {
-        if(userData!=UserUpdateUi.empty){
+        val updatedUserData = userData.copy(
+            email = userData.email?.takeIf { userData.email.isValidEmail() },
+            firstName = userData.firstName?.takeIf { it.isNotEmpty() },
+            lastName = userData.lastName?.takeIf { it.isNotEmpty() },
+            middleName = userData.middleName?.takeIf { it.isNotEmpty() },
+            telephone = userData.telephone.formatPhone()
+        )
+        if(updatedUserData!=UserUpdateUi.empty){
             launchOperation(
                 operation = {
-                    userRepository.editUser(userData.toUI())
+                    userRepository.editUser(updatedUserData.toUI())
                 }
             )
         }
+
         reduce { state.copy(
             newUserData = UserUpdateUi.empty,
             emailError = "",
@@ -161,24 +176,28 @@ internal class ProfileViewModel: BaseScreenModel<ProfileState, ProfileEvent>(Pro
         reduce { state.copy(
                 oldPasswordError = "",
                 newPasswordError = "",
-                confirmPasswordError = "") }
+                confirmPasswordError = ""
+        ) }
 
         if (oldPassword.isNullOrEmpty() || newPassword.isNullOrEmpty() || confirmPassword.isNullOrEmpty()) {
-            reduce { state.copy(
+            reduce {
+                state.copy(
                     oldPasswordError = if (oldPassword.isNullOrEmpty()) VestaResourceStrings.error_fill_all_fields else "",
                     newPasswordError = if (newPassword.isNullOrEmpty()) VestaResourceStrings.error_fill_all_fields else "",
-                    confirmPasswordError = if (confirmPassword.isNullOrEmpty()) VestaResourceStrings.error_fill_all_fields else "") }
+                    confirmPasswordError = if (confirmPassword.isNullOrEmpty()) VestaResourceStrings.error_fill_all_fields else ""
+            ) }
         } else if (newPassword != confirmPassword) {
-            reduce { state.copy(
+            reduce {
+                state.copy(
                     newPasswordError = VestaResourceStrings.error_passwords_not_same,
-                    confirmPasswordError = VestaResourceStrings.error_passwords_not_same) }
+                    confirmPasswordError = VestaResourceStrings.error_passwords_not_same
+            ) }
         }
         else if (newPassword == oldPassword) {
             reduce { state.copy(newPasswordError = VestaResourceStrings.error_new_password_must_be_different,) }
         }
         else if(newPassword.length<6||newPassword.length>24){
             reduce { state.copy(newPasswordError = VestaResourceStrings.error_password_length) }
-
         }
         else{
             val newUserPassword = UserUpdateUi.empty.copy(

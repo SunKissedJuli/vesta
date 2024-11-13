@@ -2,14 +2,16 @@ package com.example.vesta.screen.signUp
 
 import cafe.adriel.voyager.navigator.Navigator
 import com.example.vesta.domain.manager.ObserverManager
+import com.example.vesta.ext.isValidEmail
 import com.example.vesta.platform.BaseScreenModel
 import com.example.vesta.strings.VestaResourceStrings
 import org.koin.core.component.inject
 import org.orbitmvi.orbit.syntax.simple.blockingIntent
 import org.orbitmvi.orbit.syntax.simple.intent
+import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 
-internal class SignUpViewModel: BaseScreenModel<SignUpState, Unit>(SignUpState.InitState) {
+internal class SignUpViewModel: BaseScreenModel<SignUpState, SignUpEvent>(SignUpState.InitState) {
 
     private val bottomBarVisibleManager: ObserverManager by inject()
     fun updateLastName(newLastName: String) = blockingIntent {
@@ -26,7 +28,9 @@ internal class SignUpViewModel: BaseScreenModel<SignUpState, Unit>(SignUpState.I
     }
 
     fun updatePhone(newPhone: String) = blockingIntent {
-        reduce { state.copy(phone = newPhone, errorPhone = "") }
+        if(newPhone.length<=10&&newPhone.all { it.isDigit() }){
+            reduce { state.copy(phone = newPhone, errorPhone = "") }
+        }
     }
 
     fun updatePassword(newPassword: String) = blockingIntent {
@@ -53,31 +57,54 @@ internal class SignUpViewModel: BaseScreenModel<SignUpState, Unit>(SignUpState.I
         bottomBarVisibleManager.setBottomBarVisibility(false)
     }
 
-    fun isFilled(navigator: Navigator, viewModel: SignUpViewModel) = intent{
-        if(state.patronymic.isEmpty()||state.lastName.isEmpty()
-            ||state.firstName.isEmpty()||state.phone.isEmpty()){
-            reduce { state.copy(
-                errorFirstName = state.firstName.ifEmpty { VestaResourceStrings.error_fill_all_fields },
-                errorLastName = state.lastName.ifEmpty { VestaResourceStrings.error_fill_all_fields } ,
-                errorPatronymic = state.patronymic.ifEmpty { VestaResourceStrings.error_fill_all_fields } ,
-                errorPhone = state.phone.ifEmpty { VestaResourceStrings.error_fill_all_fields } ,) }
-        }
-        else if(state.phone.isEmpty()){
+    fun isFilled(
+        lastName: String,
+        firstName: String,
+        phone: String
+    ) = intent{
 
+        if(lastName.isEmpty() ||firstName.isEmpty()||phone.isEmpty()){
+            reduce { state.copy(
+                errorFirstName =  if(firstName.isEmpty()) VestaResourceStrings.error_fill_all_fields else "",
+                errorLastName =  if(lastName.isEmpty()) VestaResourceStrings.error_fill_all_fields else "",
+                errorPhone = if(phone.isEmpty()) VestaResourceStrings.error_fill_all_fields else ""
+            ) }
+        }
+        else if(state.phone.length!=10){
+            reduce { state.copy(errorPhone = VestaResourceStrings.error_short_phone)}
         }
         else{
-            navigator.push(SignUpSecondScreen(viewModel))
-            //стоит переписать на event
+            postSideEffect(SignUpEvent.UserEnteredValidData)
         }
     }
 
-    fun isFilledSecondScreen(email: String) = intent{
-        val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$".toRegex()
-        if(emailRegex.matches(email)){
-
+    fun isFilledSecondScreen(
+        email: String,
+        password: String,
+        passwordConfirmation: String
+    ) = intent{
+        if(email.isEmpty()||password.isEmpty()||passwordConfirmation.isEmpty()){
+            reduce { state.copy(
+                errorEmail = if(email.isEmpty()) VestaResourceStrings.error_fill_all_fields else "",
+                errorPassword = if(password.isEmpty()) VestaResourceStrings.error_fill_all_fields else "",
+                errorPasswordRepeat = if(passwordConfirmation.isEmpty()) VestaResourceStrings.error_fill_all_fields else "",
+            )}
+        }
+        else if(password.length<6||password.length>24){
+            reduce { state.copy(errorPassword = if(password.isEmpty()) VestaResourceStrings.error_password_length else "",)}
+        }
+        else if(password!=passwordConfirmation){
+            reduce { state.copy(
+                errorPassword = if(password.isEmpty()) VestaResourceStrings.error_passwords_not_same else "",
+                errorPasswordRepeat = if(passwordConfirmation.isEmpty()) VestaResourceStrings.error_passwords_not_same else "",
+            )}
+        }
+        else if(!email.isValidEmail()){
+            reduce { state.copy(errorEmail = VestaResourceStrings.error_invalid_email)}
         }
         else{
-
+            //ура, квест пройден!
+            //жаль, что апи-запрос для регистрации ещё не завезли >:(
         }
     }
 }

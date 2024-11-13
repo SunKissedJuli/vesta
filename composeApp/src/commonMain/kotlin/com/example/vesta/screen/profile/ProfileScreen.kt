@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
@@ -36,6 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -44,6 +46,7 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.vesta.commons.MaskVisualTransformation
 import com.example.vesta.components.ArrowButton
 import com.example.vesta.components.CustomButton
 import com.example.vesta.components.CustomCircularProgressIndicator
@@ -183,9 +186,11 @@ class ProfileScreen(): Screen{
                         )
                         RoundedTextField(
                             value = state.currentUser.telephone,
-                            onValueChange = {viewModel.updatePhone(it)},
+                            onValueChange = { viewModel.updatePhone(it) },
                             placeholder = VestaResourceStrings.phone,
-                            errorMessage = state.phoneError
+                            errorMessage = state.phoneError,
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
+                            visualTransformation = MaskVisualTransformation("+7 (###) ###-##-##")
                         )
                         Spacer(Modifier.height(20.dp))
                         RoundedTextField(

@@ -7,6 +7,7 @@ import com.example.vesta.domain.manager.AuthManager
 import com.example.vesta.domain.manager.ObserverManager
 import com.example.vesta.domain.repository.InfoRepository
 import com.example.vesta.domain.repository.UserRepository
+import com.example.vesta.ext.isValidEmail
 import com.example.vesta.platform.BaseScreenModel
 import com.example.vesta.screen.profile.ProfileScreen
 import com.example.vesta.screen.splash.SplashScreen
@@ -31,7 +32,23 @@ internal class SignInViewModel:BaseScreenModel<SignInState, Unit>(SignInState.In
     }
 
     fun autorize(login: String, password: String, navigator: Navigator) = intent {
-         if(login.isNotEmpty()&& password.isNotEmpty()){
+
+        if(login.isEmpty()|| password.isEmpty()) {
+            reduce {
+                state.copy(
+                    errorPassword = if(password.isEmpty()) VestaResourceStrings.error_fill_all_fields else "",
+                    errorEmail = if(login.isEmpty()) VestaResourceStrings.error_fill_all_fields else ""
+                )
+            }
+        }
+        else if(!login.isValidEmail()) {
+            reduce {
+                state.copy(
+                    errorEmail = VestaResourceStrings.error_invalid_email
+                )
+            }
+        }
+        else{
             launchOperation(
                 operation = {
                     userRepository.autirize(login, password)
@@ -40,14 +57,29 @@ internal class SignInViewModel:BaseScreenModel<SignInState, Unit>(SignInState.In
                     authManager.token = response.plainTextToken
                     setBottomBarVisible(true)
                     navigator.push(SplashScreen())
+                },
+                failure = { failure ->
+                    when(failure.message){
+                        "User not found" -> {
+                            reduceLocal { state.copy(
+                                errorPassword = VestaResourceStrings.error_user_not_found,
+                                errorEmail = VestaResourceStrings.error_user_not_found
+                            ) }
+                        }
+                        "Wrong password" -> {
+                            reduceLocal { state.copy(
+                                errorPassword = VestaResourceStrings.error_invalid_password
+                            ) }
+                        }
+                        else -> {
+                            reduceLocal { state.copy(
+                                errorPassword = VestaResourceStrings.error_sign_in,
+                                errorEmail = VestaResourceStrings.error_sign_in
+                            ) }
+                        }
+                    }
                 }
             )
-        }
-        else{
-             reduce { state.copy(
-                 errorPassword = if(password.isEmpty()) VestaResourceStrings.error_fill_all_fields else "",
-                 errorEmail = if(login.isEmpty()) VestaResourceStrings.error_fill_all_fields else ""
-             ) }
         }
     }
 
