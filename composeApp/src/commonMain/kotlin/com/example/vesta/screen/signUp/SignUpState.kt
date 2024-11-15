@@ -20,8 +20,7 @@ data class SignUpState(
     val errorEmail: String,
     val errorPassword: String,
     val errorPasswordRepeat: String,
-
-
+    val errorAgreePolitics: Boolean
 ){
     companion object{
         val InitState = SignUpState(
@@ -41,6 +40,7 @@ data class SignUpState(
             errorFirstName = DEFAULT_STRING,
             errorPasswordRepeat = DEFAULT_STRING,
             errorPatronymic = DEFAULT_STRING,
+            errorAgreePolitics = false
         )
     }
 }

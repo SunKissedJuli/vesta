@@ -65,7 +65,7 @@
     <string name="news">Новости</string>
     <string name="sold">Все товары категории распроданы </string>
     <string name="new_products">Новинки</string>
-    <string name="favorites">Закладки</string>
+    <string name="favorites">Избранное</string>
     <string name="address_book">Адресная книга</string>
     <string name="history">История заказов</string>
     <string name="main_features">Основные характеристики</string>
@@ -88,6 +88,9 @@
     <string name="error_password_length">Пароль от 6 до 24 символов</string>
     <string name="error_user_not_found">Пользователь не найден</string>
     <string name="error_short_phone">Короткий номер</string>
+    <string name="error_email_is_unique">Такой email уже зарегистрирован.</string>
+    <string name="error_phone_is_unique_long">Такой номер телефона уже зарегистрирован.</string>
+    <string name="error_phone_is_unique">Такой номер уже зарегистрирован.</string>
 
 
 

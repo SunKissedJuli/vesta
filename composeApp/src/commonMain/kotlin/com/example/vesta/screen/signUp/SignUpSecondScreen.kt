@@ -19,6 +19,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -40,6 +41,7 @@ import com.example.vesta.components.RoundedTextField
 import com.example.vesta.images.VestaResourceImages
 import com.example.vesta.screen.mainTab.MainTabScreen
 import com.example.vesta.screen.signIn.SignInScreen
+import com.example.vesta.screen.splash.SplashScreen
 import com.example.vesta.strings.VestaResourceStrings
 import io.github.skeptick.libres.compose.painterResource
 
@@ -49,6 +51,18 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
     override fun Content() {
         val state by viewModel.stateFlow.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
+
+        LaunchedEffect(viewModel) {
+            viewModel.container.sideEffectFlow.collect() {
+                when (it) {
+                    is SignUpEvent.UserRegistrationSucces -> {
+                        navigator.push(SplashScreen())
+                    }
+                    else -> {}
+                }
+            }
+        }
+
         val checkBoxColors = CheckboxColors(
             checkedBoxColor = MaterialTheme.colorScheme.background,
             uncheckedBoxColor = MaterialTheme.colorScheme.background,
@@ -61,7 +75,22 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
             disabledCheckedBoxColor = MaterialTheme.colorScheme.background,
             disabledUncheckedBoxColor = MaterialTheme.colorScheme.background,
             disabledUncheckedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
-            disabledIndeterminateBoxColor = MaterialTheme.colorScheme.secondaryContainer
+            disabledIndeterminateBoxColor = MaterialTheme.colorScheme.secondaryContainer,
+        )
+
+        val checkBoxErrorColors = CheckboxColors(
+            checkedBoxColor = MaterialTheme.colorScheme.background,
+            uncheckedBoxColor = MaterialTheme.colorScheme.background,
+            checkedCheckmarkColor = MaterialTheme.colorScheme.secondaryContainer,
+            uncheckedBorderColor = MaterialTheme.colorScheme.onTertiary,
+            uncheckedCheckmarkColor = MaterialTheme.colorScheme.onTertiary,
+            checkedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
+            disabledBorderColor = MaterialTheme.colorScheme.secondaryContainer,
+            disabledIndeterminateBorderColor = MaterialTheme.colorScheme.secondaryContainer,
+            disabledCheckedBoxColor = MaterialTheme.colorScheme.background,
+            disabledUncheckedBoxColor = MaterialTheme.colorScheme.background,
+            disabledUncheckedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
+            disabledIndeterminateBoxColor = MaterialTheme.colorScheme.secondaryContainer,
         )
 
         CustomScaffold(
@@ -155,7 +184,7 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
                             Checkbox(
                                 checked = state.agreePolitics,
                                 onCheckedChange = {viewModel.updateAgreePolitics()},
-                                colors = checkBoxColors
+                                colors = if(state.errorAgreePolitics) checkBoxErrorColors else checkBoxColors
                             )
                             CustomSplitClickableText(
                                 text = VestaResourceStrings.i_agree,
@@ -197,9 +226,15 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
                     ){
                         CustomButton(
                             onClick = {viewModel.isFilledSecondScreen(
+                                firstName = state.firstName,
+                                lastName = state.lastName,
+                                middleName = state.patronymic,
                                 email = state.email,
                                 password = state.password,
-                                passwordConfirmation = state.passwordRepeat
+                                passwordConfirmation = state.passwordRepeat,
+                                agreeNews = state.agreeNews,
+                                agreePolitics = state.agreePolitics,
+                                phone = state.phone
                             )},
                             text = VestaResourceStrings.sign_up
                         )

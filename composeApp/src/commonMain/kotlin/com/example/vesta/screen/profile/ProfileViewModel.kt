@@ -88,7 +88,8 @@ internal class ProfileViewModel: BaseScreenModel<ProfileState, ProfileEvent>(Pro
             state.copy(
                 newUserData =  state.newUserData.copy(middleName = name),
                 currentUser = state.currentUser.copy(middleName = name),
-                middleNameError = if(name.isEmpty()) VestaResourceStrings.error_fill_all_fields else "" )
+              //  middleNameError = if(name.isEmpty()) VestaResourceStrings.error_fill_all_fields else ""
+           )
         }
     }
 
@@ -147,7 +148,7 @@ internal class ProfileViewModel: BaseScreenModel<ProfileState, ProfileEvent>(Pro
             email = userData.email?.takeIf { userData.email.isValidEmail() },
             firstName = userData.firstName?.takeIf { it.isNotEmpty() },
             lastName = userData.lastName?.takeIf { it.isNotEmpty() },
-            middleName = userData.middleName?.takeIf { it.isNotEmpty() },
+            middleName = userData.middleName,
             telephone = userData.telephone.formatPhone()
         )
         if(updatedUserData!=UserUpdateUi.empty){

@@ -11,7 +11,7 @@ data class UserUpdateUi(
     val oldPassword: String?,
     val password: String?,
     val passwordConfirmation: String?,
-    val telephone: String?
+    val telephone: String?,
 ){
     companion object{
         val empty = UserUpdateUi(

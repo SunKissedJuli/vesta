@@ -8,6 +8,7 @@ import com.example.vesta.data.models.CategoryByIdResponse
 import com.example.vesta.data.models.info.SityUi
 import com.example.vesta.data.models.info.toUI
 import com.example.vesta.data.models.product.toUI
+import com.example.vesta.data.models.user.NewUser
 import com.example.vesta.data.models.user.UserUpdate
 import com.example.vesta.domain.manager.AuthManager
 import com.example.vesta.domain.modelsUI.CategoryByIdResponseUi
@@ -49,6 +50,13 @@ class UserRepositoryImpl(private val vestaApi: VestaApi) : UserRepository {
     override suspend fun editUser(user: UserUpdate): Either<Failure, Unit> {
         return apiCall (call = {
             vestaApi.editUser(user)
+        },
+            mapResponse = {Unit})
+    }
+
+    override suspend fun registration(user: NewUser): Either<Failure, Unit> {
+        return apiCall (call = {
+            vestaApi.registration(user)
         },
             mapResponse = {Unit})
     }

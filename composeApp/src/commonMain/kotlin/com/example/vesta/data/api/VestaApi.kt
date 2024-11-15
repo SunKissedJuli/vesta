@@ -10,6 +10,7 @@ import com.example.vesta.data.models.info.SityResponse
 import com.example.vesta.data.models.info.StocksResponse
 import com.example.vesta.data.models.product.ProductResponse
 import com.example.vesta.data.models.user.CurrentUser
+import com.example.vesta.data.models.user.NewUser
 import com.example.vesta.data.models.user.TokenResponse
 import com.example.vesta.data.models.user.UserUpdate
 import com.example.vesta.domain.manager.AuthManager
@@ -75,6 +76,9 @@ interface VestaApi {
         @Query("email") login: String,
         @Query("password") password: String
     ): TokenResponse
+
+    @POST("api/user/registration")
+    suspend fun registration(@Body user: NewUser): Unit
 
     @GET("api/user/getProfile")
     suspend fun getCurrentUser(): CurrentUser

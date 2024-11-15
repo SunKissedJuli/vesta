@@ -47,7 +47,6 @@ fun RoundedTextField(
         maxLines = 1,
         onValueChange = {
             onValueChange(it)
-            println(value)
         },
         shape = RoundedCornerShape(50.dp),
         colors = OutlinedTextFieldDefaults.colors(

@@ -59,8 +59,10 @@ class SignUpScreen: Screen {
             viewModel.container.sideEffectFlow.collect() {
                 when (it) {
                     is SignUpEvent.UserEnteredValidData -> {
+                        viewModel.setBottomBarVisible(true)
                         navigator.push(SignUpSecondScreen(viewModel))
                     }
+                    else -> {}
                 }
             }
         }
