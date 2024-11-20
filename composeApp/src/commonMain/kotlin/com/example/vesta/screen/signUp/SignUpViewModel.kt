@@ -67,22 +67,16 @@ internal class SignUpViewModel: BaseScreenModel<SignUpState, SignUpEvent>(SignUp
     fun isFilled(
         lastName: String,
         firstName: String,
-        phone: String
     ) = intent{
         reduce { state.copy(
             errorLastName = "",
-            errorFirstName = "",
-            errorPhone = "",
+            errorFirstName = ""
         )}
-        if(lastName.isEmpty() ||firstName.isEmpty()||phone.isEmpty()){
+        if(lastName.isEmpty() ||firstName.isEmpty()){
             reduce { state.copy(
                 errorFirstName =  if(firstName.isEmpty()) VestaResourceStrings.error_fill_all_fields else "",
-                errorLastName =  if(lastName.isEmpty()) VestaResourceStrings.error_fill_all_fields else "",
-                errorPhone = if(phone.isEmpty()) VestaResourceStrings.error_fill_all_fields else ""
+                errorLastName =  if(lastName.isEmpty()) VestaResourceStrings.error_fill_all_fields else ""
             ) }
-        }
-        else if(state.phone.length!=10){
-            reduce { state.copy(errorPhone = VestaResourceStrings.error_short_phone)}
         }
         else{
             postSideEffect(SignUpEvent.UserEnteredValidData)
@@ -104,36 +98,35 @@ internal class SignUpViewModel: BaseScreenModel<SignUpState, SignUpEvent>(SignUp
             errorEmail = "",
             errorPassword = "",
             errorPasswordRepeat = "",
+            errorPhone = "",
             errorAgreePolitics = false
         )}
 
         if(email.isEmpty()||password.isEmpty()||passwordConfirmation.isEmpty()){
-            println("ошибка email.isEmpty()||password.isEmpty()||passwordConfirmation.isEmpty()")
             reduce { state.copy(
                 errorEmail = if(email.isEmpty()) VestaResourceStrings.error_fill_all_fields else "",
                 errorPassword = if(password.isEmpty()) VestaResourceStrings.error_fill_all_fields else "",
                 errorPasswordRepeat = if(passwordConfirmation.isEmpty()) VestaResourceStrings.error_fill_all_fields else "",
+                errorPhone = if(phone.isEmpty()) VestaResourceStrings.error_fill_all_fields else ""
             )}
         }
+        else if(state.phone.length!=10){
+            reduce { state.copy(errorPhone = VestaResourceStrings.error_short_phone)}
+        }
         else if(password.length<6||password.length>24){
-            println("ошибка password.length<6||password.length>24")
-
             reduce { state.copy(errorPassword = VestaResourceStrings.error_password_length )}
         }
         else if(password!=passwordConfirmation){
-            println("ошибка password!=passwordConfirmation")
-            reduce { state.copy(
+           reduce { state.copy(
                 errorPassword = VestaResourceStrings.error_passwords_not_same,
                 errorPasswordRepeat = VestaResourceStrings.error_passwords_not_same,
             )}
         }
         else if(!email.isValidEmail()){
-            println("ошибка !email.isValidEmail()")
             reduce { state.copy(errorEmail = VestaResourceStrings.error_invalid_email)}
         }
         else if(!agreePolitics){
-            println("ошибка !agreePolitics")
-            reduce { state.copy(errorAgreePolitics = true)}
+           reduce { state.copy(errorAgreePolitics = true)}
         }
         else{
             registration(
@@ -156,13 +149,16 @@ internal class SignUpViewModel: BaseScreenModel<SignUpState, SignUpEvent>(SignUp
             operation = {
                 userRepository.registration(newUser)
             },
-            success = {
-                postSideEffectLocal(SignUpEvent.UserRegistrationSucces)
+            success = { response ->
+                authManager.token = response.plainTextToken
+               if(!authManager.token.isNullOrEmpty()){
+                    postSideEffectLocal(SignUpEvent.UserRegistrationSucces)
+                }
             },
             failure = { failure ->
                 when(failure.message){
                     VestaResourceStrings.error_phone_is_unique_long -> {
-                        reduceLocal { state.copy(errorEmail = VestaResourceStrings.error_phone_is_unique) }
+                        reduceLocal { state.copy(errorPhone = VestaResourceStrings.error_phone_is_unique) }
                     }
                     VestaResourceStrings.error_email_is_unique -> {
                         reduceLocal { state.copy(errorEmail = VestaResourceStrings.error_email_is_unique) }

@@ -5,7 +5,16 @@ data class DescriptionUi(
     val name: String,
     val description: String,
     val metaKeyword: String
-)
+){
+    companion object{
+        val empty = DescriptionUi(
+            categoryId = 0,
+            name = "",
+            description = "",
+            metaKeyword = ""
+        )
+    }
+}
 
 data class CategoryUi(
     val categoryId: Int,

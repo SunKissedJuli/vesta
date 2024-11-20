@@ -37,7 +37,7 @@ class UserRepositoryImpl(private val vestaApi: VestaApi) : UserRepository {
         return apiCall (call = {
             vestaApi.getCurrentUser()
         },
-            mapResponse = {token -> token.toUI()})
+            mapResponse = {user -> user.toUI()})
     }
 
     override suspend fun logOut(): Either<Failure, Unit> {
@@ -54,10 +54,10 @@ class UserRepositoryImpl(private val vestaApi: VestaApi) : UserRepository {
             mapResponse = {Unit})
     }
 
-    override suspend fun registration(user: NewUser): Either<Failure, Unit> {
+    override suspend fun registration(user: NewUser): Either<Failure, TokenUi> {
         return apiCall (call = {
             vestaApi.registration(user)
         },
-            mapResponse = {Unit})
+            mapResponse = {token -> token.toUI()})
     }
 }

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxColors
 import androidx.compose.material3.Icon
@@ -27,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,6 +36,7 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.vesta.commons.MaskVisualTransformation
 import com.example.vesta.components.CustomButton
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.CustomSplitClickableText
@@ -144,11 +147,28 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
                         .padding(vertical = 20.dp, horizontal = 20.dp)) {
 
                     Text(
+                        text = VestaResourceStrings.contact_information,
+                        fontSize = 16.sp,
+                        lineHeight = 19.5.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(bottom = 20.dp)
+                    )
+
+                    RoundedTextField(
+                        value = state.phone,
+                        onValueChange = {viewModel.updatePhone(it)},
+                        placeholder = VestaResourceStrings.phone,
+                        errorMessage = state.errorPhone,
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
+                        visualTransformation = MaskVisualTransformation("+7 (###) ###-##-##")
+                    )
+
+                    Text(
                         text = VestaResourceStrings.your_account,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                         lineHeight = 19.5.sp,
-                        modifier = Modifier.padding(bottom = 20.dp)
+                        modifier = Modifier.padding(top = 30.dp, bottom = 20.dp)
                     )
 
                     RoundedTextField(
@@ -218,7 +238,7 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
                 Box(
                     Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 100.dp, start = 20.dp, end = 20.dp)
+                        .padding(bottom = 80.dp, start = 20.dp, end = 20.dp)
                         .align(Alignment.BottomCenter)){
                     Column(
                         verticalArrangement = Arrangement.Center,

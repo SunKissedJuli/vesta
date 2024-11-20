@@ -145,29 +145,12 @@ class SignUpScreen: Screen {
                         placeholder = VestaResourceStrings.patronymic,
                         errorMessage = state.errorPatronymic
                     )
-
-                    Text(
-                        text = VestaResourceStrings.contact_information,
-                        fontSize = 16.sp,
-                        lineHeight = 19.5.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(top =30.dp, bottom = 20.dp)
-                    )
-
-                    RoundedTextField(
-                        value = state.phone,
-                        onValueChange = {viewModel.updatePhone(it)},
-                        placeholder = VestaResourceStrings.phone,
-                        errorMessage = state.errorPhone,
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
-                        visualTransformation = MaskVisualTransformation("+7 (###) ###-##-##")
-                    )
                 }
 
                 Box(
                     Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 100.dp, start = 20.dp, end = 20.dp)
+                    .padding(bottom = 80.dp, start = 20.dp, end = 20.dp)
                     .align(Alignment.BottomCenter)){
                     Column(
                         verticalArrangement = Arrangement.Center,
@@ -176,8 +159,7 @@ class SignUpScreen: Screen {
                         CustomButton(
                             onClick = { viewModel.isFilled(
                                 lastName = state.lastName,
-                                firstName = state.firstName,
-                                phone = state.phone
+                                firstName = state.firstName
                             ) },
                             text = VestaResourceStrings.further
                         )

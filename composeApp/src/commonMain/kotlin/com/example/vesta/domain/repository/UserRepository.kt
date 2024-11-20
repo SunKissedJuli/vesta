@@ -2,6 +2,7 @@ package com.example.vesta.domain.repository
 
 import com.example.vesta.data.models.info.SityUi
 import com.example.vesta.data.models.user.NewUser
+import com.example.vesta.data.models.user.Token
 import com.example.vesta.data.models.user.UserUpdate
 import com.example.vesta.domain.modelsUI.CategoryUi
 import com.example.vesta.domain.modelsUI.info.ShopsUi
@@ -22,6 +23,6 @@ interface UserRepository {
 
     suspend fun editUser(user: UserUpdate) : Either<Failure,Unit>
 
-    suspend fun registration(user: NewUser) : Either<Failure,Unit>
+    suspend fun registration(user: NewUser) : Either<Failure, TokenUi>
 
 }

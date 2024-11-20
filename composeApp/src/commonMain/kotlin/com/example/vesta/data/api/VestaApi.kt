@@ -2,7 +2,6 @@ package com.example.vesta.data.api
 
 import com.example.vesta.data.models.CategoryByIdResponse
 import com.example.vesta.data.models.CategoryResponse
-import com.example.vesta.data.models.ProductsDataResponse
 import com.example.vesta.data.models.info.MainBlogResponse
 import com.example.vesta.data.models.info.NewsResponse
 import com.example.vesta.data.models.info.ShopsResponse
@@ -11,9 +10,9 @@ import com.example.vesta.data.models.info.StocksResponse
 import com.example.vesta.data.models.product.ProductResponse
 import com.example.vesta.data.models.user.CurrentUser
 import com.example.vesta.data.models.user.NewUser
+import com.example.vesta.data.models.user.Token
 import com.example.vesta.data.models.user.TokenResponse
 import com.example.vesta.data.models.user.UserUpdate
-import com.example.vesta.domain.manager.AuthManager
 import de.jensklingenberg.ktorfit.http.Body
 import de.jensklingenberg.ktorfit.http.GET
 import de.jensklingenberg.ktorfit.http.POST
@@ -26,9 +25,6 @@ interface VestaApi {
 
     @GET("api/getCategoryToStore")
     suspend fun getAllCategory(@Query("sity") sity: Int = 0): List<CategoryResponse>
-
-   // @GET("api/getAllCategory")
-  //  suspend fun getAllCategory(): List<CategoryResponse>
 
     @GET("api/getCategoryId/{categoryId}")
     suspend fun getCategoryById(
@@ -78,7 +74,7 @@ interface VestaApi {
     ): TokenResponse
 
     @POST("api/user/registration")
-    suspend fun registration(@Body user: NewUser): Unit
+    suspend fun registration(@Body user: NewUser): Token
 
     @GET("api/user/getProfile")
     suspend fun getCurrentUser(): CurrentUser

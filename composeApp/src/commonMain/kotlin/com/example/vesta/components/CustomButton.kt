@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vesta.strings.VestaResourceStrings
@@ -28,6 +29,7 @@ fun CustomButton(
     modifier: Modifier = Modifier,
     background: Color = MaterialTheme.colorScheme.primary,
     textColor: Color = MaterialTheme.colorScheme.background,
+    fontSize: TextUnit = 16.sp
 ) {
     Row( modifier = modifier
         .fillMaxWidth()
@@ -40,7 +42,7 @@ fun CustomButton(
     ){
         Text(
             text = text,
-            fontSize = 16.sp,
+            fontSize = fontSize,
             lineHeight = 19.5.sp,
             fontWeight = FontWeight.Bold,
             letterSpacing = 1.sp,

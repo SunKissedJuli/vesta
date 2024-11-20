@@ -14,7 +14,7 @@ class CategoryById(
     @SerialName("category_id") val categoryId: Int?,
     @SerialName("children") val children: List<CategoryById>?,
     @SerialName("column") val column: Int?,
-    @SerialName("description") val description: List<DescriptionResponse>?,
+    @SerialName("description") val description: DescriptionResponse?,
     @SerialName("image") val image: String?,
     @SerialName("oct_image") val octImage: String?,
     @SerialName("parent_id") val parentId: Int?,
@@ -29,3 +29,4 @@ class Link(
     @SerialName("label") val label: String?,
     @SerialName("url") val url: String?
 )
+

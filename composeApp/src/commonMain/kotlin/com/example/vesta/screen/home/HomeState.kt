@@ -34,6 +34,7 @@ data class HomeState(
             phone = DEFAULT_STRING,
             selectedPage = 0,
             pages = listOf(
+                VestaResourceStrings.everything,
                 VestaResourceStrings.news,
                 VestaResourceStrings.stocks,
                 VestaResourceStrings.new_products)

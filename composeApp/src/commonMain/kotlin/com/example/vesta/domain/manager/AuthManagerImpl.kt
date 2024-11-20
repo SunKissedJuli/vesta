@@ -15,6 +15,12 @@ class AuthManagerImpl: AuthManager, KoinComponent {
             settings.putString(TOKEN, value.orEmpty())
         }
 
+    override var sessionId: String?
+        get() = if (settings.getString(SESSION_ID).isBlank()) null else settings.getString(SESSION_ID, "")
+        set(value){
+            settings.putString(SESSION_ID, value.orEmpty())
+        }
+
     override var sity: Int?
         get() {
             return if (settings.contains(SITY)) settings.getInt(SITY, 0) else 0
@@ -25,6 +31,7 @@ class AuthManagerImpl: AuthManager, KoinComponent {
 
     companion object{
         private const val TOKEN = "TOKEN"
+        private const val SESSION_ID = "SESSION_ID"
         private const val SITY = "SITY"
     }
 }

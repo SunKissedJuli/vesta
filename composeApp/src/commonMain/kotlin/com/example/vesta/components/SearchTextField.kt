@@ -1,11 +1,14 @@
 package com.example.vesta.components
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
@@ -21,22 +24,25 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vesta.ext.clickableBlank
+import com.example.vesta.images.VestaResourceImages
 import com.example.vesta.strings.VestaResourceStrings
+import io.github.skeptick.libres.compose.painterResource
 
 @Composable
 fun SearchTextField(
     value: String,
     onValueChange: (String)->Unit,
     onClick: ()-> Unit = {}){
-    Row(verticalAlignment = Alignment.CenterVertically){
+    Row(verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween){
         BasicTextField(
             value = value,
             onValueChange = { onValueChange(it) },
             modifier = Modifier
-                .fillMaxWidth(0.9f)
+                .fillMaxWidth(0.85f)
                 .padding(start = 15.dp),
             textStyle = TextStyle.Default.copy(
-                fontSize = 17.sp,
+                fontSize = 14.sp,
             ),
             maxLines = 1,
             decorationBox = { innerTextField ->
@@ -46,7 +52,7 @@ fun SearchTextField(
                         Text(
                             text = VestaResourceStrings.search_string,
                             color = MaterialTheme.colorScheme.secondaryContainer,
-                            fontSize = 12.sp,
+                            fontSize = 14.sp,
                             maxLines = 1,
                             modifier = Modifier.align(Alignment.CenterStart)
                         )
@@ -54,14 +60,14 @@ fun SearchTextField(
                 }
             }
         )
+
         Icon(
-            Icons.Default.Search,
+            painterResource(VestaResourceImages.icon_search),
             modifier = Modifier
-                .padding(horizontal = 5.dp)
-                .size(25.dp)
+                .size(20.dp)
                 .clickableBlank{onClick()},
             contentDescription = "",
-            tint = MaterialTheme.colorScheme.onTertiary
+            tint = MaterialTheme.colorScheme.onSecondary
         )
     }
 }

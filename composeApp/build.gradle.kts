@@ -2,6 +2,17 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
+class RoomSchemaArgProvider(
+    @get:InputDirectory
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    val schemaDir: File
+) : CommandLineArgumentProvider {
+
+    override fun asArguments(): Iterable<String> {
+        return listOf("room.schemaLocation=${schemaDir.path}")
+    }
+}
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
@@ -11,7 +22,16 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.ktorfit)
     alias(libs.plugins.libres)
+    //alias(libs.plugins.room)
 }
+
+ksp {
+    arg(RoomSchemaArgProvider(File(projectDir, "schemas")))
+}
+
+//room {
+//    schemaDirectory("$projectDir/schemas")
+//}
 
 configure<de.jensklingenberg.ktorfit.gradle.KtorfitGradleConfiguration>{
     version = libs.versions.ktorfit.asProvider().get()
@@ -54,6 +74,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
         }
+
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -64,8 +85,13 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.libres.compose)
-            implementation(libs.androidx.lifecycle.viewmodel.ktx)
+            //implementation(libs.androidx.lifecycle.viewmodel.ktx)
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+
+            // room
+            implementation(libs.room.runtime)
+            implementation(libs.sqlite.bundled)
+            //implementation("androidx.room:room-ktx:2.7.0-alpha01")
 
           //  implementation(libs.yandex.maps)
 
@@ -157,13 +183,23 @@ android {
     }
 }
 
+
+
 dependencies {
+ //   ksp(libs.room.compiler)
     val ktorfitVersion = libs.versions.ktorfit.asProvider().get()
     add("kspCommonMainMetadata", "de.jensklingenberg.ktorfit:ktorfit-ksp:$ktorfitVersion")
     add("kspAndroid", "de.jensklingenberg.ktorfit:ktorfit-ksp:$ktorfitVersion")
     add("kspIosX64", "de.jensklingenberg.ktorfit:ktorfit-ksp:$ktorfitVersion")
     add("kspIosArm64", "de.jensklingenberg.ktorfit:ktorfit-ksp:$ktorfitVersion")
     add("kspIosSimulatorArm64", "de.jensklingenberg.ktorfit:ktorfit-ksp:$ktorfitVersion")
+
+    add("kspCommonMainMetadata", libs.room.compiler)
+    add("kspAndroid", libs.room.compiler)
+    add("kspIosX64", libs.room.compiler)
+    add("kspIosArm64", libs.room.compiler)
+    add("kspIosSimulatorArm64", libs.room.compiler)
+
 }
 
 libres {

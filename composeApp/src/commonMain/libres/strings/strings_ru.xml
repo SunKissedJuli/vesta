@@ -4,7 +4,7 @@
     <string name="app_name">VESTA</string>
     <string name="app_name_trading">TRADING</string>
     <string name="hello_text">Мы работаем для того, чтобы в каждом доме были вода и тепло</string>
-    <string name="search_string">Поиск по названию товара, категории товара, артикулу, бренду...</string>
+    <string name="search_string">Поиск</string>
     <string name="filter">Фильтр товаров</string>
     <string name="sort">Сортировка:</string>
     <string name="sort_ascending">По цене (по возрастанию)</string>
@@ -63,6 +63,7 @@
     <string name="change_password">Изменить пароль</string>
     <string name="stocks">Акции</string>
     <string name="news">Новости</string>
+    <string name="everything">Общее</string>
     <string name="sold">Все товары категории распроданы </string>
     <string name="new_products">Новинки</string>
     <string name="favorites">Избранное</string>
@@ -91,6 +92,9 @@
     <string name="error_email_is_unique">Такой email уже зарегистрирован.</string>
     <string name="error_phone_is_unique_long">Такой номер телефона уже зарегистрирован.</string>
     <string name="error_phone_is_unique">Такой номер уже зарегистрирован.</string>
+    <string name="error_error">Неизвестная ошибка</string>
+
+    <string name="in_card">В корзину</string>
 
 
 

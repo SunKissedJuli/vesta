@@ -15,12 +15,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun VerticalLine(modifier: Modifier = Modifier){
+fun VerticalLine(modifier: Modifier = Modifier, background: Color = MaterialTheme.colorScheme.background){
     Box(modifier = modifier
         .padding(horizontal = 2.dp)
         .fillMaxHeight()
         .width(1.dp)
-        .background(color = MaterialTheme.colorScheme.background)
+        .background(color = background)
         .alpha(0.5f)
     )
 }

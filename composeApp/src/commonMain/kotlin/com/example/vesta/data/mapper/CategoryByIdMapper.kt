@@ -8,6 +8,7 @@ import com.example.vesta.domain.modelsUI.CategoryByIdUi
 import com.example.vesta.domain.modelsUI.LinkUi
 import com.example.vesta.data.mapper.toUI
 import com.example.vesta.data.mapper.toUI
+import com.example.vesta.domain.modelsUI.DescriptionUi
 
 
 fun List<CategoryById>.toUI(): List<CategoryByIdUi> {
@@ -27,7 +28,7 @@ fun CategoryById.toUI(): CategoryByIdUi {
         categoryId = categoryId ?: 0,
         children = children?.map { it.toUI() }?: emptyList(),
         column = column ?: 0,
-        description = description?.map { it.toUI() } ?: emptyList(),
+        description = description?.toUI() ?:DescriptionUi.empty,
         image = image.orEmpty(),
         octImage = octImage.orEmpty(),
         parentId = parentId ?: 0,

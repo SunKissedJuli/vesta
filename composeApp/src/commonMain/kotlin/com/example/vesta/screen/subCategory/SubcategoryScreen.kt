@@ -116,13 +116,13 @@ class SubcategoryScreen(private val id: Int): Screen {
                         items(state.subcategoryList.children) { subcategory ->
                             SubcategorySquare(
                                 image = subcategory.image,
-                                name = subcategory.description[0].name,
+                                name = subcategory.description.name,
                                 onClick = { navigator.push(SubcategoryScreen(subcategory.categoryId)) }
                             )
                         }
 
                         //продукты
-                        items(state.productList, span = { GridItemSpan(2)}){ product->
+                        items(state.productList){ product->
                             ProductCard(
                                 product = product,
                                 onClick = {navigator.push(ProductScreen(product.productId))}

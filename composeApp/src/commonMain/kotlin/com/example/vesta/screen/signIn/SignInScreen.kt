@@ -152,7 +152,7 @@ class SignInScreen: Screen {
 
                 Box(Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 100.dp, start = 20.dp, end = 20.dp)
+                    .padding(bottom = 80.dp, start = 20.dp, end = 20.dp)
                     .align(Alignment.BottomCenter)){
                     Column(
                         verticalArrangement = Arrangement.Center,

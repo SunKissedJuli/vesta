@@ -12,3 +12,5 @@ class TokenResponse(
 class Token(
     @SerialName("plainTextToken")val plainTextToken: String?
 )
+
+

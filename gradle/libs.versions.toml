@@ -38,6 +38,9 @@ kotlin = "2.0.0"
 coil3 = "3.0.0-alpha08"
 googleAccompanistPager = "0.24.13-rc"
 yadnex-map = "4.4.0-lite"
+roomRuntimeAndroid = "2.7.0-alpha11"
+room = "2.7.0-alpha01"
+sqlite = "2.5.0-SNAPSHOT"
 
 [libraries]
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
@@ -90,6 +93,10 @@ russhwolf-settings = { group = "com.russhwolf", name = "multiplatform-settings-n
 yandex-maps = { module = "com.yandex.android:maps.mobile", version.ref = "yadnex-map"}
 google-accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "googleAccompanistPager" }
 accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "googleAccompanistPager" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-runtime-android = { module = "androidx.room:room-runtime-android", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 
 [plugins]
 libres = { id = "io.github.skeptick.libres", version.ref = "libres" }
@@ -101,3 +108,4 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit-plugin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "room" }

@@ -16,11 +16,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vesta.domain.modelsUI.OctStickerDataUi
 import com.example.vesta.domain.modelsUI.SpecialStickerDataUi
 import com.example.vesta.ext.rgbToColor
+import vestatrade.composeapp.generated.resources.Res
 
 @Composable
 fun ProductSticker(
@@ -29,7 +31,7 @@ fun ProductSticker(
     val colorScheme = MaterialTheme.colorScheme
     Box(
         Modifier
-            .height(22.dp)
+            .height(20.dp)
             .padding(start = 10.dp, top = 5.dp )
             .clip(RoundedCornerShape(50.dp))
             .wrapContentWidth()
@@ -46,6 +48,7 @@ fun ProductSticker(
                 color = sticker.textColor.rgbToColor(colorScheme),
                 fontSize = 10.sp,
                 softWrap = true,
+                fontWeight = FontWeight.Bold,
                 modifier = Modifier.align(Alignment.Center).padding(horizontal = 10.dp)
             )
         }

@@ -150,6 +150,9 @@ private fun provideKtorHttpClient(
         if(authManager.token!=null){
             context.headers["Authorization"] = authManager.token?.toToken()?:""
         }
+        else{
+            context.headers["Authorization"] = authManager.sessionId?.toToken()?:""
+        }
 
     }
     return ktorfit {
