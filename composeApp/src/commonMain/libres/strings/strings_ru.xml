@@ -93,9 +93,8 @@
     <string name="error_phone_is_unique_long">Такой номер телефона уже зарегистрирован.</string>
     <string name="error_phone_is_unique">Такой номер уже зарегистрирован.</string>
     <string name="error_error">Неизвестная ошибка</string>
-
-    <string name="in_card">В корзину</string>
-
+    <string name="in_cart">В корзину</string>
+    <string name="all_products">Все товары категории</string>
 
 
 </resources>

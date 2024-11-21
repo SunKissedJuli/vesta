@@ -137,7 +137,7 @@ fun ProductCardForMainScreen(
                     onClick = {},
                     fontSize = 12.sp,
                     modifier = Modifier.height(25.dp).padding(horizontal = 10.dp),
-                    text = VestaResourceStrings.in_card
+                    text = VestaResourceStrings.in_cart
                 )
             }
 

@@ -69,7 +69,7 @@ class CategoryScreen: Screen {
                 topBar = {
                     Box(
                         modifier = Modifier
-                            .fillMaxWidth().height(110.dp).background(Color.Transparent)
+                            .fillMaxWidth().height(105.dp).background(Color.Transparent)
                             .shadow(
                                 5.dp,
                                 shape = MaterialTheme.shapes.medium,
@@ -79,7 +79,7 @@ class CategoryScreen: Screen {
                     ) {
                         Column(Modifier
                             .fillMaxWidth()
-                            .height(105.dp)
+                            .height(100.dp)
                             .background(MaterialTheme.colorScheme.background)
                             .align(Alignment.TopCenter),
                             verticalArrangement = Arrangement.Center) {
@@ -87,7 +87,7 @@ class CategoryScreen: Screen {
                                 Modifier
                                     .fillMaxWidth()
                                     .height(35.dp)
-                                    .padding(top=10.dp)
+                                    .padding(top=5.dp)
                                     .background(MaterialTheme.colorScheme.background),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.Center

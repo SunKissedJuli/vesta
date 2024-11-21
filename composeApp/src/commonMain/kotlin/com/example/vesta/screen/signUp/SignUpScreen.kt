@@ -40,11 +40,13 @@ import com.example.vesta.commons.MaskVisualTransformation
 import com.example.vesta.components.CustomButton
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.CustomSplitClickableText
+import com.example.vesta.components.HeaderWithButtonBack
 import com.example.vesta.components.RoundedTextField
 import com.example.vesta.images.VestaResourceImages
 import com.example.vesta.screen.mainTab.MainTabScreen
 import com.example.vesta.screen.profile.ProfileEvent
 import com.example.vesta.screen.signIn.SignInScreen
+import com.example.vesta.screen.tabs.HomeTab
 import com.example.vesta.strings.VestaResourceStrings
 import io.github.skeptick.libres.compose.painterResource
 
@@ -69,45 +71,12 @@ class SignUpScreen: Screen {
 
         CustomScaffold(
             topBar = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth().height(51.dp).background(Color.Transparent)
-                        .shadow(
-                            5.dp,
-                            shape = MaterialTheme.shapes.medium,
-                            ambientColor = Color(0x1FF00000),
-                            clip = false,
-                        )
-                ) {
-                    Row(
-                        Modifier
-                            .align(Alignment.TopCenter)
-                            .fillMaxWidth()
-                            .height(46.dp)
-                            .background(MaterialTheme.colorScheme.background),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Spacer(modifier = Modifier.width(20.dp))
-                        IconButton(
-                            onClick = { navigator.pop() },
-                        ) {
-                            Icon(
-                                painter = painterResource(VestaResourceImages.button_back),
-                                contentDescription = "",
-                                modifier = Modifier.size(24.dp)
-                            )
-                        }
-                        Spacer(modifier = Modifier.weight(1f))
-                        Text(
-                            text = VestaResourceStrings.registration,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Medium,
-                            lineHeight = 19.5.sp
-                        )
-                        Spacer(modifier = Modifier.weight(1.2f))
-                        Spacer(modifier = Modifier.width(20.dp))
-                    }
-                }
+
+                HeaderWithButtonBack(
+                    onClick = { navigator.pop()},
+                    text = VestaResourceStrings.registration
+                )
+
             }
         ) {
             Box(Modifier.fillMaxSize()){

@@ -24,13 +24,18 @@ internal class SubcategoryViewModel: BaseScreenModel<SubcategoryState, Subcatego
                 reduceLocal {
                     state.copy(
                         subcategoryList = response.category,
-                        productList = response.products
-                        )
+                        productList = response.products,
+                        isProducts = response.category.children.isEmpty()
+                    )
                 }},
         )
     }
 
     fun setBottomBarVisible(visible: Boolean){
         bottomBarVisibleManager.setBottomBarVisibility(visible)
+    }
+
+    fun updateIsProduct(isProduct: Boolean) = blockingIntent{
+       reduce { state.copy(isProducts = isProduct) }
     }
 }

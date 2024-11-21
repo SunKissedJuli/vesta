@@ -51,6 +51,7 @@ import com.example.vesta.components.CustomButton
 import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.CustomSegmentedButton
+import com.example.vesta.components.HeaderOneWord
 import com.example.vesta.components.ProductCardForMainScreen
 import com.example.vesta.images.VestaResourceImages
 import com.example.vesta.platform.OpenPhone
@@ -84,34 +85,7 @@ class HomeScreen: Screen {
 
         CustomScaffold(
             topBar = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth().height(51.dp).background(Color.Transparent)
-                        .shadow(
-                            5.dp,
-                            shape = MaterialTheme.shapes.medium,
-                            ambientColor = Color(0x1FF00000),
-                            clip = false,
-                        )
-                ) {
-                    Row(
-                        Modifier
-                            .align(Alignment.TopCenter)
-                            .fillMaxWidth()
-                            .height(46.dp)
-                            .background(MaterialTheme.colorScheme.background),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-
-                        Text(
-                            text = VestaResourceStrings.home,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Medium,
-                            lineHeight = 19.5.sp
-                        )
-                    }
-                }
+                HeaderOneWord(VestaResourceStrings.home)
             }
         ) {
             if(viewModel.status.collectAsState().value && HomeState.InitState==state){

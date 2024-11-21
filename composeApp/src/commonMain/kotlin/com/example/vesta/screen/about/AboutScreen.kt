@@ -26,6 +26,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.components.CustomScaffold
+import com.example.vesta.components.HeaderOneWord
 import com.example.vesta.strings.VestaResourceStrings
 
 class AboutScreen: Screen {
@@ -40,34 +41,7 @@ class AboutScreen: Screen {
 
         CustomScaffold(
             topBar = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth().height(51.dp).background(Color.Transparent)
-                        .shadow(
-                            5.dp,
-                            shape = MaterialTheme.shapes.medium,
-                            ambientColor = Color(0x1FF00000),
-                            clip = false,
-                        )
-                ) {
-                    Row(
-                        Modifier
-                            .align(Alignment.TopCenter)
-                            .fillMaxWidth()
-                            .height(46.dp)
-                            .background(MaterialTheme.colorScheme.background),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-
-                        Text(
-                            text = VestaResourceStrings.about,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Medium,
-                            lineHeight = 19.5.sp
-                        )
-                    }
-                }
+                HeaderOneWord(VestaResourceStrings.about)
             }
         ) {
             if (viewModel.status.collectAsState().value && AboutState.InitState == state) {
