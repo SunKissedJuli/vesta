@@ -28,7 +28,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,7 +44,6 @@ import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.vesta.components.CustomAsyncImage
-import com.example.vesta.components.CustomButton
 import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.HeaderWithButtonBack
@@ -193,7 +191,7 @@ class SubcategoryScreen(private val id: Int): Screen {
                             items(state.subcategoryList.children) { subcategory ->
                                 SubcategoryCard(
                                     image = subcategory.image,
-                                    name = subcategory.description.name,
+                                    name = subcategory.name,
                                     onClick = { navigator.push(SubcategoryScreen(subcategory.categoryId)) }
                                 )
                             }
@@ -221,6 +219,7 @@ class SubcategoryScreen(private val id: Int): Screen {
                                             fontWeight = FontWeight.Medium,
                                             lineHeight = 19.5.sp
                                         )
+
                                     }
                                 }
                             }

@@ -1,13 +1,6 @@
 package com.example.vesta.data.models.info
 
-import com.example.vesta.data.mapper.toUI
-import com.example.vesta.data.models.CategoryById
-import com.example.vesta.data.models.Link
-import com.example.vesta.domain.modelsUI.CategoryByIdUi
-import com.example.vesta.domain.modelsUI.LinkUi
 import com.example.vesta.domain.modelsUI.info.ShopsUi
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
 fun ShopsResponse.toUI(): ShopsUi {
     return ShopsUi(

@@ -33,6 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vesta.data.models.product.ProductResponseUi
+import com.example.vesta.domain.modelsUI.ProductInCategoryUi
 import com.example.vesta.domain.modelsUI.ProductsDataResponseUi
 import com.example.vesta.images.VestaResourceImages
 import com.example.vesta.strings.VestaResourceStrings
@@ -151,7 +152,7 @@ fun NotUsableProductCard(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ProductCard(
-    product: ProductsDataResponseUi,
+    product: ProductInCategoryUi,
     onClick: ()-> Unit,
 ){
     Surface(
