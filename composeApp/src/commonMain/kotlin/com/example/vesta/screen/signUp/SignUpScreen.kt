@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -77,12 +79,38 @@ class SignUpScreen: Screen {
                     text = VestaResourceStrings.registration
                 )
 
+            },
+            bottomBar = {
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 80.dp, start = 20.dp, end = 20.dp)
+                ){
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ){
+                        CustomButton(
+                            onClick = { viewModel.isFilled(
+                                lastName = state.lastName,
+                                firstName = state.firstName
+                            ) },
+                            text = VestaResourceStrings.further
+                        )
+                        Spacer(Modifier.height(20.dp))
+                        CustomSplitClickableText(
+                            text = VestaResourceStrings.wanna_enter,
+                            onClick = {navigator.push(SignInScreen())}
+                        )
+                    }
+                }
             }
         ) {
             Box(Modifier.fillMaxSize()){
                 Column(
                     Modifier
                     .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
                     .background(MaterialTheme.colorScheme.background)
                     .padding(vertical = 20.dp, horizontal = 20.dp)) {
 
@@ -114,30 +142,6 @@ class SignUpScreen: Screen {
                         placeholder = VestaResourceStrings.patronymic,
                         errorMessage = state.errorPatronymic
                     )
-                }
-
-                Box(
-                    Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 80.dp, start = 20.dp, end = 20.dp)
-                    .align(Alignment.BottomCenter)){
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ){
-                        CustomButton(
-                            onClick = { viewModel.isFilled(
-                                lastName = state.lastName,
-                                firstName = state.firstName
-                            ) },
-                            text = VestaResourceStrings.further
-                        )
-                        Spacer(Modifier.height(20.dp))
-                        CustomSplitClickableText(
-                            text = VestaResourceStrings.wanna_enter,
-                            onClick = {navigator.push(SignInScreen())}
-                        )
-                    }
                 }
             }
         }

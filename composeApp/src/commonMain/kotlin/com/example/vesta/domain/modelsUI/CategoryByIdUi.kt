@@ -16,29 +16,15 @@ class CategoryByIdResponseUi(
 data class CategoryByIdUi(
     val categoryId: Int,
     val children: List<CategoryByIdUi>,
-  //  val column: Int,
-   // val description: DescriptionUi,
     val image: String,
     val name: String
-   // val octImage: String,
-  //  val parentId: Int,
-  //  val sortOrder: Int,
-  //  val status: Int,
-  //  val top: Int
 ){
     companion object{
         val empty = CategoryByIdUi(
             categoryId = 0,
             children = emptyList(),
-          //  column = 0,
-        //    description = DescriptionUi.empty,
             image = "",
             name = ""
-         //   octImage = "",
-          //  parentId = 0,
-          //  sortOrder = 0,
-          //  status = 0,
-          //  top = 0
         )
     }
 }

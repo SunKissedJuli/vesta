@@ -3,7 +3,7 @@ package com.example.vesta.data.models.info
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SityUi(
+data class CityUi(
     val storeId: Int,
     val name: String,
     val url: String,
@@ -11,7 +11,7 @@ data class SityUi(
     val phone: String
 ){
     companion object{
-        val empty = SityUi(
+        val empty = CityUi(
             storeId = 0,
             name = "",
             url = "",

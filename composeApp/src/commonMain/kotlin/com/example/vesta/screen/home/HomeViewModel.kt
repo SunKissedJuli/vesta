@@ -50,12 +50,12 @@ internal class HomeViewModel: BaseScreenModel<HomeState, Unit>(HomeState.InitSta
         )
         launchOperation(
             operation = {
-                infoRepository.getSites()
+                infoRepository.getCites()
             },
             success = { response ->
                 var phone: String = ""
                 for(item in response){
-                    if(item.storeId==manager.sity){
+                    if(item.storeId==manager.city){
                         phone = item.phone
                     }
                 }

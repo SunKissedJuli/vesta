@@ -12,7 +12,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxColors
 import androidx.compose.material3.Icon
@@ -59,7 +61,7 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
         LaunchedEffect(viewModel) {
             viewModel.container.sideEffectFlow.collect() {
                 when (it) {
-                    is SignUpEvent.UserRegistrationSucces -> {
+                    is SignUpEvent.UserRegistrationSuccess -> {
                         navigator.push(SplashScreen())
                     }
                     else -> {}
@@ -104,12 +106,45 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
                     onClick = { navigator.pop()},
                     text = VestaResourceStrings.registration
                 )
+            },
+            bottomBar = {
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 80.dp, start = 20.dp, end = 20.dp)
+                ){
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ){
+                        CustomButton(
+                            onClick = {viewModel.isFilledSecondScreen(
+                                firstName = state.firstName,
+                                lastName = state.lastName,
+                                middleName = state.patronymic,
+                                email = state.email,
+                                password = state.password,
+                                passwordConfirmation = state.passwordRepeat,
+                                agreeNews = state.agreeNews,
+                                agreePolitics = state.agreePolitics,
+                                phone = state.phone
+                            )},
+                            text = VestaResourceStrings.sign_up
+                        )
+                        Spacer(Modifier.height(25.dp))
+                        CustomSplitClickableText(
+                            text = VestaResourceStrings.wanna_enter,
+                            onClick = {navigator.push(SignInScreen())}
+                        )
+                    }
+                }
             }
         ) {
             Box(Modifier.fillMaxSize()){
                 Column(
                     Modifier
                         .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
                         .background(MaterialTheme.colorScheme.background)
                         .padding(vertical = 20.dp, horizontal = 20.dp)) {
 
@@ -200,36 +235,6 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
                                 modifier = Modifier.padding(start = 15.dp)
                             )
                         }
-                    }
-                }
-                Box(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 80.dp, start = 20.dp, end = 20.dp)
-                        .align(Alignment.BottomCenter)){
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ){
-                        CustomButton(
-                            onClick = {viewModel.isFilledSecondScreen(
-                                firstName = state.firstName,
-                                lastName = state.lastName,
-                                middleName = state.patronymic,
-                                email = state.email,
-                                password = state.password,
-                                passwordConfirmation = state.passwordRepeat,
-                                agreeNews = state.agreeNews,
-                                agreePolitics = state.agreePolitics,
-                                phone = state.phone
-                            )},
-                            text = VestaResourceStrings.sign_up
-                        )
-                        Spacer(Modifier.height(25.dp))
-                        CustomSplitClickableText(
-                            text = VestaResourceStrings.wanna_enter,
-                            onClick = {navigator.push(SignInScreen())}
-                        )
                     }
                 }
             }

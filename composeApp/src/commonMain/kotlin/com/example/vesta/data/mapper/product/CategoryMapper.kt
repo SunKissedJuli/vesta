@@ -1,9 +1,5 @@
 package com.example.vesta.data.models.product
 
-import com.example.vesta.commons.Constantas.BASE_IMAGE_URL
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerialName
-
 fun Category.toUI(): CategoryUi {
     return CategoryUi(
         category = this.category?.toUI()?: CategoryDetailsUi.empty,

@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -85,11 +87,33 @@ class SignInScreen: Screen {
                     },
                     text = VestaResourceStrings.authorize
                 )
+            },
+            bottomBar = {
+                Box(Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 80.dp, start = 20.dp, end = 20.dp)
+                ){
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ){
+                        CustomButton(
+                            onClick = {viewModel.authorize(state.email, state.password, navigator)},
+                            text = VestaResourceStrings.sign_in
+                        )
+                        Spacer(Modifier.height(25.dp))
+                        CustomSplitClickableText(
+                            text = VestaResourceStrings.wanna_registration,
+                            onClick = {navigator.push(SignUpScreen())}
+                        )
+                    }
+                }
             }
         ) {
             Box(Modifier.fillMaxSize()){
                 Column(Modifier
                     .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
                     .background(MaterialTheme.colorScheme.background)
                     .padding(vertical = 20.dp, horizontal = 20.dp)) {
 
@@ -109,32 +133,13 @@ class SignInScreen: Screen {
                     )
                     Text(
                         text = VestaResourceStrings.forgot_password,
+
                         color =  MaterialTheme.colorScheme.primary,
                         style = TextStyle(textDecoration = TextDecoration.Underline),
                         letterSpacing = 0.5.sp,
                         lineHeight = 14.63.sp,
-                        modifier = Modifier.padding(start = 20.dp, top = 15.dp).clickable{navigator.replaceAll(MainTabScreen())}
+                        modifier = Modifier.padding(start = 20.dp, top = 15.dp).clickable{}
                     )
-                }
-
-                Box(Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 80.dp, start = 20.dp, end = 20.dp)
-                    .align(Alignment.BottomCenter)){
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ){
-                        CustomButton(
-                            onClick = {viewModel.autorize(state.email, state.password, navigator)},
-                            text = VestaResourceStrings.sign_in
-                        )
-                        Spacer(Modifier.height(25.dp))
-                        CustomSplitClickableText(
-                            text = VestaResourceStrings.wanna_registration,
-                            onClick = {navigator.push(SignUpScreen())}
-                        )
-                    }
                 }
             }
         }

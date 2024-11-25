@@ -1,4 +1,4 @@
-package com.example.vesta.data.models
+package com.example.vesta.data.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-class SityResponse(
+class CityResponse(
     @SerialName("store_id") val storeId: Int?,
     @SerialName("name") val name: String?,
     @SerialName("url") val url: String?,

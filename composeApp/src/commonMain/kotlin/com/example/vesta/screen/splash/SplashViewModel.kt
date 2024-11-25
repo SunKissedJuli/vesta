@@ -14,10 +14,10 @@ internal class SplashViewModel: BaseScreenModel<Unit, SplashEvent>(Unit) {
     private val observerManager: ObserverManager by inject()
     fun isAutorize() = intent{
         if(manager.token.isNullOrEmpty()){
-            postSideEffect(SplashEvent.UserNotAutorize)
+            postSideEffect(SplashEvent.UserNotAuthorize)
         }
         else{
-            postSideEffectLocal(SplashEvent.UserAutorize)
+            postSideEffectLocal(SplashEvent.UserAuthorize)
         }
     }
 

@@ -1,7 +1,7 @@
 package com.example.vesta.data.models.info
 
-fun SityResponse.toUI(): SityUi {
-    return SityUi(
+fun CityResponse.toUI(): CityUi {
+    return CityUi(
         storeId = storeId?:0,
         name = name.orEmpty(),
         url = url.orEmpty(),
@@ -10,7 +10,7 @@ fun SityResponse.toUI(): SityUi {
     )
 }
 
-fun List<SityResponse>.toUI(): List<SityUi> {
+fun List<CityResponse>.toUI(): List<CityUi> {
     return map { it.toUI() }
 }
 

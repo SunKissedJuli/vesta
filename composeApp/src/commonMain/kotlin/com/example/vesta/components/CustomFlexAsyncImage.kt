@@ -18,8 +18,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.LocalPlatformContext
 import coil3.compose.SubcomposeAsyncImage
-import coil3.request.ImageRequest
-import com.example.vesta.platform.CompressedAsyncImage
 
 
 @Composable

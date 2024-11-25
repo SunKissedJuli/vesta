@@ -33,8 +33,6 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.domain.manager.ObserverManager
-import com.example.vesta.platform.BackHandlerPlatform
-import com.example.vesta.platform.doOnFailure
 import com.example.vesta.screen.tabs.CartTab
 import com.example.vesta.screen.tabs.CatalogTab
 import com.example.vesta.screen.tabs.HomeTab
@@ -44,7 +42,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class MainTabScreen(): Screen, KoinComponent {
+class MainTabScreen: Screen, KoinComponent {
 
     @Composable
     override fun Content() {
@@ -72,21 +70,6 @@ class MainTabScreen(): Screen, KoinComponent {
                 }
             }
 
-            BackHandlerPlatform { navigator, rootNavigator, exitApp ->
-                when {
-                    rootNavigator.canPop -> {
-                        rootNavigator.pop()
-                    }
-                    navigator.canPop -> {
-                         navigator.pop()
-                    }
-                    else -> {
-                         observerManager.popTab().doOnFailure {
-                            exitApp()
-                        }
-                    }
-                }
-            }
             CustomScaffold(
 
                 bottomBar = {
@@ -102,9 +85,11 @@ class MainTabScreen(): Screen, KoinComponent {
                             ) {
                                 NavigationBar(
                                     modifier = Modifier.height(72.dp).fillMaxWidth()
-                                        .align(Alignment.BottomStart),
+                                        .align(Alignment.BottomStart)
+                                    ,
                                     containerColor = MaterialTheme.colorScheme.background,
-                                    contentColor = MaterialTheme.colorScheme.onSecondary
+                                    contentColor = MaterialTheme.colorScheme.onSecondary,
+                                    tonalElevation = 5.dp
                                 ) {
                                     TabNavItem(HomeTab)
                                     TabNavItem(CatalogTab)

@@ -159,94 +159,99 @@ fun ProductCard(
         Modifier
             .fillMaxWidth()
             .height(270.dp)
-            .padding(start = 5.dp, end = 5.dp, top = 5.dp, bottom = 5.dp),
+            .padding(5.dp),
         shape = RoundedCornerShape(15.dp),
         shadowElevation = 5.dp) {
 
-        Column(
-            Modifier
-                .fillMaxSize()
+        CustomScaffold(
+            modifier =   Modifier.fillMaxSize()
                 .clip(RoundedCornerShape(15.dp))
                 .background(MaterialTheme.colorScheme.background)
                 .clickable(onClick = onClick),
-            verticalArrangement = Arrangement.Center) {
-            FlowRow(
-                modifier = Modifier.fillMaxWidth()) {
-                for (sticker in product.octStickers.specialStickerData) {
-                    ProductSticker(sticker)
+            topBar = {
+                FlowRow(
+                    modifier = Modifier.fillMaxWidth(),) {
+                    for (sticker in product.octStickers.specialStickerData) {
+                        ProductSticker(sticker)
+                    }
+                }
+            },
+            bottomBar = {
+                Column {
+                    CustomButton(
+                        onClick = {},
+                        fontSize = 12.sp,
+                        modifier = Modifier.height(25.dp).padding(horizontal = 10.dp),
+                        text = VestaResourceStrings.in_cart
+                    )
+                    Spacer(Modifier.height(10.dp))
                 }
             }
+        ){
 
-            Box(Modifier.fillMaxWidth().weight(1f).padding(vertical = 10.dp, horizontal = 5.dp)){
+            Column {
+                Box(Modifier.fillMaxWidth().weight(1f).padding(vertical = 10.dp, horizontal = 5.dp)){
 
-                CustomAsyncImage(product.image, modifier = Modifier.fillMaxSize())
+                    CustomAsyncImage(product.image, modifier = Modifier.fillMaxSize())
 
-                Column(Modifier.fillMaxHeight().align(Alignment.CenterEnd).padding(horizontal = 15.dp),
-                    verticalArrangement = Arrangement.SpaceBetween) {
-                    IconButton(
-                        onClick = {},
-                        Modifier.size(30.dp)
-                    ) {
-                        if(Random.nextBoolean()){
-                            Icon(
-                                painter = painterResource(VestaResourceImages.icon_fav_clicked),
-                                contentDescription = "",
-                                modifier = Modifier.size(20.dp),
-                                tint = MaterialTheme.colorScheme.primary
-                            )
+                    Column(Modifier.fillMaxHeight().align(Alignment.CenterEnd).padding(horizontal = 15.dp),
+                        verticalArrangement = Arrangement.SpaceBetween) {
+                        IconButton(
+                            onClick = {},
+                            Modifier.size(30.dp)
+                        ) {
+                            if(Random.nextBoolean()){
+                                Icon(
+                                    painter = painterResource(VestaResourceImages.icon_fav_clicked),
+                                    contentDescription = "",
+                                    modifier = Modifier.size(20.dp),
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                            else{
+                                Icon(
+                                    painter = painterResource(VestaResourceImages.icon_fav),
+                                    contentDescription = "",
+                                    modifier = Modifier.size(20.dp),
+                                    tint = MaterialTheme.colorScheme.onSecondary
+                                )
+                            }
                         }
-                        else{
+
+                        IconButton(
+                            onClick = {},
+                            Modifier.size(30.dp)
+                        ) {
                             Icon(
-                                painter = painterResource(VestaResourceImages.icon_fav),
+                                painterResource(VestaResourceImages.icon_statistic),
                                 contentDescription = "",
-                                modifier = Modifier.size(20.dp),
-                                tint = MaterialTheme.colorScheme.onSecondary
+                                Modifier.size(20.dp)
                             )
                         }
                     }
+                }
 
-                    IconButton(
-                        onClick = {},
-                        Modifier.size(30.dp)
-                    ) {
-                        Icon(
-                            painterResource(VestaResourceImages.icon_statistic),
-                            contentDescription = "",
-                            Modifier.size(20.dp)
-                        )
-                    }
+                Column(Modifier.weight(1f),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = product.nameKorr,
+                        fontSize = 12.sp,
+                        softWrap = true,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(horizontal = 10.dp),
+                        maxLines = 3
+                    )
+
+                    Text(
+                        text = "${product.price} ${VestaResourceStrings.rub}",
+                        fontSize = 12.sp,
+                        textAlign = TextAlign.Center,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(vertical = 7.dp),
+                    )
                 }
             }
-            Spacer(Modifier.width(10.dp))
-
-            Column(Modifier.weight(1.5f),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = product.nameKorr,
-                    fontSize = 12.sp,
-                    softWrap = true,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(horizontal = 10.dp),
-                    maxLines = 3)
-
-                Text(
-                    text = "${product.price} ${VestaResourceStrings.rub}",
-                    fontSize = 12.sp,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(vertical = 7.dp),
-                )
-
-                Spacer(Modifier.height(5.dp))
-
-                CustomButton(
-                    onClick = {},
-                    fontSize = 12.sp,
-                    modifier = Modifier.height(25.dp).padding(horizontal = 10.dp),
-                    text = VestaResourceStrings.in_cart
-                )
-            }
-
         }
     }
 }

@@ -32,7 +32,7 @@ class SplashScreen : Screen {
         LaunchedEffect(viewModel) {
             viewModel.container.sideEffectFlow.collect() {
                 when (it) {
-                    is SplashEvent.UserAutorize -> {
+                    is SplashEvent.UserAuthorize -> {
                         viewModel.updateBottomBarVisible(true)
                         if(!viewModel.isTabNavigator()){
                             viewModel.updateIsTabNavigator(true)
@@ -42,7 +42,7 @@ class SplashScreen : Screen {
                             navigator.push(HomeScreen())
                         }
                     }
-                    is SplashEvent.UserNotAutorize ->{
+                    is SplashEvent.UserNotAuthorize ->{
                         navigator.push(WelcomeScreen())
                     }
                 }

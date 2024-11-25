@@ -34,8 +34,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -50,14 +48,13 @@ import com.example.vesta.components.CustomAsyncImage
 import com.example.vesta.components.CustomButton
 import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.components.CustomScaffold
-import com.example.vesta.components.CustomSegmentedButton
 import com.example.vesta.components.HeaderOneWord
 import com.example.vesta.components.ProductCardForMainScreen
 import com.example.vesta.images.VestaResourceImages
 import com.example.vesta.platform.OpenPhone
 import com.example.vesta.screen.product.ProductScreen
-import com.example.vesta.screen.sity.SityScreen
-import com.example.vesta.screen.sity.SityViewModel
+import com.example.vesta.screen.city.CityScreen
+import com.example.vesta.screen.city.CityViewModel
 import com.example.vesta.screen.tabs.HomeTab
 import com.example.vesta.strings.VestaResourceStrings
 import io.github.skeptick.libres.compose.painterResource
@@ -68,7 +65,7 @@ class HomeScreen: Screen {
     override fun Content() {
 
         val viewModel = rememberScreenModel { HomeViewModel() }
-        val sityViewModel = rememberScreenModel { SityViewModel() }
+        val cityViewModel = rememberScreenModel { CityViewModel() }
         val state by viewModel.stateFlow.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
         val tabNavigator = LocalTabNavigator.current
@@ -96,7 +93,7 @@ class HomeScreen: Screen {
                     OpenPhone(state.phone)
                 }
                 if(state.isOpenSity){
-                    SityScreen(sityViewModel) { viewModel.openSity() }
+                    CityScreen(cityViewModel) { viewModel.openSity() }
                 }
 
                 Box(Modifier.fillMaxSize()) {
@@ -111,14 +108,10 @@ class HomeScreen: Screen {
                             Row(Modifier.fillMaxWidth().padding(bottom = 10.dp, start = 5.dp, end = 5.dp),
                                 horizontalArrangement = Arrangement.Center){
 
-//                                CustomSegmentedButton(
-//                                    options = state.pages,
-//                                    selectedIndex = state.selectedPage,
-//                                    onChangeIndex = {viewModel.updatePage(it)}
-//                                )
                                 SingleChoiceSegmentedButtonRow {
                                     state.pages.forEachIndexed { index, choice ->
                                         SegmentedButton(
+                                            icon = {},
                                             selected = state.selectedPage == index,
                                             onClick = {viewModel.updatePage(index) },
                                             colors = SegmentedButtonDefaults.colors(
@@ -243,36 +236,41 @@ private fun NewsItem(
         shape = RoundedCornerShape(15.dp),
         shadowElevation = 5.dp) {
 
-        Column(
+        Box(
             Modifier
                 .fillMaxSize()
-                .padding(10.dp)
                 .clip(RoundedCornerShape(15.dp))
                 .background(MaterialTheme.colorScheme.background)
                 .clickable(onClick = onClick),
-            verticalArrangement = Arrangement.Center) {
+        ){
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .padding(10.dp),
+                verticalArrangement = Arrangement.Center) {
 
-            CustomAsyncImage(
-                image = icon,
-                modifier = Modifier
-                    .height(150.dp)
-                    .fillMaxWidth(),
-                contentScale = ContentScale.FillHeight
-            )
-            Spacer(Modifier.height(10.dp))
-            Text(
-                text = name,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Medium,
-                maxLines = 2
-            )
-            Spacer(Modifier.height(10.dp))
-            CustomButton(
-                onClick = onClick,
-                text = VestaResourceStrings.more,
-                fontSize = 12.sp,
-                modifier = Modifier.height(25.dp)
-            )
+                CustomAsyncImage(
+                    image = icon,
+                    modifier = Modifier
+                        .height(150.dp)
+                        .fillMaxWidth(),
+                    contentScale = ContentScale.FillHeight
+                )
+                Spacer(Modifier.height(10.dp))
+                Text(
+                    text = name,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Medium,
+                    maxLines = 2
+                )
+                Spacer(Modifier.height(10.dp))
+                CustomButton(
+                    onClick = onClick,
+                    text = VestaResourceStrings.more,
+                    fontSize = 12.sp,
+                    modifier = Modifier.height(25.dp)
+                )
+            }
         }
     }
 }

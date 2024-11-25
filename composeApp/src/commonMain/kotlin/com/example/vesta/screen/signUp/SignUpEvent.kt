@@ -4,6 +4,6 @@ sealed class SignUpEvent {
 
     object UserEnteredValidData: SignUpEvent()
 
-    object UserRegistrationSucces: SignUpEvent()
+    object UserRegistrationSuccess: SignUpEvent()
 
 }

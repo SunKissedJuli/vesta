@@ -138,7 +138,7 @@ internal class SignUpViewModel: BaseScreenModel<SignUpState, SignUpEvent>(SignUp
                     lastName = lastName,
                     middleName = middleName,
                     telephone = phone.formatPhone(),
-                    storeId = authManager.sity,
+                    storeId = authManager.city,
                     newsletter = if(agreeNews) 1 else 0,
             ))
         }
@@ -152,7 +152,7 @@ internal class SignUpViewModel: BaseScreenModel<SignUpState, SignUpEvent>(SignUp
             success = { response ->
                 authManager.token = response.plainTextToken
                if(!authManager.token.isNullOrEmpty()){
-                    postSideEffectLocal(SignUpEvent.UserRegistrationSucces)
+                    postSideEffectLocal(SignUpEvent.UserRegistrationSuccess)
                 }
             },
             failure = { failure ->

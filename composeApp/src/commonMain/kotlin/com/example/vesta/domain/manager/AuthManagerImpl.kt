@@ -21,17 +21,17 @@ class AuthManagerImpl: AuthManager, KoinComponent {
             settings.putString(SESSION_ID, value.orEmpty())
         }
 
-    override var sity: Int?
+    override var city: Int?
         get() {
-            return if (settings.contains(SITY)) settings.getInt(SITY, 0) else 0
+            return if (settings.contains(CITY)) settings.getInt(CITY, 0) else 0
         }
         set(value) {
-            settings.putInt(SITY, value ?: 0)
+            settings.putInt(CITY, value ?: 0)
         }
 
     companion object{
         private const val TOKEN = "TOKEN"
         private const val SESSION_ID = "SESSION_ID"
-        private const val SITY = "SITY"
+        private const val CITY = "CITY"
     }
 }

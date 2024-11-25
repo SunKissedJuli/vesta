@@ -1,6 +1,5 @@
 package com.example.vesta.screen.newsDetails
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -12,7 +11,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -22,10 +20,6 @@ import com.example.vesta.components.CustomAsyncImage
 import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.HeaderOneWord
-import com.example.vesta.platform.OpenPhone
-import com.example.vesta.screen.sity.SityScreen
-import com.example.vesta.screen.sity.SityViewModel
-import com.example.vesta.screen.tabs.HomeTab
 import com.example.vesta.strings.VestaResourceStrings
 
 

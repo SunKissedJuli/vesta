@@ -2,8 +2,8 @@ package com.example.vesta.screen.splash
 
 sealed class SplashEvent {
 
-    object UserAutorize: SplashEvent()
+    object UserAuthorize: SplashEvent()
 
-    object UserNotAutorize: SplashEvent()
+    object UserNotAuthorize: SplashEvent()
 
 }

@@ -30,15 +30,8 @@ fun CategoryById.toUI(): CategoryByIdUi {
     return CategoryByIdUi(
         categoryId = categoryId ?: 0,
         children = children?.map { it.toUI() }?: emptyList(),
-     //   column = column ?: 0,
-      //  description = description?.toUI() ?:DescriptionUi.empty,
         image = image.orEmpty(),
         name = name.orEmpty()
-     //   octImage = octImage.orEmpty(),
-      //  parentId = parentId ?: 0,
-     //   sortOrder = sortOrder ?: 0,
-      //  status = status ?: 0,
-     //   top = top ?: 0
     )
 }
 

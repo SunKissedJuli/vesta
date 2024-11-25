@@ -2,14 +2,11 @@ package com.example.vesta.screen.signIn
 
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import com.example.vesta.data.models.info.SityUi
 import com.example.vesta.domain.manager.AuthManager
 import com.example.vesta.domain.manager.ObserverManager
-import com.example.vesta.domain.repository.InfoRepository
 import com.example.vesta.domain.repository.UserRepository
 import com.example.vesta.ext.isValidEmail
 import com.example.vesta.platform.BaseScreenModel
-import com.example.vesta.screen.profile.ProfileScreen
 import com.example.vesta.screen.splash.SplashScreen
 import com.example.vesta.strings.VestaResourceStrings
 import org.koin.core.component.inject
@@ -31,7 +28,7 @@ internal class SignInViewModel:BaseScreenModel<SignInState, Unit>(SignInState.In
         reduce { state.copy(email = newEmail) }
     }
 
-    fun autorize(login: String, password: String, navigator: Navigator) = intent {
+    fun authorize(login: String, password: String, navigator: Navigator) = intent {
 
         if(login.isEmpty()|| password.isEmpty()) {
             reduce {
@@ -51,7 +48,7 @@ internal class SignInViewModel:BaseScreenModel<SignInState, Unit>(SignInState.In
         else{
             launchOperation(
                 operation = {
-                    userRepository.autirize(login, password)
+                    userRepository.authorize(login, password)
                 },
                 success = { response ->
                     authManager.token = response.plainTextToken

@@ -1,7 +1,6 @@
 package com.example.vesta.screen.cart
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,9 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -36,7 +32,6 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.images.VestaResourceImages
-import com.example.vesta.screen.tabs.HomeTab
 import com.example.vesta.strings.VestaResourceStrings
 import io.github.skeptick.libres.compose.painterResource
 
@@ -89,7 +84,7 @@ class CartScreen: Screen {
                             onClick = {},
                         ) {
                             Icon(
-                                Icons.Outlined.MoreVert,
+                               painterResource(VestaResourceImages.icon_more),
                                 contentDescription = "",
                                 modifier = Modifier.size(24.dp)
                             )

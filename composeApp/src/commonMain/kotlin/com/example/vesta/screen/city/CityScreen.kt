@@ -1,4 +1,4 @@
-package com.example.vesta.screen.sity
+package com.example.vesta.screen.city
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -26,8 +26,8 @@ import com.example.vesta.strings.VestaResourceStrings
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun SityScreen(
-    viewModel: SityViewModel,
+internal fun CityScreen(
+    viewModel: CityViewModel,
     onDismissRequest: ()-> Unit) {
     val state by viewModel.stateFlow.collectAsState()
 
@@ -35,7 +35,7 @@ internal fun SityScreen(
         viewModel.loadData()
     }
 
-    if(state!=SityState.InitState) {
+    if(state!=CityState.InitState) {
 
         BasicAlertDialog(
             onDismissRequest = onDismissRequest,
@@ -72,7 +72,7 @@ internal fun SityScreen(
                         .padding(30.dp)
                 ) {
                     CustomDropdownMenu(
-                        items = state.sities,
+                        items = state.cities,
                         selectedItem = viewModel.getChoosenSity(),
                         onChange = { viewModel.updateChoosenSity(it) })
                 }

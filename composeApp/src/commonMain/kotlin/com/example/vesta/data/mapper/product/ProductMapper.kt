@@ -1,15 +1,8 @@
 package com.example.vesta.data.models.product
 
-import com.example.vesta.commons.Constantas.BASE_IMAGE_URL
 import com.example.vesta.data.mapper.product.toUI
 import com.example.vesta.data.mapper.toUI
-import com.example.vesta.data.models.CategoryById
-import com.example.vesta.data.models.OctStickers
-import com.example.vesta.domain.modelsUI.CategoryByIdUi
 import com.example.vesta.domain.modelsUI.OctStickersUi
-
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerialName
 
 fun List<ProductResponse>.toUI(): List<ProductResponseUi> {
     return map { it.toUI() }

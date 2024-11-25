@@ -19,28 +19,28 @@ class ProductRepositoryImpl(private val vestaApi: VestaApi, private val manager:
 
     override suspend fun getAllCategory(): Either<Failure, List<CategoryUi>> {
         return apiCall (call = {
-            vestaApi.getAllCategory(sity = manager.sity?:0)
+            vestaApi.getAllCategory(city = manager.city?:0)
         },
             mapResponse = { category -> category.toUI() })
     }
 
     override suspend fun getCategoryById(categoryId: Int, limit: Int, page: Int): Either<Failure, CategoryByIdResponseUi> {
         return apiCall (call = {
-            vestaApi.getCategoryById(categoryId, limit, page, sity = manager.sity?:0)
+            vestaApi.getCategoryById(categoryId, limit, page, city = manager.city?:0)
         },
         mapResponse = { category -> category.toUI() })
     }
 
     override suspend fun getProduct(productId: Int): Either<Failure, ProductResponseUi> {
         return apiCall (call = {
-            vestaApi.getProduct(productId, sity = manager.sity?:0)
+            vestaApi.getProduct(productId, city = manager.city?:0)
         },
             mapResponse = { product -> product.toUI() })
     }
 
     override suspend fun getFeaturedProducts(): Either<Failure, List<ProductResponseUi>> {
         return apiCall (call = {
-            vestaApi.getFeaturedProducts(sity = manager.sity?:0)
+            vestaApi.getFeaturedProducts(city = manager.city?:0)
         },
             mapResponse = { product -> product.toUI() })
     }

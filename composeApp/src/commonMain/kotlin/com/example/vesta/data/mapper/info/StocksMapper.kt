@@ -1,7 +1,5 @@
 package com.example.vesta.data.mapper.info
 
-import com.example.vesta.data.models.info.SityResponse
-import com.example.vesta.data.models.info.SityUi
 import com.example.vesta.data.models.info.StocksResponse
 import com.example.vesta.domain.modelsUI.info.StocksUi
 

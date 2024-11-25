@@ -2,7 +2,7 @@ package com.example.vesta.data.localDb
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.vesta.data.models.LocalWishlist
+import com.example.vesta.data.entity.LocalWishlist
 import com.example.vesta.domain.repository.LocalWishlistDao
 
 
