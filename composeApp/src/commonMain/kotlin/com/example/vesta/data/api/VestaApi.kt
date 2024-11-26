@@ -2,6 +2,7 @@ package com.example.vesta.data.api
 
 import com.example.vesta.data.models.CategoryByIdResponse
 import com.example.vesta.data.models.CategoryResponse
+import com.example.vesta.data.models.blog.BlogByIdResponse
 import com.example.vesta.data.models.info.CityResponse
 import com.example.vesta.data.models.info.MainBlogResponse
 import com.example.vesta.data.models.info.NewsResponse
@@ -22,7 +23,6 @@ import de.jensklingenberg.ktorfit.http.Query
 interface VestaApi {
 
     //категории и продукты
-
     @GET("api/getCategoryToStore")
     suspend fun getAllCategory(@Query("sity") city: Int = 0): List<CategoryResponse>
 
@@ -66,6 +66,9 @@ interface VestaApi {
     @GET("api/getStocks") //акции
     suspend fun getStocks(@Query("sity") city: Int = 0): List<StocksResponse>
 
+    @GET("api/getBlogId/{id}")
+    suspend fun getBlogById( @Path("id") id: Int, @Query("sity") city: Int = 0): BlogByIdResponse
+
     //юзер
     @POST("api/user/login")
     suspend fun authorize(
@@ -81,6 +84,9 @@ interface VestaApi {
 
     @POST("api/user/logout")
     suspend fun logOut(): Unit
+
+    @POST("api/user/getToken")
+    suspend fun registrationNullableUser(): TokenResponse
 
     @POST("api/user/editProfile")
     suspend fun editUser(  @Body user: UserUpdate): Unit

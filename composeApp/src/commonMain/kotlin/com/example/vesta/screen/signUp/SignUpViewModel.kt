@@ -8,6 +8,7 @@ import com.example.vesta.domain.repository.UserRepository
 import com.example.vesta.ext.formatPhone
 import com.example.vesta.ext.isValidEmail
 import com.example.vesta.platform.BaseScreenModel
+import com.example.vesta.screen.splash.SplashScreen
 import com.example.vesta.strings.VestaResourceStrings
 import org.koin.core.component.inject
 import org.orbitmvi.orbit.syntax.simple.blockingIntent
@@ -150,10 +151,11 @@ internal class SignUpViewModel: BaseScreenModel<SignUpState, SignUpEvent>(SignUp
                 userRepository.registration(newUser)
             },
             success = { response ->
-                authManager.token = response.plainTextToken
-               if(!authManager.token.isNullOrEmpty()){
-                    postSideEffectLocal(SignUpEvent.UserRegistrationSuccess)
-                }
+                logoutNullableUser(response.plainTextToken)
+//                authManager.token = response.plainTextToken
+//               if(!authManager.token.isNullOrEmpty()){
+//                    postSideEffectLocal(SignUpEvent.UserRegistrationSuccess)
+//                }
             },
             failure = { failure ->
                 when(failure.message){
@@ -163,6 +165,20 @@ internal class SignUpViewModel: BaseScreenModel<SignUpState, SignUpEvent>(SignUp
                     VestaResourceStrings.error_email_is_unique -> {
                         reduceLocal { state.copy(errorEmail = VestaResourceStrings.error_email_is_unique) }
                     }
+                }
+            }
+        )
+    }
+
+    private fun logoutNullableUser(newToken: String) = intent {
+        launchOperation(
+            operation = {
+                userRepository.logOut()
+            },
+            success = {
+                authManager.token = newToken
+                if(!authManager.token.isNullOrEmpty()){
+                    postSideEffectLocal(SignUpEvent.UserRegistrationSuccess)
                 }
             }
         )

@@ -48,6 +48,18 @@ internal class ProfileViewModel: BaseScreenModel<ProfileState, ProfileEvent>(Pro
             },
             success = {
                 authManager.token = ""
+                registrationNullableUser()
+            }
+        )
+    }
+
+    private fun registrationNullableUser() = intent{
+        launchOperation(
+            operation = {
+                userRepository.registrationNullableUser()
+            },
+            success = { response ->
+                authManager.sessionId = response.plainTextToken
                 postSideEffectLocal(ProfileEvent.UserLogOut)
             }
         )

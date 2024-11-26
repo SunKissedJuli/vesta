@@ -45,4 +45,11 @@ class UserRepositoryImpl(private val vestaApi: VestaApi) : UserRepository {
         },
             mapResponse = {token -> token.toUI()})
     }
+
+    override suspend fun registrationNullableUser(): Either<Failure, TokenUi> {
+        return apiCall (call = {
+            vestaApi.registrationNullableUser()
+        },
+            mapResponse = {token -> token.toUI()})
+    }
 }

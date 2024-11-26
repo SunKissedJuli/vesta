@@ -1,10 +1,12 @@
 package com.example.vesta.data.repositoryImpl
 
 import com.example.vesta.data.api.VestaApi
+import com.example.vesta.data.mapper.blog.toUI
 import com.example.vesta.data.mapper.info.toUI
 import com.example.vesta.data.models.info.CityUi
 import com.example.vesta.data.models.info.toUI
 import com.example.vesta.domain.manager.AuthManager
+import com.example.vesta.domain.modelsUI.blog.BlogByIdUi
 import com.example.vesta.domain.modelsUI.info.MainBlogUi
 import com.example.vesta.domain.modelsUI.info.NewsUi
 import com.example.vesta.domain.modelsUI.info.ShopsUi
@@ -48,6 +50,16 @@ class InfoRepositoryImpl(private val vestaApi: VestaApi, private val manager: Au
             vestaApi.getMainBlogs(manager.city?:0)
         },
             mapResponse = { blogs -> blogs.toUI() })
+    }
+
+    override suspend fun getBlogById(id: Int): Either<Failure, BlogByIdUi> {
+        return apiCall (call = {
+            vestaApi.getBlogById(
+                id = id,
+                city = manager.city?:0
+            )
+        },
+            mapResponse = { blog -> blog.toUI() })
     }
 
 }

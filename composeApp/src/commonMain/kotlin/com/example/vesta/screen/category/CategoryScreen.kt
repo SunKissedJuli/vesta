@@ -42,7 +42,6 @@ import com.example.vesta.components.SearchTextField
 import com.example.vesta.ext.clickableBlank
 import com.example.vesta.screen.subCategory.SubcategoryScreen
 import com.example.vesta.strings.VestaResourceStrings
-import kotlin.math.PI
 
 class CategoryScreen: Screen {
     @Composable

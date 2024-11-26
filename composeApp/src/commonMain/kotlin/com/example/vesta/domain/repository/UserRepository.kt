@@ -19,4 +19,6 @@ interface UserRepository {
 
     suspend fun registration(user: NewUser) : Either<Failure, TokenUi>
 
+    suspend fun registrationNullableUser() : Either<Failure, TokenUi>
+
 }

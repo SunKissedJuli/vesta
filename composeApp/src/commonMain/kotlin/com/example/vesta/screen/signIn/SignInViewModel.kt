@@ -51,9 +51,10 @@ internal class SignInViewModel:BaseScreenModel<SignInState, Unit>(SignInState.In
                     userRepository.authorize(login, password)
                 },
                 success = { response ->
-                    authManager.token = response.plainTextToken
-                    setBottomBarVisible(true)
-                    navigator.push(SplashScreen())
+                    logoutNullableUser(response.plainTextToken, navigator)
+//                    authManager.token = response.plainTextToken
+//                    setBottomBarVisible(true)
+//                    navigator.push(SplashScreen())
                 },
                 failure = { failure ->
                     when(failure.message){
@@ -90,5 +91,18 @@ internal class SignInViewModel:BaseScreenModel<SignInState, Unit>(SignInState.In
 
     fun isTabNavigator() : Boolean{
         return bottomBarVisibleManager.isTabNavigator()
+    }
+
+    private fun logoutNullableUser(newToken: String, navigator: Navigator) = intent {
+        launchOperation(
+            operation = {
+                userRepository.logOut()
+            },
+            success = {
+                authManager.token = newToken
+                setBottomBarVisible(true)
+                navigator.push(SplashScreen())
+            }
+        )
     }
 }

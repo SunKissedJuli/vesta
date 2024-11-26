@@ -49,12 +49,13 @@ import com.example.vesta.components.CustomButton
 import com.example.vesta.components.CustomCircularProgressIndicator
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.HeaderOneWord
-import com.example.vesta.components.ProductCardForMainScreen
+import com.example.vesta.components.ProductCard
 import com.example.vesta.images.VestaResourceImages
 import com.example.vesta.platform.OpenPhone
 import com.example.vesta.screen.product.ProductScreen
 import com.example.vesta.screen.city.CityScreen
 import com.example.vesta.screen.city.CityViewModel
+import com.example.vesta.screen.newsDetails.NewsDetailsScreen
 import com.example.vesta.screen.tabs.HomeTab
 import com.example.vesta.strings.VestaResourceStrings
 import io.github.skeptick.libres.compose.painterResource
@@ -138,17 +139,22 @@ class HomeScreen: Screen {
                             0 -> {
                                 //блок с актуальными продуктами
                                 items(state.productList, key = {it.hashCode()}){ product ->
-                                    ProductCardForMainScreen(product,
-                                        onClick = {navigator.push(ProductScreen(product.productId))})
+                                    ProductCard(
+                                        image = product.image,
+                                        name = product.description.nameKorr,
+                                        price = product.multistoreProduct.price,
+                                        stickers = product.octStickers.specialStickerData,
+                                        onClick = {navigator.push(ProductScreen(product.productId))}
+                                    )
                                 }
                             }
                             1 -> {
                                 // новости
-                                items(state.newsData.mainBlogObjectData, key = {it.hashCode()}){ stock ->
+                                items(state.newsData.mainBlogObjectData, key = {it.hashCode()}){ news ->
                                     NewsItem(
-                                        name = stock.blogarticleName,
-                                        icon = stock.blogarticleImage,
-                                        onClick = {}
+                                        name = news.blogarticleName,
+                                        icon = news.blogarticleImage,
+                                        onClick = {navigator.push(NewsDetailsScreen(news.blogarticleId))}
                                     )
                                 }
 
@@ -159,17 +165,17 @@ class HomeScreen: Screen {
                                     NewsItem(
                                         name = stock.blogarticleName,
                                         icon = stock.blogarticleImage,
-                                        onClick = {}
+                                        onClick = {navigator.push(NewsDetailsScreen(stock.blogarticleId))}
                                     )
                                 }
                             }
                             3 -> {
                                 //новинки
-                                items(state.newProductsData.mainBlogObjectData, key = {it.hashCode()}){ stock ->
+                                items(state.newProductsData.mainBlogObjectData, key = {it.hashCode()}){ product ->
                                     NewsItem(
-                                        name = stock.blogarticleName,
-                                        icon = stock.blogarticleImage,
-                                        onClick = {}
+                                        name = product.blogarticleName,
+                                        icon = product.blogarticleImage,
+                                        onClick = {navigator.push(NewsDetailsScreen(product.blogarticleId))}
                                     )
                                 }
                             }

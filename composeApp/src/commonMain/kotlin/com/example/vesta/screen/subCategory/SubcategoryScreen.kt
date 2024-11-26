@@ -199,8 +199,11 @@ class SubcategoryScreen(private val id: Int): Screen {
                             //продукты
                             items(state.productList) { product ->
                                 ProductCard(
-                                    product = product,
-                                    onClick = { navigator.push(ProductScreen(product.productId)) }
+                                    image = product.image,
+                                    name = product.nameKorr,
+                                    price = product.price,
+                                    stickers = product.octStickers.specialStickerData,
+                                    onClick = {navigator.push(ProductScreen(product.productId))}
                                 )
                             }
                             if (state.productList.isEmpty()) {

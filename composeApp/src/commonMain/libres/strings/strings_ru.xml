@@ -69,7 +69,7 @@
     <string name="favorites">Избранное</string>
     <string name="address_book">Адресная книга</string>
     <string name="history">История заказов</string>
-    <string name="main_features">Основные характеристики</string>
+    <string name="main_features">Основная информация</string>
     <string name="description">Описание</string>
     <string name="specifications">Характеристики</string>
     <string name="more">Подробнее</string>
@@ -95,6 +95,9 @@
     <string name="error_error">Неизвестная ошибка</string>
     <string name="in_cart">В корзину</string>
     <string name="all_products">Все товары категории</string>
+    <string name="stock_products">Товары акции</string>
+    <string name="all_comments">Все комментарии</string>
+    <string name="add_comment">Добавить комментарий</string>
 
 
 </resources>
