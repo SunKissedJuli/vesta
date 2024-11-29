@@ -52,4 +52,16 @@ internal class ProductViewModel:BaseScreenModel<ProductState, Unit>(ProductState
         val regex = Regex("""<img src=["'](https://[^"']*)["'][^>]*>""")
         return regex.findAll(decodedInput).mapNotNull { it.groups[1]?.value }.toList()
     }
+
+    fun addToWishlist(id: Int) = intent {
+        launchOperation(
+            operation = {
+                productRepository.addToWishlist(id)
+            },
+            success = {
+                reduceLocal { state.copy(productData = state.productData.copy(isFavorite = !state.productData.isFavorite)) }
+            },
+            loading = {setStatus(false)}
+        )
+    }
 }

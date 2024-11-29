@@ -10,13 +10,15 @@ import com.example.vesta.domain.modelsUI.ProductsResponseUi
 data class SubcategoryState(
     val subcategoryList: CategoryByIdUi,
     val productList: List<ProductInCategoryUi>,
-    val isProducts: Boolean
+    val isProducts: Boolean,
+    val showFilter: Boolean
 ){
     companion object{
         val InitState = SubcategoryState(
             subcategoryList = CategoryByIdUi.empty,
             productList = listOf(),
-            isProducts = DEFAULT_BOOLEAN
+            isProducts = DEFAULT_BOOLEAN,
+            showFilter = DEFAULT_BOOLEAN
         )
     }
 }

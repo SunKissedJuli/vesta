@@ -19,15 +19,32 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.BottomSheetDefaults
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.BottomSheetScaffoldState
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.SheetState
+import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberBottomSheetScaffoldState
+import androidx.compose.material3.rememberDrawerState
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -52,15 +69,18 @@ import com.example.vesta.images.VestaResourceImages
 import com.example.vesta.screen.product.ProductScreen
 import com.example.vesta.strings.VestaResourceStrings
 import io.github.skeptick.libres.compose.painterResource
+import kotlinx.coroutines.launch
 
 class SubcategoryScreen(private val id: Int): Screen {
     override val key: ScreenKey = id.toString()
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
 
         val viewModel = rememberScreenModel { SubcategoryViewModel() }
         val state by viewModel.stateFlow.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
+
         LifecycleEffect(
             onStarted = {
                 viewModel.setBottomBarVisible(true)
@@ -69,75 +89,78 @@ class SubcategoryScreen(private val id: Int): Screen {
         LaunchedEffect(id){
             viewModel.loadData(id)
         }
-        CustomScaffold(
-            topBar = {
-                if(state.isProducts){
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth().height(51.dp).background(Color.Transparent)
-                            .shadow(
-                                5.dp,
-                                shape = MaterialTheme.shapes.medium,
-                                ambientColor = Color(0x1FF00000),
-                                clip = false,
-                            )
-                    ) {
+
+
+
+            CustomScaffold(
+                topBar = {
+                    if (state.isProducts) {
                         Box(
-                            Modifier
-                                .align(Alignment.TopCenter)
-                                .height(46.dp)
-                                .fillMaxWidth()
-                                .background(MaterialTheme.colorScheme.background)
-                        ) {
-                            Row(
-                                Modifier
-                                    .fillMaxSize()
-                                    .padding(horizontal = 20.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                IconButton(
-                                    onClick = {
-                                        viewModel.updateIsProduct(false)
-                                        if(state.subcategoryList.children.isEmpty()){
-                                            navigator.pop()
-                                        }
-                                              },
-                                ) {
-                                    Icon(
-                                        painter = painterResource(VestaResourceImages.button_back),
-                                        contentDescription = "",
-                                        modifier = Modifier.size(24.dp)
-                                    )
-                                }
-                                Text(
-                                    text = VestaResourceStrings.catalog,
-                                    fontSize = 16.sp,
-                                    fontWeight = FontWeight.Medium,
-                                    lineHeight = 19.5.sp
+                            modifier = Modifier
+                                .fillMaxWidth().height(51.dp).background(Color.Transparent)
+                                .shadow(
+                                    5.dp,
+                                    shape = MaterialTheme.shapes.medium,
+                                    ambientColor = Color(0x1FF00000),
+                                    clip = false,
                                 )
-                                IconButton(
-                                    onClick = { },
+                        ) {
+                            Box(
+                                Modifier
+                                    .align(Alignment.TopCenter)
+                                    .height(46.dp)
+                                    .fillMaxWidth()
+                                    .background(MaterialTheme.colorScheme.background)
+                            ) {
+                                Row(
+                                    Modifier
+                                        .fillMaxSize()
+                                        .padding(horizontal = 20.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
-                                    Icon(
-                                        painter = painterResource(VestaResourceImages.icon_filter),
-                                        contentDescription = "",
-                                        modifier = Modifier.size(24.dp)
+                                    IconButton(
+                                        onClick = {
+                                            viewModel.updateIsProduct(false)
+                                            if (state.subcategoryList.children.isEmpty()) {
+                                                navigator.pop()
+                                            }
+                                        },
+                                    ) {
+                                        Icon(
+                                            painter = painterResource(VestaResourceImages.button_back),
+                                            contentDescription = "",
+                                            modifier = Modifier.size(24.dp)
+                                        )
+                                    }
+                                    Text(
+                                        text = VestaResourceStrings.catalog,
+                                        fontSize = 16.sp,
+                                        fontWeight = FontWeight.Medium,
+                                        lineHeight = 19.5.sp
                                     )
+                                    IconButton(
+                                        onClick = {
+                                            viewModel.updateShowFilter(true) },
+                                    ) {
+                                        Icon(
+                                            painter = painterResource(VestaResourceImages.icon_filter),
+                                            contentDescription = "",
+                                            modifier = Modifier.size(24.dp)
+                                        )
+                                    }
                                 }
                             }
                         }
+                    } else {
+                        HeaderWithButtonBack(
+                            onClick = { navigator.pop() },
+                            text = VestaResourceStrings.catalog
+                        )
                     }
                 }
-                else{
-                    HeaderWithButtonBack(
-                        onClick = {navigator.pop()},
-                        text = VestaResourceStrings.catalog
-                    )
-                }
-            }
-        ) {
-            Column(Modifier.fillMaxHeight()) {
+            ) {
+                //  Column(Modifier.fillMaxHeight()) {
 
                 if (viewModel.status.collectAsState().value || SubcategoryState.InitState == state) {
                     CustomCircularProgressIndicator()
@@ -188,7 +211,9 @@ class SubcategoryScreen(private val id: Int): Screen {
                             }
 
                             //субкатегории
-                            items(state.subcategoryList.children) { subcategory ->
+                            items(
+                                state.subcategoryList.children,
+                                key = { it.hashCode() }) { subcategory ->
                                 SubcategoryCard(
                                     image = subcategory.image,
                                     name = subcategory.name,
@@ -197,13 +222,15 @@ class SubcategoryScreen(private val id: Int): Screen {
                             }
                         } else {
                             //продукты
-                            items(state.productList) { product ->
+                            items(state.productList, key = { it.hashCode() }) { product ->
                                 ProductCard(
                                     image = product.image,
                                     name = product.nameKorr,
                                     price = product.price,
                                     stickers = product.octStickers.specialStickerData,
-                                    onClick = {navigator.push(ProductScreen(product.productId))}
+                                    onClick = { navigator.push(ProductScreen(product.productId)) },
+                                    isFavorite = product.isFavorite,
+                                    onHeartClick = { viewModel.addToWishlist(product.productId) }
                                 )
                             }
                             if (state.productList.isEmpty()) {
@@ -228,16 +255,14 @@ class SubcategoryScreen(private val id: Int): Screen {
                             }
                         }
                     }
-
                 }
             }
-        }
+      //  }
     }
 }
 
 @Composable
 private fun SubcategoryCard(
-    modifier: Modifier = Modifier,
     image: String,
     name: String,
     onClick: ()-> Unit
@@ -271,7 +296,6 @@ private fun SubcategoryCard(
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(horizontal = 10.dp)
             )
-
         }
     }
 }

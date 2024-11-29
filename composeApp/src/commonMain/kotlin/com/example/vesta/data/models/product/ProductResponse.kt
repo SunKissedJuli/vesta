@@ -48,7 +48,8 @@ class ProductResponse(
     @SerialName("viewed") val viewed: Int?,
     @SerialName("weight") val weight: String?,
     @SerialName("weight_class_id") val weightClassId: Int?,
-    @SerialName("width") val width: String?
+    @SerialName("width") val width: String?,
+    @SerialName("is_favorite") val isFavorite: Boolean?
 )
 
 @Serializable

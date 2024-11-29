@@ -9,7 +9,7 @@ data class BlogByIdUi(
     val dateAvailable: String,
     val dateModified: String,
     val description: String,
-    val image: String,
+    val image:List <String>,
     val viewed: Int,
     val languageId: Int,
     val metaDescription: String,
@@ -21,7 +21,7 @@ data class BlogByIdUi(
     val sortOrder: Int,
     val status: Int,
     val storeId: Int,
-    val tag: String
+    val tag: String,
 ) {
     companion object {
         val empty = BlogByIdUi(
@@ -31,7 +31,7 @@ data class BlogByIdUi(
             dateModified = "",
             description = "",
             viewed = 0,
-            image = "",
+            image = emptyList(),
             languageId = 0,
             metaDescription = "",
             metaKeyword = "",
@@ -42,7 +42,7 @@ data class BlogByIdUi(
             sortOrder = 0,
             status = 0,
             storeId = 0,
-            tag = ""
+            tag = "",
         )
     }
 }

@@ -144,7 +144,9 @@ class HomeScreen: Screen {
                                         name = product.description.nameKorr,
                                         price = product.multistoreProduct.price,
                                         stickers = product.octStickers.specialStickerData,
-                                        onClick = {navigator.push(ProductScreen(product.productId))}
+                                        isFavorite = product.isFavorite,
+                                        onClick = {navigator.push(ProductScreen(product.productId))},
+                                        onHeartClick = {viewModel.addToWishlist(product.productId)}
                                     )
                                 }
                             }

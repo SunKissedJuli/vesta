@@ -10,7 +10,7 @@ data class BlogByIdResponse(
     @SerialName("date_available") val dateAvailable: String?,
     @SerialName("date_modified") val dateModified: String?,
     @SerialName("description") val description: String?,
-    @SerialName("image") val image: String?,
+   // @SerialName("image") val image: List<String>?,
     @SerialName("language_id") val languageId: Int?,
     @SerialName("meta_description") val metaDescription: String?,
     @SerialName("meta_keyword") val metaKeyword: String?,
@@ -22,5 +22,5 @@ data class BlogByIdResponse(
     @SerialName("status") val status: Int?,
     @SerialName("store_id") val storeId: Int?,
     @SerialName("tag") val tag: String?,
-    @SerialName("viewed") val viewed: Int?
+    @SerialName("viewed") val viewed: Int?,
 )

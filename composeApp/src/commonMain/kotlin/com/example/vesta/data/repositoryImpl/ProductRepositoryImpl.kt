@@ -44,4 +44,10 @@ class ProductRepositoryImpl(private val vestaApi: VestaApi, private val manager:
         },
             mapResponse = { product -> product.toUI() })
     }
+
+    override suspend fun addToWishlist(productId: Int): Either<Failure, Unit> {
+        return apiCall (call = {
+            vestaApi.addToWishlist(productId)
+        })
+    }
 }

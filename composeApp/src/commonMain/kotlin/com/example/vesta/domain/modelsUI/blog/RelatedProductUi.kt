@@ -12,5 +12,6 @@ data class RelatedProductUi(
     val productId: Int,
     val quantity: Int,
     val quantityStatus: String,
-    val weight: String
+    val weight: String,
+    val isFavorite: Boolean
 )

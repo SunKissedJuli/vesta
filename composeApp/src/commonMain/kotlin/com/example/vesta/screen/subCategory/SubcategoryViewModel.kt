@@ -38,4 +38,17 @@ internal class SubcategoryViewModel: BaseScreenModel<SubcategoryState, Subcatego
     fun updateIsProduct(isProduct: Boolean) = blockingIntent{
        reduce { state.copy(isProducts = isProduct) }
     }
+
+    fun updateShowFilter(showFilter: Boolean) = blockingIntent{
+        reduce { state.copy(showFilter = showFilter) }
+    }
+
+    fun addToWishlist(id: Int) = intent {
+        launchOperation(
+            operation = {
+                productRepository.addToWishlist(id)
+            },
+            loading = {setStatus(false)}
+        )
+    }
 }

@@ -27,42 +27,44 @@ fun CustomScaffold(
     contentBackground: Color = MaterialTheme.colorScheme.background,
     containerColor: Color = MaterialTheme.colorScheme.background,
     contentColor: Color = MaterialTheme.colorScheme.onSecondary,
+    onClick: () -> Unit = {},
     content: @Composable () -> Unit,
-
 ) {
     val localFocusManager = LocalFocusManager.current
 
-    Column{
-        Scaffold(containerColor = containerColor,
-            contentColor = contentColor,
-            modifier = modifier.weight(1f).pointerInput(Unit) {
-                detectTapGestures(onTap = { localFocusManager.clearFocus() })
-            },
-            topBar = {
-                Box(modifier = Modifier.fillMaxWidth()) {
-                    topBar?.let { top ->
-                        top()
-                    }
-                }
-            },
-            content = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(contentBackground)
-                        .padding(
-                            top = it.calculateTopPadding(),
-                            bottom = it.calculateBottomPadding()
-                        )
-                ) {
-                    content()
-                }
+    Scaffold(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        modifier = modifier.pointerInput(Unit) {
+            detectTapGestures(onTap = {
+                localFocusManager.clearFocus()
+                onClick()
+            })
+        },
+            //.clickable { onClick() },
+        topBar = {
+            Box(modifier = Modifier.fillMaxWidth()) {
+                topBar?.let { it() }
             }
-        )
-        Box(modifier = Modifier.fillMaxWidth()) {
-            bottomBar?.let { bottom ->
-                bottom()
+        },
+        bottomBar = {
+            Box(modifier = Modifier.fillMaxWidth()) {
+                bottomBar?.let { it() }
+            }
+        },
+        content = {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(contentBackground)
+                    .padding(
+                        top = it.calculateTopPadding(),
+                        bottom = it.calculateBottomPadding()
+                    )
+                    //.clickable { onClick() }
+            ) {
+                content()
             }
         }
-    }
+    )
 }

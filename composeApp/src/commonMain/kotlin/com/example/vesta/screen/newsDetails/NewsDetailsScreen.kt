@@ -91,12 +91,15 @@ class NewsDetailsScreen(private val id: Int): Screen {
                             )
                             Spacer(Modifier.height(20.dp))
 
-                            CustomFlexAsyncImage(
-                                image = state.newsData.image,
-                                modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(15.dp)),
-                                contentScale = ContentScale.FillWidth
-                            )
-                            Spacer(Modifier.height(10.dp))
+                            for(image in state.newsData.image){
+                                println(image)
+                                CustomFlexAsyncImage(
+                                    image = image,
+                                    modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(15.dp)),
+                                    contentScale = ContentScale.FillWidth
+                                )
+                                Spacer(Modifier.height(10.dp))
+                            }
 
                             Row(Modifier.fillMaxWidth(),
                                 verticalAlignment = Alignment.CenterVertically,
@@ -127,7 +130,6 @@ class NewsDetailsScreen(private val id: Int): Screen {
                                     fontSize = 14.sp
                                 )
                             }
-
                         }
                     }
 
@@ -161,8 +163,10 @@ class NewsDetailsScreen(private val id: Int): Screen {
                                 image = product.image,
                                 name = product.name,
                                 price = product.price,
+                                isFavorite = product.isFavorite,
                                 stickers = product.octStickers.specialStickerData,
-                                onClick = {navigator.push(ProductScreen(product.productId))}
+                                onClick = {navigator.push(ProductScreen(product.productId))},
+                                onHeartClick = {viewModel.addToWishlist(product.productId)}
                             )
                         }
                     }

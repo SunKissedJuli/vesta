@@ -46,6 +46,11 @@ interface VestaApi {
         @Query("sity") city: Int = 0
     ): List<ProductResponse>
 
+    @POST("api/user/wishlist")
+    suspend fun addToWishlist(
+        @Query("product_id") productId: Int,
+    ): Unit
+
     //инфо
     @GET("api/info/getSites")
     suspend fun getCites(): List<CityResponse>
@@ -90,6 +95,4 @@ interface VestaApi {
 
     @POST("api/user/editProfile")
     suspend fun editUser(  @Body user: UserUpdate): Unit
-
-
 }

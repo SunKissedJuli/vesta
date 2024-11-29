@@ -147,10 +147,10 @@ class ProductScreen(private val id: Int): Screen{
                             }
                             Spacer(modifier = Modifier.width(5.dp))
                             IconButton(
-                                onClick = { },
+                                onClick = {viewModel.addToWishlist(state.productData.productId) },
                             ) {
                                 Icon(
-                                    painter = painterResource(VestaResourceImages.icon_fav),
+                                    painter = painterResource( if (state.productData.isFavorite) VestaResourceImages.icon_fav_clicked else VestaResourceImages.icon_fav),
                                     contentDescription = "",
                                     modifier = Modifier.size(24.dp)
                                 )

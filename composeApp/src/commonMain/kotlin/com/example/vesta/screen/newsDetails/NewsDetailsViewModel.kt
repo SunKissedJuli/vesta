@@ -26,4 +26,12 @@ internal class NewsDetailsViewModel: BaseScreenModel<NewsDetailsState, Unit>(New
             }
         )
     }
+
+    fun addToWishlist(id: Int) = intent {
+        launchOperation(
+            operation = {
+                productRepository.addToWishlist(id)
+            },
+        )
+    }
 }

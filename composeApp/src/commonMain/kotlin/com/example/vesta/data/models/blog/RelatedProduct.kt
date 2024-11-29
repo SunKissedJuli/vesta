@@ -16,5 +16,6 @@ class RelatedProduct(
     @SerialName("product_id") val productId: Int?,
     @SerialName("quantity") val quantity: Int?,
     @SerialName("quantity_status") val quantityStatus: String?,
-    @SerialName("weight") val weight: String?
+    @SerialName("weight") val weight: String?,
+    @SerialName("is_favorite") val isFavorite: Boolean?
 )

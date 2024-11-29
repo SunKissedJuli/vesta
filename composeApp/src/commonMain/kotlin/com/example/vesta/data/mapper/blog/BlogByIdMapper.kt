@@ -7,6 +7,7 @@ import com.example.vesta.domain.modelsUI.OctStickersUi
 import com.example.vesta.domain.modelsUI.blog.BlogByIdUi
 import com.example.vesta.domain.modelsUI.blog.RelatedProductUi
 import com.example.vesta.ext.cleanHtml
+import com.example.vesta.ext.imageFromHtml
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 fun BlogByIdResponse.toUI(): BlogByIdUi {
@@ -16,7 +17,7 @@ fun BlogByIdResponse.toUI(): BlogByIdUi {
         dateAvailable = this.dateAvailable.orEmpty(),
         dateModified = this.dateModified.orEmpty(),
         description = this.description?.cleanHtml().orEmpty(),
-        image = this.image.orEmpty(),
+        image = this.description?.imageFromHtml().orEmpty(),
         languageId = this.languageId ?: 0,
         metaDescription = this.metaDescription.orEmpty(),
         metaKeyword = this.metaKeyword.orEmpty(),
@@ -42,6 +43,7 @@ fun RelatedProduct.toUI(): RelatedProductUi {
         productId = this.productId?:0,
         quantity = this.quantity?:0,
         quantityStatus = this.quantityStatus.orEmpty(),
-        weight = this.weight.orEmpty()
+        weight = this.weight.orEmpty(),
+        isFavorite = this.isFavorite?:false
     )
 }

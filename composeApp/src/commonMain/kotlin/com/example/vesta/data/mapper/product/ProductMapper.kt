@@ -52,6 +52,7 @@ fun ProductResponse.toUI(): ProductResponseUi {
         weight= this.weight ?: "",
         weightClassId= this.weightClassId ?: 0,
         width= this.width ?: "",
+        isFavorite = this.isFavorite?:false
     )
 }
 

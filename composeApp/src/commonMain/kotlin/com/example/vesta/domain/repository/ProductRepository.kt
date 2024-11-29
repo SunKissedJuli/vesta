@@ -24,5 +24,9 @@ interface ProductRepository {
 
     suspend fun getFeaturedProducts(): Either<Failure, List<ProductResponseUi>>
 
+    suspend fun addToWishlist(
+        productId: Int,
+    ): Either<Failure, Unit>
+
 
 }

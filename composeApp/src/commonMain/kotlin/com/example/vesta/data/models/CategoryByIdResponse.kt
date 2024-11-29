@@ -29,7 +29,8 @@ class ProductInCategoryResponse(
     @SerialName("price") val price: Int?,
     @SerialName("product_id") val productId: Int?,
     @SerialName("quantity") val quantity: Int?,
-    @SerialName("quantity_status") val quantityStatus: String?
+    @SerialName("quantity_status") val quantityStatus: String?,
+    @SerialName("is_favorite") val isFavorite: Boolean?
 )
 
 @Serializable

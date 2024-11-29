@@ -85,4 +85,12 @@ internal class HomeViewModel: BaseScreenModel<HomeState, Unit>(HomeState.InitSta
     fun setBottomBarVisible(visible: Boolean){
         bottomBarVisibleManager.setBottomBarVisibility(visible)
     }
+
+    fun addToWishlist(id: Int) = intent {
+        launchOperation(
+            operation = {
+                productRepository.addToWishlist(id)
+            },
+        )
+    }
 }

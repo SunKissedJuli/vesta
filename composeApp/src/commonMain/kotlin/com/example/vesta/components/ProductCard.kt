@@ -17,24 +17,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vesta.data.models.product.ProductResponseUi
-import com.example.vesta.data.models.user.SmallOrder
-import com.example.vesta.domain.modelsUI.ProductsDataResponseUi
 import com.example.vesta.domain.modelsUI.SpecialStickerDataUi
 import com.example.vesta.ext.QuantityToStore
 import com.example.vesta.images.VestaResourceImages
@@ -49,109 +49,106 @@ fun ProductCard(
     image: String,
     name: String,
     price: Int,
+    isFavorite: Boolean = false,
     onClick: ()-> Unit,
+    onCartClick: ()-> Unit = {},
+    onHeartClick: ()-> Unit = {},
 ){
+
+    var favorite by remember{ mutableStateOf(isFavorite) }
+
     Surface(
         Modifier
             .fillMaxWidth()
             .height(270.dp)
-            .padding(5.dp)
-            .clickable { onClick() },
+            .padding(5.dp),
         shape = RoundedCornerShape(15.dp),
         shadowElevation = 5.dp) {
 
-        Box {
-            CustomScaffold(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(15.dp))
-                    .background(MaterialTheme.colorScheme.background),
-                topBar = {
-                    FlowRow(
-                        modifier = Modifier.fillMaxWidth(),) {
-                        for (sticker in stickers) {
-                            ProductSticker(sticker)
-                        }
-                    }
-                },
-                bottomBar = {
-                    Column {
-                        CustomButton(
-                            onClick = {},
-                            fontSize = 12.sp,
-                            modifier = Modifier.height(25.dp).padding(horizontal = 10.dp),
-                            text = VestaResourceStrings.in_cart
-                        )
-                        Spacer(Modifier.height(10.dp))
+        CustomScaffold(
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(15.dp))
+                .background(MaterialTheme.colorScheme.background),
+            onClick = onClick,
+            topBar = {
+                FlowRow(
+                    modifier = Modifier.fillMaxWidth(),) {
+                    for (sticker in stickers) {
+                        ProductSticker(sticker)
                     }
                 }
-            ){
+            },
+            bottomBar = {
                 Column {
-                    Box(Modifier.fillMaxWidth().weight(1f).padding(vertical = 10.dp, horizontal = 5.dp)){
+                    CustomButton(
+                        onClick = onCartClick,
+                        fontSize = 12.sp,
+                        modifier = Modifier.height(25.dp).padding(horizontal = 10.dp),
+                        text = VestaResourceStrings.in_cart
+                    )
+                    Spacer(Modifier.height(10.dp))
+                }
+            }
+        ){
+            Column {
+                Box(Modifier.fillMaxWidth().weight(1f).padding(vertical = 10.dp, horizontal = 5.dp)){
 
-                        CustomAsyncImage(image, modifier = Modifier.fillMaxHeight().fillMaxWidth(0.8f).align(Alignment.Center))
+                    CustomAsyncImage(image, modifier = Modifier.fillMaxHeight().fillMaxWidth(0.8f).align(Alignment.Center))
 
-                        Column(Modifier.fillMaxHeight().align(Alignment.CenterEnd).padding(horizontal = 15.dp),
-                            verticalArrangement = Arrangement.SpaceBetween) {
-                            IconButton(
-                                onClick = {},
-                                Modifier.size(30.dp)
-                            ) {
-                                if(Random.nextBoolean()){
-                                    Icon(
-                                        painter = painterResource(VestaResourceImages.icon_fav_clicked),
-                                        contentDescription = "",
-                                        modifier = Modifier.size(20.dp),
-                                        tint = MaterialTheme.colorScheme.primary
-                                    )
-                                }
-                                else{
-                                    Icon(
-                                        painter = painterResource(VestaResourceImages.icon_fav),
-                                        contentDescription = "",
-                                        modifier = Modifier.size(20.dp),
-                                        tint = MaterialTheme.colorScheme.onSecondary
-                                    )
-                                }
-                            }
+                    Column(Modifier.fillMaxHeight().align(Alignment.CenterEnd).padding(horizontal = 15.dp),
+                        verticalArrangement = Arrangement.SpaceBetween) {
+                        IconButton(
+                            onClick = {
+                                onHeartClick()
+                                favorite = !favorite
+                            },
+                            Modifier.size(30.dp)
+                        ) {
 
-                            IconButton(
-                                onClick = {},
-                                Modifier.size(30.dp)
-                            ) {
-                                Icon(
-                                    painterResource(VestaResourceImages.icon_statistic),
-                                    contentDescription = "",
-                                    Modifier.size(20.dp)
-                                )
-                            }
+                            Icon(
+                                painter = painterResource(if (favorite) VestaResourceImages.icon_fav_clicked else VestaResourceImages.icon_fav),
+                                contentDescription = "",
+                                modifier = Modifier.size(20.dp),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
+
+                        IconButton(
+                            onClick = {},
+                            Modifier.size(30.dp)
+                        ) {
+                            Icon(
+                                painterResource(VestaResourceImages.icon_statistic),
+                                contentDescription = "",
+                                Modifier.size(20.dp)
+                            )
                         }
                     }
+                }
 
-                    Column(Modifier.weight(1f),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = name,
-                            fontSize = 12.sp,
-                            softWrap = true,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(horizontal = 10.dp),
-                            maxLines = 3
-                        )
+                Column(Modifier.weight(1f),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = name,
+                        fontSize = 12.sp,
+                        softWrap = true,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(horizontal = 10.dp),
+                        maxLines = 3
+                    )
 
-                        Text(
-                            text = "${price} ${VestaResourceStrings.rub}",
-                            fontSize = 12.sp,
-                            textAlign = TextAlign.Center,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(vertical = 7.dp),
-                        )
-                    }
+                    Text(
+                        text = "${price} ${VestaResourceStrings.rub}",
+                        fontSize = 12.sp,
+                        textAlign = TextAlign.Center,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(vertical = 7.dp),
+                    )
                 }
             }
 
-            Box(Modifier.fillMaxSize().clickable { onClick() })
         }
 
     }

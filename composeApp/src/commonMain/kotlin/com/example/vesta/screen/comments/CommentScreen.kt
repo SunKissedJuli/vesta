@@ -16,7 +16,6 @@ import com.example.vesta.components.HeaderWithButtonBack
 import com.example.vesta.strings.VestaResourceStrings
 
 class CommentScreen(): Screen {
-    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
 

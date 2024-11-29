@@ -54,5 +54,6 @@ fun ProductInCategoryResponse.toUI(): ProductInCategoryUi{
         productId = this.productId?:0,
         quantityStatus = this.quantityStatus.orEmpty(),
         quantity = this.quantity?:0,
+        isFavorite = this.isFavorite?:false
     )
 }

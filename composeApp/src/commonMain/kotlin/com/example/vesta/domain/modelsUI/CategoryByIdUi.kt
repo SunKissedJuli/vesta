@@ -39,7 +39,8 @@ data class ProductInCategoryUi(
     val price: Int,
     val productId: Int,
     val quantity: Int,
-    val quantityStatus: String
+    val quantityStatus: String,
+    val isFavorite: Boolean
 )
 
 data class LinkUi(

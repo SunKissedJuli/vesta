@@ -2,9 +2,6 @@ package com.example.vesta.data.mapper
 
 import com.example.vesta.data.models.ProductsDataResponse
 import com.example.vesta.data.models.ProductsResponse
-import com.example.vesta.data.models.product.ProductResponse
-import com.example.vesta.data.models.product.ProductResponseUi
-import com.example.vesta.data.models.product.toUI
 import com.example.vesta.domain.modelsUI.OctStickersUi
 import com.example.vesta.domain.modelsUI.ProductsDataResponseUi
 import com.example.vesta.domain.modelsUI.ProductsResponseUi

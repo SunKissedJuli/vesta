@@ -49,7 +49,8 @@ data class ProductResponseUi(
     val viewed: Int,
     val weight: String,
     val weightClassId: Int,
-    val width: String
+    val width: String,
+    val isFavorite: Boolean
 ) {
     companion object {
         val empty = ProductResponseUi(
@@ -94,7 +95,8 @@ data class ProductResponseUi(
             viewed = 0,
             weight = "",
             weightClassId = 0,
-            width = ""
+            width = "",
+            isFavorite = false
         )
     }
 }
