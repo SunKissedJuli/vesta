@@ -40,6 +40,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.vesta.commons.MaskVisualTransformation
 import com.example.vesta.components.CustomButton
+import com.example.vesta.components.CustomCheckBox
 import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.CustomSplitClickableText
 import com.example.vesta.components.HeaderWithButtonBack
@@ -68,36 +69,6 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
                 }
             }
         }
-
-        val checkBoxColors = CheckboxColors(
-            checkedBoxColor = MaterialTheme.colorScheme.background,
-            uncheckedBoxColor = MaterialTheme.colorScheme.background,
-            checkedCheckmarkColor = MaterialTheme.colorScheme.secondaryContainer,
-            uncheckedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
-            uncheckedCheckmarkColor = MaterialTheme.colorScheme.secondaryContainer,
-            checkedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
-            disabledBorderColor = MaterialTheme.colorScheme.secondaryContainer,
-            disabledIndeterminateBorderColor = MaterialTheme.colorScheme.secondaryContainer,
-            disabledCheckedBoxColor = MaterialTheme.colorScheme.background,
-            disabledUncheckedBoxColor = MaterialTheme.colorScheme.background,
-            disabledUncheckedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
-            disabledIndeterminateBoxColor = MaterialTheme.colorScheme.secondaryContainer,
-        )
-
-        val checkBoxErrorColors = CheckboxColors(
-            checkedBoxColor = MaterialTheme.colorScheme.background,
-            uncheckedBoxColor = MaterialTheme.colorScheme.background,
-            checkedCheckmarkColor = MaterialTheme.colorScheme.secondaryContainer,
-            uncheckedBorderColor = MaterialTheme.colorScheme.onTertiary,
-            uncheckedCheckmarkColor = MaterialTheme.colorScheme.onTertiary,
-            checkedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
-            disabledBorderColor = MaterialTheme.colorScheme.secondaryContainer,
-            disabledIndeterminateBorderColor = MaterialTheme.colorScheme.secondaryContainer,
-            disabledCheckedBoxColor = MaterialTheme.colorScheme.background,
-            disabledUncheckedBoxColor = MaterialTheme.colorScheme.background,
-            disabledUncheckedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
-            disabledIndeterminateBoxColor = MaterialTheme.colorScheme.secondaryContainer,
-        )
 
         CustomScaffold(
             topBar = {
@@ -197,17 +168,17 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
                     Column(
                         Modifier
                             .fillMaxWidth()
-                            .padding(top = 20.dp, start = 20.dp)
+                            .padding(top = 25.dp, start = 20.dp)
                     ) {
                         Row(
-                            Modifier.fillMaxWidth(),
+                            Modifier.fillMaxWidth().padding(bottom = 15.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Checkbox(
+                            CustomCheckBox(
                                 checked = state.agreePolitics,
                                 onCheckedChange = {viewModel.updateAgreePolitics()},
-                                colors = if(state.errorAgreePolitics) checkBoxErrorColors else checkBoxColors
-                            )
+                                isError = state.errorAgreePolitics
+                                )
                             CustomSplitClickableText(
                                 text = VestaResourceStrings.i_agree,
                                 onClick = {},
@@ -220,10 +191,9 @@ internal class SignUpSecondScreen(private val viewModel: SignUpViewModel): Scree
                             Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Checkbox(
+                            CustomCheckBox(
                                 checked = state.agreeNews,
                                 onCheckedChange = {viewModel.updateAgreeNews()},
-                                colors = checkBoxColors
                             )
                             Text(
                                 text = VestaResourceStrings.i_agree_news,

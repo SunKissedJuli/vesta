@@ -110,7 +110,7 @@ fun ProductCard(
                                 painter = painterResource(if (favorite) VestaResourceImages.icon_fav_clicked else VestaResourceImages.icon_fav),
                                 contentDescription = "",
                                 modifier = Modifier.size(20.dp),
-                                tint = MaterialTheme.colorScheme.primary
+                                tint =if (favorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSecondary
                             )
                         }
 

@@ -5,6 +5,7 @@ import com.example.vesta.domain.modelsUI.CategoryByIdResponseUi
 import com.example.vesta.domain.modelsUI.CategoryUi
 import com.example.vesta.domain.modelsUI.ProductsDataResponseUi
 import com.example.vesta.domain.modelsUI.ProductsResponseUi
+import com.example.vesta.domain.modelsUI.blog.RelatedProductUi
 import com.example.vesta.platform.Either
 import com.example.vesta.platform.Failure
 
@@ -22,7 +23,7 @@ interface ProductRepository {
         productId: Int,
     ): Either<Failure, ProductResponseUi>
 
-    suspend fun getFeaturedProducts(): Either<Failure, List<ProductResponseUi>>
+    suspend fun getFeaturedProducts(): Either<Failure, List<RelatedProductUi>>
 
     suspend fun addToWishlist(
         productId: Int,

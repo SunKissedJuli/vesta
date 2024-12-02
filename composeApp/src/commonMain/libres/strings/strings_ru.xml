@@ -6,6 +6,7 @@
     <string name="hello_text">Мы работаем для того, чтобы в каждом доме были вода и тепло</string>
     <string name="search_string">Поиск</string>
     <string name="filter">Фильтр товаров</string>
+    <string name="filters">Фильтры</string>
     <string name="sort">Сортировка:</string>
     <string name="sort_ascending">По цене (по возрастанию)</string>
     <string name="sort_descending">По цене (по убыванию)</string>
@@ -98,6 +99,14 @@
     <string name="stock_products">Товары акции</string>
     <string name="all_comments">Все комментарии</string>
     <string name="add_comment">Добавить комментарий</string>
-
+    <string name="apply_filter">Применить</string>
+    <string name="clean">Очистить</string>
+    <string name="cost">Цена</string>
+    <string name="available">Наличие</string>
+    <string name="filter_opt">Оптовый склад</string>
+    <string name="filter_all">Все</string>
+    <string name="filter_available">В наличии</string>
+    <string name="filter_subcategory">Подкатегории</string>
+    <string name="filter_maufacturer">Производитель</string>
 
 </resources>

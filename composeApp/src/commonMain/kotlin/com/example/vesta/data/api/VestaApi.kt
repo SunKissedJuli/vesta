@@ -3,6 +3,7 @@ package com.example.vesta.data.api
 import com.example.vesta.data.models.CategoryByIdResponse
 import com.example.vesta.data.models.CategoryResponse
 import com.example.vesta.data.models.blog.BlogByIdResponse
+import com.example.vesta.data.models.blog.RelatedProduct
 import com.example.vesta.data.models.info.CityResponse
 import com.example.vesta.data.models.info.MainBlogResponse
 import com.example.vesta.data.models.info.NewsResponse
@@ -44,7 +45,7 @@ interface VestaApi {
     suspend fun getFeaturedProducts(
         @Query("code") code: String = "featured",
         @Query("sity") city: Int = 0
-    ): List<ProductResponse>
+    ): List<RelatedProduct>
 
     @POST("api/user/wishlist")
     suspend fun addToWishlist(
@@ -72,7 +73,10 @@ interface VestaApi {
     suspend fun getStocks(@Query("sity") city: Int = 0): List<StocksResponse>
 
     @GET("api/getBlogId/{id}")
-    suspend fun getBlogById( @Path("id") id: Int, @Query("sity") city: Int = 0): BlogByIdResponse
+    suspend fun getBlogById(
+        @Path("id") id: Int,
+        @Query("sity") city: Int = 0
+    ): BlogByIdResponse
 
     //юзер
     @POST("api/user/login")
@@ -95,4 +99,7 @@ interface VestaApi {
 
     @POST("api/user/editProfile")
     suspend fun editUser(  @Body user: UserUpdate): Unit
+
+    @GET("api/user/wishlistAll")
+    suspend fun getWishlist(): List<RelatedProduct>
 }

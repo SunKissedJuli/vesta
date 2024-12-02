@@ -5,6 +5,7 @@ import com.example.vesta.commons.Constantas.DEFAULT_STRING
 import com.example.vesta.data.models.product.ProductResponseUi
 import com.example.vesta.domain.modelsUI.ProductsDataResponseUi
 import com.example.vesta.domain.modelsUI.ProductsResponseUi
+import com.example.vesta.domain.modelsUI.blog.RelatedProductUi
 import com.example.vesta.domain.modelsUI.info.MainBlogObjectUi
 import com.example.vesta.domain.modelsUI.info.NewsDataUi
 import com.example.vesta.domain.modelsUI.info.StocksUi
@@ -15,7 +16,7 @@ data class HomeState(
     val newsData: MainBlogObjectUi,
     val stockSliderData: MainBlogObjectUi,
     val newProductsData: MainBlogObjectUi,
-    val productList: List<ProductResponseUi>,
+    val productList: List<RelatedProductUi>,
     val isOpenPhone: Boolean,
     val isOpenSity: Boolean,
     val phone: String,

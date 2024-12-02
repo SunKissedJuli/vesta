@@ -69,11 +69,8 @@ import com.example.vesta.ext.QuantityToStore
 import com.example.vesta.ext.cleanHtml
 import com.example.vesta.ext.clickableBlank
 import com.example.vesta.images.VestaResourceImages
-import com.example.vesta.screen.tabs.HomeTab
 import com.example.vesta.strings.VestaResourceStrings
 import io.github.skeptick.libres.compose.painterResource
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class ProductScreen(private val id: Int): Screen{
     @Composable
@@ -392,7 +389,7 @@ private fun ExpandPanel(
     name: String,
     content: @Composable () -> Unit
 ){
-    var isOpen by remember{mutableStateOf(false)}
+    var isOpen by remember{ mutableStateOf(false) }
     val rotation = if(isOpen) 90f else 0f
     Column(
         Modifier
@@ -400,9 +397,10 @@ private fun ExpandPanel(
             .padding(top = 8.dp)
     ) {
         HorizontalLine(Modifier.padding(bottom = 8.dp))
-        Row(Modifier
-            .fillMaxWidth()
-            .clickableBlank { isOpen = !isOpen },
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .clickableBlank { isOpen = !isOpen },
             horizontalArrangement = Arrangement.SpaceBetween){
             Text(
                 text = name,

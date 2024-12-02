@@ -43,6 +43,7 @@ import com.example.vesta.components.HorizontalLine
 import com.example.vesta.components.RoundedTextField
 import com.example.vesta.ext.formatCost
 import com.example.vesta.ext.toFormattedDate
+import com.example.vesta.screen.favorites.FavoritesScreen
 import com.example.vesta.screen.signIn.SignInScreen
 import com.example.vesta.strings.VestaResourceStrings
 
@@ -170,7 +171,7 @@ class ProfileScreen(): Screen{
                         )
                         Spacer(Modifier.height(15.dp))
                         ArrowButton(
-                            onClick = {},
+                            onClick = {navigator.push(FavoritesScreen())},
                             text = VestaResourceStrings.favorites
                         )
                         Spacer(Modifier.height(15.dp))

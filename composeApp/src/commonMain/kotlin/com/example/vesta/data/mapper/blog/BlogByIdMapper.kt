@@ -3,6 +3,7 @@ package com.example.vesta.data.mapper.blog
 import com.example.vesta.data.mapper.toUI
 import com.example.vesta.data.models.blog.BlogByIdResponse
 import com.example.vesta.data.models.blog.RelatedProduct
+import com.example.vesta.data.models.info.toUI
 import com.example.vesta.domain.modelsUI.OctStickersUi
 import com.example.vesta.domain.modelsUI.blog.BlogByIdUi
 import com.example.vesta.domain.modelsUI.blog.RelatedProductUi
@@ -46,4 +47,8 @@ fun RelatedProduct.toUI(): RelatedProductUi {
         weight = this.weight.orEmpty(),
         isFavorite = this.isFavorite?:false
     )
+}
+
+fun List<RelatedProduct>.toUI(): List<RelatedProductUi>{
+    return map { it.toUI() }
 }

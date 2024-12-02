@@ -1,6 +1,7 @@
 package com.example.vesta.data.repositoryImpl
 
 import com.example.vesta.data.api.VestaApi
+import com.example.vesta.data.mapper.blog.toUI
 import com.example.vesta.data.mapper.toUI
 import com.example.vesta.data.models.CategoryByIdResponse
 import com.example.vesta.data.models.product.ProductResponseUi
@@ -10,6 +11,7 @@ import com.example.vesta.domain.modelsUI.CategoryByIdResponseUi
 import com.example.vesta.domain.modelsUI.CategoryUi
 import com.example.vesta.domain.modelsUI.ProductsDataResponseUi
 import com.example.vesta.domain.modelsUI.ProductsResponseUi
+import com.example.vesta.domain.modelsUI.blog.RelatedProductUi
 import com.example.vesta.domain.repository.ProductRepository
 import com.example.vesta.platform.Either
 import com.example.vesta.platform.Failure
@@ -38,7 +40,7 @@ class ProductRepositoryImpl(private val vestaApi: VestaApi, private val manager:
             mapResponse = { product -> product.toUI() })
     }
 
-    override suspend fun getFeaturedProducts(): Either<Failure, List<ProductResponseUi>> {
+    override suspend fun getFeaturedProducts(): Either<Failure, List<RelatedProductUi>> {
         return apiCall (call = {
             vestaApi.getFeaturedProducts(city = manager.city?:0)
         },

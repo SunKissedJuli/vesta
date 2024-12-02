@@ -141,8 +141,8 @@ class HomeScreen: Screen {
                                 items(state.productList, key = {it.hashCode()}){ product ->
                                     ProductCard(
                                         image = product.image,
-                                        name = product.description.nameKorr,
-                                        price = product.multistoreProduct.price,
+                                        name = product.name,
+                                        price = product.price,
                                         stickers = product.octStickers.specialStickerData,
                                         isFavorite = product.isFavorite,
                                         onClick = {navigator.push(ProductScreen(product.productId))},
