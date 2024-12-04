@@ -25,7 +25,8 @@ internal class SubcategoryViewModel: BaseScreenModel<SubcategoryState, Subcatego
                     state.copy(
                         subcategoryList = response.category,
                         productList = response.products,
-                        isProducts = response.category.children.isEmpty()
+                        isProducts = response.category.children.isEmpty(),
+                        manufacturers = response.manufacturers
                     )
                 }},
         )

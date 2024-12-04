@@ -1,6 +1,7 @@
 package com.example.vesta.data.api
 
 import com.example.vesta.data.models.CategoryByIdResponse
+import com.example.vesta.data.models.CategoryObjectFilters
 import com.example.vesta.data.models.CategoryResponse
 import com.example.vesta.data.models.blog.BlogByIdResponse
 import com.example.vesta.data.models.blog.RelatedProduct
@@ -25,26 +26,28 @@ interface VestaApi {
 
     //категории и продукты
     @GET("api/getCategoryToStore")
-    suspend fun getAllCategory(@Query("sity") city: Int = 0): List<CategoryResponse>
+    suspend fun getAllCategory(@Query("city") city: Int = 0): List<CategoryResponse>
 
     @GET("api/getCategoryId/{categoryId}")
     suspend fun getCategoryById(
         @Path("categoryId") categoryId: Int,
         @Query("limit") limit: Int = 25,
         @Query("page") page: Int = 1,
-        @Query("sity") city: Int = 0
+        @Query("city") city: Int = 0,
+        @Query("filters") filters: List<CategoryObjectFilters>? = null,
+        @Query("sub_category") subCategory: List<String>? = null
     ): CategoryByIdResponse
 
     @GET("api/getProductId/{productId}")
     suspend fun getProduct(
         @Path("productId") productId: Int,
-        @Query("sity") city: Int = 0
+        @Query("city") city: Int = 0
     ): ProductResponse
 
     @GET("api/getModule")
     suspend fun getFeaturedProducts(
         @Query("code") code: String = "featured",
-        @Query("sity") city: Int = 0
+        @Query("city") city: Int = 0
     ): List<RelatedProduct>
 
     @POST("api/user/wishlist")
@@ -53,29 +56,29 @@ interface VestaApi {
     ): Unit
 
     //инфо
-    @GET("api/info/getSites")
+    @GET("api/info/getCities")
     suspend fun getCites(): List<CityResponse>
 
     @GET("api/getNews")
     suspend fun getNews(
-        @Query("sity") city: Int = 0,
+        @Query("city") city: Int = 0,
         @Query("limit") limit: Int = 25,
         @Query("page") page: Int = 1
     ): NewsResponse
 
     @GET("api/info/getShops")
-    suspend fun getShops(@Query("sity") city: Int = 0): List<ShopsResponse>
+    suspend fun getShops(@Query("city") city: Int = 0): List<ShopsResponse>
 
     @GET("api/getMainBlogs")
-    suspend fun getMainBlogs(@Query("sity") city: Int = 0): MainBlogResponse
+    suspend fun getMainBlogs(@Query("city") city: Int = 0): MainBlogResponse
 
     @GET("api/getStocks") //акции
-    suspend fun getStocks(@Query("sity") city: Int = 0): List<StocksResponse>
+    suspend fun getStocks(@Query("city") city: Int = 0): List<StocksResponse>
 
     @GET("api/getBlogId/{id}")
     suspend fun getBlogById(
         @Path("id") id: Int,
-        @Query("sity") city: Int = 0
+        @Query("city") city: Int = 0
     ): BlogByIdResponse
 
     //юзер

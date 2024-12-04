@@ -77,3 +77,55 @@ fun RoundedTextField(
         visualTransformation = visualTransformation
     )
 }
+
+@Composable
+fun SmallRoundedTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    placeholder: String = "",
+    errorMessage: String = "",
+    modifier: Modifier = Modifier,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    visualTransformation: VisualTransformation = VisualTransformation.None
+) {
+    val isPlaceholderVisible = value.isEmpty()
+    val interactionSource = remember { MutableInteractionSource() }
+    val labelFontSize by animateFloatAsState(targetValue = if (isPlaceholderVisible) 16f else 12f)
+    val labelColor = if (errorMessage.isNotEmpty()) MaterialTheme.colorScheme.onTertiary else MaterialTheme.colorScheme.secondaryContainer
+
+    OutlinedTextField(
+        modifier = modifier,
+        value = value,
+        maxLines = 1,
+        onValueChange = {
+            onValueChange(it)
+        },
+        shape = RoundedCornerShape(50.dp),
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedContainerColor = MaterialTheme.colorScheme.background,
+            unfocusedContainerColor = MaterialTheme.colorScheme.background,
+            focusedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
+            unfocusedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
+            unfocusedTextColor = MaterialTheme.colorScheme.onSecondary,
+            focusedTextColor = MaterialTheme.colorScheme.onSecondary,
+            unfocusedPlaceholderColor = MaterialTheme.colorScheme.secondaryContainer,
+            focusedPlaceholderColor = MaterialTheme.colorScheme.secondaryContainer,
+            disabledPlaceholderColor = MaterialTheme.colorScheme.secondaryContainer,
+            errorPlaceholderColor = MaterialTheme.colorScheme.onTertiary,
+            errorTextColor =  MaterialTheme.colorScheme.onTertiary,
+            errorBorderColor =  MaterialTheme.colorScheme.onTertiary,
+            errorContainerColor = MaterialTheme.colorScheme.background
+        ),
+        isError = errorMessage.isNotEmpty(),
+        keyboardOptions = keyboardOptions,
+        label = {
+            Text(
+                text = errorMessage.ifEmpty { placeholder },
+                color = labelColor,
+                fontSize = labelFontSize.sp
+            )
+        },
+        interactionSource = interactionSource,
+        visualTransformation = visualTransformation
+    )
+}

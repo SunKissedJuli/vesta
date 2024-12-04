@@ -6,13 +6,11 @@ import com.example.vesta.data.models.Link
 import com.example.vesta.domain.modelsUI.CategoryByIdResponseUi
 import com.example.vesta.domain.modelsUI.CategoryByIdUi
 import com.example.vesta.domain.modelsUI.LinkUi
-import com.example.vesta.data.mapper.toUI
-import com.example.vesta.data.mapper.toUI
+import com.example.vesta.data.models.Manufacturers
 import com.example.vesta.data.models.ProductInCategoryResponse
-import com.example.vesta.domain.modelsUI.DescriptionUi
+import com.example.vesta.domain.modelsUI.ManufacturersUi
 import com.example.vesta.domain.modelsUI.OctStickersUi
 import com.example.vesta.domain.modelsUI.ProductInCategoryUi
-
 
 fun List<CategoryById>.toUI(): List<CategoryByIdUi> {
     return map { it.toUI() }
@@ -35,10 +33,18 @@ fun CategoryById.toUI(): CategoryByIdUi {
     )
 }
 
+fun Manufacturers.toUI(): ManufacturersUi {
+    return ManufacturersUi(
+        manufacturerId = manufacturerId ?: 0,
+        name = name.orEmpty()
+    )
+}
+
 fun CategoryByIdResponse.toUI(): CategoryByIdResponseUi {
     return CategoryByIdResponseUi(
         category = category?.toUI()?: CategoryByIdUi.empty,
-        products = products?.map{it.toUI()}  ?: emptyList()
+        products = products?.map{it.toUI()}  ?: emptyList(),
+        manufacturers = manufacturers?.map { it.toUI() }?: emptyList()
     )
 }
 
@@ -48,7 +54,7 @@ fun ProductInCategoryResponse.toUI(): ProductInCategoryUi{
         image = this.image.orEmpty(),
         manufacturerId = this.manufacturerId?:0,
         manufacturerName = this.manufacturerName.orEmpty(),
-        nameKorr = this.nameKorr.orEmpty(),
+        name = this.name.orEmpty(),
         octStickers = octStickers?.toUI()?: OctStickersUi.empty,
         price = this.price?:0,
         productId = this.productId?:0,

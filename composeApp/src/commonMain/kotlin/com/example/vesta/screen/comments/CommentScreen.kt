@@ -22,7 +22,6 @@ class CommentScreen(): Screen {
         val viewModel = rememberScreenModel { CommentViewModel() }
         val state by viewModel.stateFlow.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
-        val tabNavigator = LocalTabNavigator.current
 
         LaunchedEffect(viewModel) {
             viewModel.loadData()

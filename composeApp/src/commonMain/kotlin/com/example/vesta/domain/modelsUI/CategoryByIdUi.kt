@@ -1,6 +1,7 @@
 package com.example.vesta.domain.modelsUI
 
 import com.example.vesta.data.models.CategoryById
+import com.example.vesta.data.models.Manufacturers
 import com.example.vesta.data.models.OctStickers
 import com.example.vesta.data.models.ProductsDataResponse
 import com.example.vesta.data.models.ProductsResponse
@@ -8,9 +9,15 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
-class CategoryByIdResponseUi(
+data class CategoryByIdResponseUi(
     val category: CategoryByIdUi,
     val products: List<ProductInCategoryUi>,
+    val manufacturers: List<ManufacturersUi>
+)
+
+data class ManufacturersUi(
+    val manufacturerId: Int,
+    val name:String,
 )
 
 data class CategoryByIdUi(
@@ -34,7 +41,7 @@ data class ProductInCategoryUi(
     val image: String,
     val manufacturerId: Int,
     val manufacturerName: String,
-    val nameKorr: String,
+    val name: String,
     val octStickers: OctStickersUi,
     val price: Int,
     val productId: Int,

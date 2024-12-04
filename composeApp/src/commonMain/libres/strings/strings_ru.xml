@@ -108,5 +108,7 @@
     <string name="filter_available">В наличии</string>
     <string name="filter_subcategory">Подкатегории</string>
     <string name="filter_maufacturer">Производитель</string>
+    <string name="filter_from">От</string>
+    <string name="filter_before">до</string>
 
 </resources>

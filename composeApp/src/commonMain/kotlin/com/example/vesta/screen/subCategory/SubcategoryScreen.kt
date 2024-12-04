@@ -1,5 +1,6 @@
 package com.example.vesta.screen.subCategory
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -73,6 +74,7 @@ import com.example.vesta.components.CustomScaffold
 import com.example.vesta.components.HeaderWithButtonBack
 import com.example.vesta.components.HorizontalLine
 import com.example.vesta.components.ProductCard
+import com.example.vesta.components.SmallRoundedTextField
 import com.example.vesta.ext.clickableBlank
 import com.example.vesta.images.VestaResourceImages
 import com.example.vesta.screen.product.ProductScreen
@@ -137,8 +139,44 @@ class SubcategoryScreen(private val id: Int): Screen {
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Medium,
                         lineHeight = 19.5.sp,
-                        modifier = Modifier.align(Alignment.Start)
+                        modifier = Modifier.align(Alignment.Start).padding(top = 10.dp)
                     )
+                    Row(Modifier.fillMaxWidth().padding(top = 10.dp, bottom = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween){
+
+                        Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically,){
+                            Text(
+                                text = VestaResourceStrings.filter_from,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Medium,
+                            )
+
+                            Spacer(Modifier.width(15.dp))
+
+                            SmallRoundedTextField(
+                                value = "00",
+                                onValueChange = {},
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+
+                        Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically,){
+                            Spacer(Modifier.width(25.dp))
+                            Text(
+                                text = VestaResourceStrings.filter_before,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Medium,
+                            )
+                            Spacer(Modifier.width(15.dp))
+                            SmallRoundedTextField(
+                                value = "00",
+                                onValueChange = {},
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+
+                    }
                     HorizontalLine(Modifier.padding(top = 10.dp, bottom = 15.dp))
 
                     Text(
@@ -166,15 +204,24 @@ class SubcategoryScreen(private val id: Int): Screen {
 
                     ExpandPanel(
                         name = VestaResourceStrings.filter_maufacturer,
-                        content = {}
-                    )
+                    ){
+                        Column {
+                            for(manufacturer in state.manufacturers){
+                                CheckRow(
+                                    checked = false,
+                                    onCheckedChange = {},
+                                    text = manufacturer.name
+                                )
+                            }
+                        }
+                    }
 
+                    Spacer(Modifier.height(20.dp))
                     CustomButton(
                         onClick = {},
                         text = VestaResourceStrings.apply_filter,
                         modifier = Modifier.height(50.dp)
                     )
-
                     CustomButton(
                         onClick = {},
                         text = VestaResourceStrings.clean,
@@ -321,7 +368,7 @@ class SubcategoryScreen(private val id: Int): Screen {
                         items(state.productList, key = { it.hashCode() }) { product ->
                             ProductCard(
                                 image = product.image,
-                                name = product.nameKorr,
+                                name = product.name,
                                 price = product.price,
                                 stickers = product.octStickers.specialStickerData,
                                 onClick = { navigator.push(ProductScreen(product.productId)) },
@@ -420,10 +467,7 @@ private fun ExpandPanel(
 ){
     var isOpen by remember{ mutableStateOf(false) }
     val rotation = if(isOpen) 90f else 0f
-    Column(
-        Modifier
-            .fillMaxWidth()
-            .padding(top = 15.dp)
+    Column(Modifier.fillMaxWidth().padding(top = 15.dp)
     ) {
         Row(
             Modifier
@@ -441,10 +485,12 @@ private fun ExpandPanel(
                 contentDescription = "",
             )
         }
-        HorizontalLine(Modifier.padding(vertical = 10.dp))
 
-        if(isOpen){
-            content()
+        AnimatedVisibility(visible = isOpen) {
+            Column {
+                content()
+            }
         }
+        HorizontalLine(Modifier.padding(top = 10.dp))
     }
 }

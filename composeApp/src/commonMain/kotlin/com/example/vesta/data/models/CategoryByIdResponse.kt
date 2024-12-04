@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 class CategoryByIdResponse(
     @SerialName("category") val category: CategoryById?,
     @SerialName("products") val products: List<ProductInCategoryResponse>?,
-   // @SerialName("products") val products: List<ProductInCategoryResponse>?,
+    @SerialName("manufacturers") val manufacturers: List<Manufacturers>?,
     //мануфактуреры
 )
 
@@ -25,7 +25,7 @@ class ProductInCategoryResponse(
     @SerialName("image") val image: String?,
     @SerialName("manufacturer_id") val manufacturerId: Int?,
     @SerialName("manufacturer_name") val manufacturerName: String?,
-    @SerialName("name_korr") val nameKorr: String?,
+    @SerialName("name") val name: String?,
     @SerialName("oct_stickers") val octStickers: OctStickers?,
     @SerialName("price") val price: Int?,
     @SerialName("product_id") val productId: Int?,
@@ -39,5 +39,11 @@ class Link(
     @SerialName("active") val active: Boolean?,
     @SerialName("label") val label: String?,
     @SerialName("url") val url: String?
+)
+
+@Serializable
+class Manufacturers(
+    @SerialName("manufacturer_id") val manufacturerId: Int?,
+    @SerialName("name") val name: String?,
 )
 

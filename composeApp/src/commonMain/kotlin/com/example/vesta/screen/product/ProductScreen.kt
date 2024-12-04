@@ -1,5 +1,6 @@
 package com.example.vesta.screen.product
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -414,8 +415,10 @@ private fun ExpandPanel(
             )
         }
 
-        if(isOpen){
-            content()
+        AnimatedVisibility(visible = isOpen) {
+            Column {
+                content()
+            }
         }
     }
 }
